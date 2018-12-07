@@ -1,15 +1,42 @@
 package swap.irfanullah.com.swap.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("user_id")
     private int USER_ID;
+    @SerializedName("username")
     private String USERNAME;
+    @SerializedName("name")
+    private String FULL_NAME;
+    @SerializedName("email")
     private String EMAIL;
+    @SerializedName("password")
     private String PASSWORD;
+    @SerializedName("profile_image")
     private int PROFILE_IMAGE;
+    @SerializedName("created_at")
     private String CREATED_AT;
+    @SerializedName("updated_at")
     private String UPDATED_AT;
+    @SerializedName("token")
+    private String TOKEN;
 
+    public String getTOKEN() {
+        return TOKEN;
+    }
 
+    public void setTOKEN(String TOKEN) {
+        this.TOKEN = TOKEN;
+    }
+
+    public String getFULL_NAME() {
+        return FULL_NAME;
+    }
+
+    public void setFULL_NAME(String FULL_NAME) {
+        this.FULL_NAME = FULL_NAME;
+    }
 
     public int getUSER_ID() {
         return USER_ID;

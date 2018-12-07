@@ -3,16 +3,62 @@ package swap.irfanullah.com.swap.Models;
 import com.google.gson.annotations.SerializedName;
 
 public class Status {
+    @SerializedName("username")
     private String USERNAME;
+    @SerializedName("user_id")
     private int USER_ID;
+    @SerializedName("status_id")
     private int STATUS_ID;
+    @SerializedName("status")
     private String STATUS;
+    @SerializedName("created_at")
     private String TIME;
+    @SerializedName("profile_image")
     private String PROFILE_IMAGE;
+    @SerializedName("isPosted")
+    private Boolean isPosted;
+    @SerializedName("message")
+    private String MESSAGE;
+    @SerializedName("isAuthenticated")
+    private Boolean isAuthenticated;
+    @SerializedName("ratting")
+    private int RATTING;
 
 
     public Status() {
 
+    }
+
+    public int getRATTING() {
+        return RATTING;
+    }
+
+    public void setRATTING(int RATTING) {
+        this.RATTING = RATTING;
+    }
+
+    public Boolean getAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setAuthenticated(Boolean authenticated) {
+        isAuthenticated = authenticated;
+    }
+
+    public String getMESSAGE() {
+        return MESSAGE;
+    }
+
+    public void setMESSAGE(String MESSAGE) {
+        this.MESSAGE = MESSAGE;
+    }
+
+    public Boolean getPosted() {
+        return isPosted;
+    }
+
+    public void setPosted(Boolean posted) {
+        isPosted = posted;
     }
 
     public Status(String USERNAME, int USER_ID, int STATUS_ID, String STATUS, String TIME, String PROFILE_IMAGE) {
