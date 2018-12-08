@@ -2,6 +2,8 @@ package swap.irfanullah.com.swap.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import swap.irfanullah.com.swap.R;
+
 public class User {
     @SerializedName("user_id")
     private int USER_ID;
@@ -14,7 +16,7 @@ public class User {
     @SerializedName("password")
     private String PASSWORD;
     @SerializedName("profile_image")
-    private int PROFILE_IMAGE;
+    private String PROFILE_IMAGE;
     @SerializedName("created_at")
     private String CREATED_AT;
     @SerializedName("updated_at")
@@ -70,11 +72,11 @@ public class User {
         this.PASSWORD = PASSWORD;
     }
 
-    public int getPROFILE_IMAGE() {
+    public String getPROFILE_IMAGE() {
         return PROFILE_IMAGE;
     }
 
-    public void setPROFILE_IMAGE(int PROFILE_IMAGE) {
+    public void setPROFILE_IMAGE(String PROFILE_IMAGE) {
         this.PROFILE_IMAGE = PROFILE_IMAGE;
     }
 

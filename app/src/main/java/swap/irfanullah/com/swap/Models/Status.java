@@ -2,7 +2,10 @@ package swap.irfanullah.com.swap.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Status {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Status{
     @SerializedName("username")
     private String USERNAME;
     @SerializedName("user_id")
@@ -22,18 +25,38 @@ public class Status {
     @SerializedName("isAuthenticated")
     private Boolean isAuthenticated;
     @SerializedName("ratting")
-    private int RATTING;
+    private float RATTING;
+    @SerializedName("isFound")
+    private Boolean isFound;
+    @SerializedName("statuses")
+    private ArrayList<Status> STATUSES;
 
+
+    public Boolean getFound() {
+        return isFound;
+    }
+
+    public void setFound(Boolean found) {
+        isFound = found;
+    }
+
+    public ArrayList<Status> getSTATUSES() {
+        return STATUSES;
+    }
+
+    public void setSTATUSES(ArrayList<Status> STATUSES) {
+        this.STATUSES = STATUSES;
+    }
 
     public Status() {
 
     }
 
-    public int getRATTING() {
+    public float getRATTING() {
         return RATTING;
     }
 
-    public void setRATTING(int RATTING) {
+    public void setRATTING(float RATTING) {
         this.RATTING = RATTING;
     }
 

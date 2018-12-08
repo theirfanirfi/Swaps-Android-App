@@ -16,6 +16,7 @@ import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import swap.irfanullah.com.swap.Adapters.StatusAdapter;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.R;
@@ -61,6 +62,7 @@ public class ComposeStatusDialog extends AppCompatDialogFragment {
                     if(response.body().getAuthenticated()) {
                         if (response.body().getPosted()) {
                             progressBar.setVisibility(View.GONE);
+
                             Toast.makeText(getContext(), response.body().getMESSAGE(), Toast.LENGTH_LONG).show();
                             getDialog().dismiss();
                         } else {

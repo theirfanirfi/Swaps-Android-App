@@ -4,15 +4,27 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.StatusAdapter;
+import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.R;
+import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 public class StatusesFragment extends Fragment {
 
@@ -30,30 +42,49 @@ public class StatusesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_statuses, container, false);
         sRV = rootView.findViewById(R.id.statusesRV);
         statuses = new ArrayList<>();
-        Status st1 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
 
-        statuses.add(st1);
+        SimpleDateFormat sdf = new SimpleDateFormat("y-M-dd HH:mm");
+        String currentTime = sdf.format(new Date());
+        Log.i("DATETIME",currentTime.toString());
 
-        Status st2 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
 
-        statuses.add(st2);
-        Status st3 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
+        RetroLib.geApiService().getStatuses(PrefStorage.getUser(getContext()).getTOKEN()).enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if(response.isSuccessful()) {
 
-        statuses.add(st3);
+                    Status status = response.body();
+                    if(status.getAuthenticated()) {
+                        if(status.getFound()) {
 
-        Status st4 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
+                            statusAdapter= new StatusAdapter(getActivity(),status.getSTATUSES());
+                            sRV.setHasFixedSize(true);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                            sRV.setLayoutManager(layoutManager);
+                            sRV.setAdapter(statusAdapter);
 
-        statuses.add(st4);
+                        }
+                        else {
+                            Toast.makeText(getContext(),status.getMESSAGE(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(getContext(),status.getMESSAGE(),Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Log.i("STATUES: ","NOT SUCCESSFULL "+response.raw().toString());
 
-        Status st5 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
+                }
+            }
 
-        statuses.add(st5);
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                Toast.makeText(getContext(),"ERROR: "+t.toString(),Toast.LENGTH_LONG).show();
+                Log.i("STATUES: ","NOT SUCCESSFULL "+t.toString());
 
-        statusAdapter= new StatusAdapter(getActivity(),statuses);
-        sRV.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        sRV.setLayoutManager(layoutManager);
-        sRV.setAdapter(statusAdapter);
+            }
+        });
 
          return rootView;
     }

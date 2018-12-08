@@ -5,6 +5,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Status;
 
 public interface ApiService {
@@ -12,6 +13,6 @@ public interface ApiService {
     @FormUrlEncoded
     Call<Status> composeStatus(@Field("token") String token,@Field("status") String status);
 
-    @GET("swap/public/api/status/get")
-    Call<Status> getStatuses(@Field("token") String token);
+    @GET("swap/public/api/status/getStatuses")
+    Call<Status> getStatuses(@Query("token") String token);
 }
