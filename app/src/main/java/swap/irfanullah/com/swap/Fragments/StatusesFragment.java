@@ -10,12 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Period;
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,13 +39,9 @@ public class StatusesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_statuses, container, false);
         sRV = rootView.findViewById(R.id.statusesRV);
+
+
         statuses = new ArrayList<>();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("y-M-dd HH:mm");
-        String currentTime = sdf.format(new Date());
-        Log.i("DATETIME",currentTime.toString());
-
-
         RetroLib.geApiService().getStatuses(PrefStorage.getUser(getContext()).getTOKEN()).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {

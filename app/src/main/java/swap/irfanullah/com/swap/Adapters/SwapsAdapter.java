@@ -8,20 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import swap.irfanullah.com.swap.Libraries.TimeDiff;
 import swap.irfanullah.com.swap.Models.Status;
+import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.R;
 
 public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHolder> {
     private Context context;
-    private ArrayList<Status> statuses;
-
-    public SwapsAdapter(Context context, ArrayList<Status> st) {
+    private ArrayList<SwapsTab> swapsTabArrayList;
+    private final static String REPRESENTING_LOGGED_USER_IN_TAB = "You";
+    public SwapsAdapter(Context context, ArrayList<SwapsTab> swapsTabArrayList) {
         this.context = context;
-        this.statuses = st;
+        this.swapsTabArrayList = swapsTabArrayList;
     }
 
     @NonNull
@@ -35,28 +38,48 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
 
     @Override
     public void onBindViewHolder(@NonNull StatusViewHolder statusViewHolder, int i) {
+            SwapsTab swap = this.swapsTabArrayList.get(i);
+            if(swap.getIS_ME()){
+                statusViewHolder.username.setText(REPRESENTING_LOGGED_USER_IN_TAB);
+                statusViewHolder.withTextV.setText(swap.getSWAPED_WITH_FULLNAME());
+            }else {
+                statusViewHolder.username.setText(swap.getPOSTER_FULLNAME());
+                statusViewHolder.withTextV.setText(REPRESENTING_LOGGED_USER_IN_TAB);
+            }
 
+            statusViewHolder.statusDescription.setText(swap.getSTATUS());
+            statusViewHolder.ratingBar.setRating(swap.getAVG_RATTING());
+            statusViewHolder.swapTime.setText(TimeDiff.getTimeDifference(swap.getSWAP_DATE()));
     }
 
 
 
     @Override
     public int getItemCount() {
-        return this.statuses.size();
+        return this.swapsTabArrayList.size();
     }
 
 
     public static class StatusViewHolder extends RecyclerView.ViewHolder {
         ImageView profile_image;
-        TextView username, statusDescription;
+        TextView username, statusDescription, withTextV,swapTime;
         ConstraintLayout layout;
+        RatingBar ratingBar;
         public StatusViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
 
             layout = itemView.findViewById(R.id.statusLayout);
             profile_image = itemView.findViewById(R.id.profile_image);
             username = itemView.findViewById(R.id.usernameTextView);
+            withTextV = itemView.findViewById(R.id.withTextView);
             statusDescription = itemView.findViewById(R.id.statusTextView);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            swapTime = itemView.findViewById(R.id.statusTimeTextView);
         }
+    }
+
+    public void notifySwapsAdapter(ArrayList<SwapsTab> swapsTabs){
+        this.swapsTabArrayList = swapsTabs;
+        notifyDataSetChanged();
     }
 }

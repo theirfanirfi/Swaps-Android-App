@@ -1,12 +1,68 @@
 package swap.irfanullah.com.swap.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Swap {
+    @SerializedName("swap_id")
     private int SWAP_ID;
+    @SerializedName("poster_user_id")
     private int POSTER_USER_ID;
+    @SerializedName("swaped_with_user_id")
     private int SWAPED_WITH_USER_ID;
+    @SerializedName("status_id")
     private int STATUS_ID;
+    @SerializedName("created_at")
     private String CREATED_AT;
+    @SerializedName("updated_at")
     private String UPDATED_AT;
+    @SerializedName("isAuthenticated")
+    private Boolean isAuthenticated;
+    @SerializedName("isError")
+    private Boolean isError;
+    @SerializedName("isAlready")
+    private Boolean isAlready;
+    @SerializedName("isSwaped")
+    private Boolean isSwaped;
+    @SerializedName("isEmpty")
+    private Boolean isEmpty;
+    @SerializedName("message")
+    private String MESSAGE;
+    @SerializedName("isDeSwaped")
+    private Boolean DE_SWAPED;
+    @SerializedName("isExist")
+    private Boolean IS_EXIST;
+
+    public Boolean getDE_SWAPED() {
+        return DE_SWAPED;
+    }
+
+    public Boolean getIS_EXIST() {
+        return IS_EXIST;
+    }
+
+    public Boolean getAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public Boolean getError() {
+        return isError;
+    }
+
+    public Boolean getAlready() {
+        return isAlready;
+    }
+
+    public Boolean getSwaped() {
+        return isSwaped;
+    }
+
+    public Boolean getEmpty() {
+        return isEmpty;
+    }
+
+    public String getMESSAGE() {
+        return MESSAGE;
+    }
 
     public int getSWAP_ID() {
         return SWAP_ID;

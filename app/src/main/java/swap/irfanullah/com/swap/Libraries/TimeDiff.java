@@ -10,6 +10,12 @@ public class TimeDiff {
 
     public static String getTimeDifference(String date1)
     {
+        if(date1 == null){
+            return "00";
+        }
+
+
+
         String returnStatement = "00";
         Date d1 = new Date();
 
@@ -22,7 +28,6 @@ public class TimeDiff {
             long difference = d2.getTime() - d1.getTime();
             int days = days = (int) (difference / (1000*60*60*24));
             int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
-            Log.i("DATETIME",Integer.toString(hours)+ " : "+Integer.toString(days));
             int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
 
             if(days > 1)

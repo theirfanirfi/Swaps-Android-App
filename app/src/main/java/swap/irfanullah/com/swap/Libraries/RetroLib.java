@@ -8,7 +8,7 @@ import swap.irfanullah.com.swap.APIs.ApiService;
 
 
 public class RetroLib {
-    public static final String BASE_URL = "http://192.168.10.5/";
+    public static final String BASE_URL = "http://192.168.10.3/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofit()

@@ -6,13 +6,29 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.Status;
+import swap.irfanullah.com.swap.Models.Swap;
+import swap.irfanullah.com.swap.Models.SwapsTab;
 
 public interface ApiService {
-    @POST("swap/public/api/status/compose")
+    String AFTER_BASE_URL = "swap/public/api/";
+    @POST(AFTER_BASE_URL+"status/compose")
     @FormUrlEncoded
     Call<Status> composeStatus(@Field("token") String token,@Field("status") String status);
 
-    @GET("swap/public/api/status/getStatuses")
+    @GET(AFTER_BASE_URL+"status/getStatuses")
     Call<Status> getStatuses(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"followers/")
+    Call<Followers> getFollowers(@Query("token") String token, @Query("status_id") int status_id);
+
+    @GET(AFTER_BASE_URL+"followers/swapStatus")
+    Call<Swap> swapStatus(@Query("token") String token, @Query("swaped_with") int swaped_with_user_id,@Query("status_id") int status_id);
+
+    @GET(AFTER_BASE_URL+"followers/deSwapStatus")
+    Call<Swap> unSwapStatus(@Query("token") String token, @Query("swaped_with") int swaped_with_user_id,@Query("status_id") int status_id);
+
+    @GET(AFTER_BASE_URL+"swaps/")
+    Call<SwapsTab> getSwaps(@Query("token") String token);
 }

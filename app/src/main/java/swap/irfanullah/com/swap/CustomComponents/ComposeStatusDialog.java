@@ -25,7 +25,7 @@ import swap.irfanullah.com.swap.Storage.PrefStorage;
 public class ComposeStatusDialog extends AppCompatDialogFragment {
     EditText composeTextArea;
     private Context context;
-    Button post;
+    Button post,cancel;
     ProgressBar progressBar;
 
 
@@ -36,6 +36,7 @@ public class ComposeStatusDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.compose_status,null);
         composeTextArea = view.findViewById(R.id.composeStatusTextArea);
         post = view.findViewById(R.id.postBtn);
+        cancel = view.findViewById(R.id.btnCancel);
         progressBar = view.findViewById(R.id.postProgressBar);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,13 @@ public class ComposeStatusDialog extends AppCompatDialogFragment {
                 progressBar.setVisibility(View.VISIBLE);
                 String status = composeTextArea.getText().toString();
                     statusComposeRequest(status);
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
             }
         });
         builder.setView(view)

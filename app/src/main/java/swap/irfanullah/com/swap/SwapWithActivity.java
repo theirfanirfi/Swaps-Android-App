@@ -7,13 +7,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.SwapWithAdapter;
+import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.Status;
+import swap.irfanullah.com.swap.Models.Swap;
+import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 
 public class SwapWithActivity extends AppCompatActivity {
@@ -21,8 +29,9 @@ public class SwapWithActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView sWRV;
     private SwapWithAdapter swapWithAdapter;
-    private ArrayList<Status> statuses, filteredArrayList;
+    private ArrayList<Followers> followersList, filteredArrayList;
     private EditText searchTextField;
+    private int INTENT_STATUS_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +42,34 @@ public class SwapWithActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         searchTextField = findViewById(R.id.searchSwapedWithField);
 
+        INTENT_STATUS_ID = getIntent().getExtras().getInt("status_id");
 
 
         sWRV = findViewById(R.id.swapWithRV);
 
-        statuses = new ArrayList<>();
+        RetroLib.geApiService().getFollowers(PrefStorage.getUser(this).getTOKEN(),INTENT_STATUS_ID).enqueue(new Callback<Followers>() {
+            @Override
+            public void onResponse(Call<Followers> call, Response<Followers> response) {
+                Followers followers = response.body();
+                ArrayList<Followers> followersArrayList = followers.getFollowers();
+                followersList = followers.getFollowers();
+                int status_id = followers.getSTATUS_ID();
+                ArrayList<Swap> swaps = followers.getSWAPS();
 
-        Status st1 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
+                swapWithAdapter = new SwapWithAdapter(getApplicationContext(),followersArrayList,swaps,status_id);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                sWRV.setLayoutManager(layoutManager);
+                sWRV.setAdapter(swapWithAdapter);
 
-        statuses.add(st1);
+                Log.i("FOLLOWERS: ",response.raw().toString());
+            }
 
-        Status st2 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
+            @Override
+            public void onFailure(Call<Followers> call, Throwable t) {
+                Log.i("FOLLOWERS: ",t.toString());
 
-        statuses.add(st2);
-        Status st3 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
-
-        statuses.add(st3);
-
-        Status st4 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
-
-        statuses.add(st4);
-
-        Status st5 = new Status("Irfan",1,1,"This is my new statuse","2h","profile");
-
-        statuses.add(st5);
-        swapWithAdapter = new SwapWithAdapter(this,statuses);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        sWRV.setLayoutManager(layoutManager);
-        sWRV.setAdapter(swapWithAdapter);
+            }
+        });
 
 
         searchTextField.addTextChangedListener(new TextWatcher() {
@@ -87,7 +96,7 @@ public class SwapWithActivity extends AppCompatActivity {
 
     private void filter(String s) {
         filteredArrayList = new ArrayList<>();
-        for(Status item: statuses)
+        for(Followers item: followersList)
         {
             if(item.getUSERNAME().toLowerCase().contains(s.toLowerCase()))
             {

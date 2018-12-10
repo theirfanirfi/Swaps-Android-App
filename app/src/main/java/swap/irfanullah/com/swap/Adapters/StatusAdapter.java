@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.R;
@@ -51,8 +52,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         statusViewHolder.profile_image.setImageResource(R.drawable.ic_person);
     }
     else {
-        statusViewHolder.profile_image.setImageURI(Uri.parse(PrefStorage.getUser(context).getPROFILE_IMAGE()));
-
+        //statusViewHolder.profile_image.setImageURI(Uri.parse(PrefStorage.getUser(context).getPROFILE_IMAGE()));
+        GLib.downloadImage(context,PrefStorage.getUser(context).getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
     }
     }
 

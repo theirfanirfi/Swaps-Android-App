@@ -53,7 +53,7 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         statuses.add(st5);
 
-        swapsAdapter= new SwapsAdapter(getActivity(),statuses);
+       // swapsAdapter= new SwapsAdapter(getActivity(),statuses);
         sRV.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         sRV.setLayoutManager(layoutManager);
