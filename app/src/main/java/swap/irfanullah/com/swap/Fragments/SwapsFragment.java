@@ -1,5 +1,7 @@
 package swap.irfanullah.com.swap.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +26,7 @@ import swap.irfanullah.com.swap.Adapters.StatusAdapter;
 import swap.irfanullah.com.swap.Adapters.SwapsAdapter;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.Status;
+import swap.irfanullah.com.swap.Models.Swap;
 import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
@@ -96,6 +99,76 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         sRV.setLayoutManager(layoutManager);
         sRV.setAdapter(swapsAdapter);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
+                final int position = viewHolder.getAdapterPosition();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(true);
+                builder.setTitle("Unswap");
+                builder.setMessage("Are you sure to unswap the status? ");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SwapsTab swap = swapsTabArrayList.get(position);
+                        RetroLib.geApiService().unswap(PrefStorage.getUser(getContext()).getTOKEN(), swap.getSWAP_ID()).enqueue(new Callback<Swap>() {
+                            @Override
+                            public void onResponse(Call<Swap> call, Response<Swap> response) {
+                                if (response.isSuccessful()) {
+                                    Swap sp = response.body();
+                                    if (!sp.getAuthenticated()) {
+                                        swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        Toast.makeText(getContext(), "You are not logged in. Please log in and then try again.", Toast.LENGTH_LONG).show();
+                                    } else if (sp.getError()) {
+                                        swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                    } else if (sp.getEmpty()) {
+                                        swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                    } else if (sp.getIS_FOUND()) {
+                                        if (sp.getIS_DE_SWAP()) {
+                                            swapsTabArrayList.remove(position);
+                                            notifySwapsAd(swapsTabArrayList);
+                                            Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                        } else {
+                                            swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                            Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                        Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getContext(), "Request was unsuccessful.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Swap> call, Throwable t) {
+                                swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+
+                    }
+                })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                            }
+                        });
+                builder.create().show();
+            }
+        }).attachToRecyclerView(sRV);
+
         return rootView;
     }
 
@@ -104,7 +177,7 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         swapsAdapter.notifyDataSetChanged();
     }
 
-    public void notifySwapsAd(ArrayList<SwapsTab> swapsTabs){
+    public void notifySwapsAd(ArrayList<SwapsTab> swapsTabs) {
         swapsAdapter.notifySwapsAdapter(swapsTabs);
     }
 }

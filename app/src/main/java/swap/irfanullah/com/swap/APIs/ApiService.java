@@ -31,4 +31,9 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"swaps/")
     Call<SwapsTab> getSwaps(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"status/rateStatus")
+    Call<Status> rateStatus(@Query("token") String token,@Query("status_id") int status_id, @Query("rating") float rating);
+    @GET(AFTER_BASE_URL+"swaps/unswap")
+    Call<Swap> unswap(@Query("token") String token,@Query("swap_id") int swap_id);
 }

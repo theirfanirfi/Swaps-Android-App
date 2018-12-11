@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class SwapsTab {
+
     @SerializedName("swap_id")
     private int SWAP_ID;
     @SerializedName("poster_user_id")
@@ -37,6 +38,7 @@ public class SwapsTab {
     private Boolean IS_ME;
     @SerializedName("swaps")
     private ArrayList<SwapsTab> swapsTabArrayList;
+
 
     public int getSWAP_ID() {
         return SWAP_ID;

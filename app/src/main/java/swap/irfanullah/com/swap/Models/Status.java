@@ -30,6 +30,24 @@ public class Status{
     private Boolean isFound;
     @SerializedName("statuses")
     private ArrayList<Status> STATUSES;
+    @SerializedName("isRated")
+    private Boolean IS_RATED;
+    @SerializedName("isAlreadyRated")
+    private Boolean IS_ALREADY_RATED;
+    @SerializedName("isEmpty")
+    private Boolean IS_EMPTY;
+
+    public Boolean getIS_EMPTY() {
+        return IS_EMPTY;
+    }
+
+    public Boolean getIS_RATED() {
+        return IS_RATED;
+    }
+
+    public Boolean getIS_ALREADY_RATED() {
+        return IS_ALREADY_RATED;
+    }
 
 
     public Boolean getFound() {

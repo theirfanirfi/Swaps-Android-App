@@ -31,6 +31,18 @@ public class Swap {
     private Boolean DE_SWAPED;
     @SerializedName("isExist")
     private Boolean IS_EXIST;
+    @SerializedName("isFound")
+    private Boolean IS_FOUND;
+    @SerializedName("isDeSwap")
+    private Boolean IS_DE_SWAP;
+
+    public Boolean getIS_FOUND() {
+        return IS_FOUND;
+    }
+
+    public Boolean getIS_DE_SWAP() {
+        return IS_DE_SWAP;
+    }
 
     public Boolean getDE_SWAPED() {
         return DE_SWAPED;
