@@ -1,6 +1,7 @@
 package swap.irfanullah.com.swap.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import swap.irfanullah.com.swap.Libraries.TimeDiff;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.R;
+import swap.irfanullah.com.swap.StatusActivity;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHolder> {
@@ -84,6 +86,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
             statusDescription = itemView.findViewById(R.id.statusTextView);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapTime = itemView.findViewById(R.id.statusTimeTextView);
+            layout = itemView.findViewById(R.id.statusLayout);
             //unswap = itemView.findViewById(R.id.cancelViewImgBtn);
 
 
@@ -115,7 +118,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
                                             Toast.makeText(context, status.getMESSAGE(), Toast.LENGTH_LONG).show();
                                         }
                                     } else {
-                                        Toast.makeText(context, "You are not loggedin. Please login and try again.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "You are not logged in. Please login and try again.", Toast.LENGTH_LONG).show();
                                     }
 
                                 } else {
@@ -125,11 +128,24 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
 
                             @Override
                             public void onFailure(Call<Status> call, Throwable t) {
+                                Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
 
                             }
                         });
 
                     }
+                }
+            });
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    SwapsTab swap = swapsTabs.get(position);
+                    int status_id = swap.getSTATUS_ID();
+                    Intent singleStatusAct = new Intent(context,StatusActivity.class);
+                    singleStatusAct.putExtra("status_id",status_id);
+                    context.startActivity(singleStatusAct);
                 }
             });
 

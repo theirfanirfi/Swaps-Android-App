@@ -8,6 +8,8 @@ import java.util.List;
 public class Status{
     @SerializedName("username")
     private String USERNAME;
+    @SerializedName("name")
+    private String name;
     @SerializedName("user_id")
     private int USER_ID;
     @SerializedName("status_id")
@@ -36,6 +38,16 @@ public class Status{
     private Boolean IS_ALREADY_RATED;
     @SerializedName("isEmpty")
     private Boolean IS_EMPTY;
+    @SerializedName("average_rating")
+    private float AVERAGE_RATING;
+
+    public float getAVERAGE_RATING() {
+        return AVERAGE_RATING;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public Boolean getIS_EMPTY() {
         return IS_EMPTY;

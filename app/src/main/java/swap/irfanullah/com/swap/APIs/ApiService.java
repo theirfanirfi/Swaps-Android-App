@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
+import swap.irfanullah.com.swap.Models.SingleStatusModel;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.Swap;
 import swap.irfanullah.com.swap.Models.SwapsTab;
@@ -36,4 +37,6 @@ public interface ApiService {
     Call<Status> rateStatus(@Query("token") String token,@Query("status_id") int status_id, @Query("rating") float rating);
     @GET(AFTER_BASE_URL+"swaps/unswap")
     Call<Swap> unswap(@Query("token") String token,@Query("swap_id") int swap_id);
+    @GET(AFTER_BASE_URL+"rating/getStatusRatings")
+    Call<SingleStatusModel> getRaters(@Query("token") String token,@Query("status_id") int status_id);
 }

@@ -23,6 +23,12 @@ public class User {
     private String UPDATED_AT;
     @SerializedName("token")
     private String TOKEN;
+    @SerializedName("ratting")
+    private float RATING;
+
+    public float getRATING() {
+        return RATING;
+    }
 
     public String getTOKEN() {
         return TOKEN;
