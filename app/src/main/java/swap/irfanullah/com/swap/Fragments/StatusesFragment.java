@@ -1,5 +1,6 @@
 package swap.irfanullah.com.swap.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.yalantis.ucrop.UCrop;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,8 @@ public class StatusesFragment extends Fragment {
     private RecyclerView sRV;
     private StatusAdapter statusAdapter;
     private ArrayList<Status> statuses;
+    private Context context;
+    private ProgressBar progressBar;
 
     public StatusesFragment() {
     }
@@ -39,10 +44,20 @@ public class StatusesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_statuses, container, false);
         sRV = rootView.findViewById(R.id.statusesRV);
+        progressBar = rootView.findViewById(R.id.statusLoadingProgressbar);
+        context = getContext();
+        makeRequest();
+        statusAdapter= new StatusAdapter(getActivity(),statuses);
+        sRV.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        sRV.setLayoutManager(layoutManager);
+        sRV.setAdapter(statusAdapter);
+         return rootView;
+    }
 
-
+    private void makeRequest() {
         statuses = new ArrayList<>();
-        RetroLib.geApiService().getStatuses(PrefStorage.getUser(getContext()).getTOKEN()).enqueue(new Callback<Status>() {
+        RetroLib.geApiService().getStatuses(PrefStorage.getUser(context).getTOKEN()).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 if(response.isSuccessful()) {
@@ -50,13 +65,9 @@ public class StatusesFragment extends Fragment {
                     Status status = response.body();
                     if(status.getAuthenticated()) {
                         if(status.getFound()) {
-
-                            statusAdapter= new StatusAdapter(getActivity(),status.getSTATUSES());
-                            sRV.setHasFixedSize(true);
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                            sRV.setLayoutManager(layoutManager);
-                            sRV.setAdapter(statusAdapter);
-
+                            progressBar.setVisibility(View.GONE);
+                            statuses = status.getSTATUSES();
+                            notifyAdapter(statuses);
                         }
                         else {
                             Toast.makeText(getContext(),status.getMESSAGE(),Toast.LENGTH_LONG).show();
@@ -68,7 +79,6 @@ public class StatusesFragment extends Fragment {
                 }
                 else {
                     Log.i("STATUES: ","NOT SUCCESSFULL "+response.raw().toString());
-
                 }
             }
 
@@ -80,6 +90,17 @@ public class StatusesFragment extends Fragment {
             }
         });
 
-         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            //makeRequest();
+        }
+    }
+
+    public void notifyAdapter(ArrayList<Status> statuses){
+        statusAdapter.notifyAdapter(statuses);
     }
 }

@@ -30,6 +30,8 @@ public class Status{
     private float RATTING;
     @SerializedName("isFound")
     private Boolean isFound;
+    @SerializedName("isDeleted")
+    private Boolean IS_DELETED;
     @SerializedName("statuses")
     private ArrayList<Status> STATUSES;
     @SerializedName("isRated")
@@ -40,6 +42,11 @@ public class Status{
     private Boolean IS_EMPTY;
     @SerializedName("average_rating")
     private float AVERAGE_RATING;
+
+
+    public Boolean getIS_DELETED() {
+        return IS_DELETED;
+    }
 
     public float getAVERAGE_RATING() {
         return AVERAGE_RATING;

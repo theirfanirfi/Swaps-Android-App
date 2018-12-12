@@ -145,6 +145,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
                     int status_id = swap.getSTATUS_ID();
                     Intent singleStatusAct = new Intent(context,StatusActivity.class);
                     singleStatusAct.putExtra("status_id",status_id);
+                    singleStatusAct.putExtra("position",position);
                     context.startActivity(singleStatusAct);
                 }
             });
@@ -160,4 +161,6 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
     public void notifyRemovSwapsAdapter() {
         notifyDataSetChanged();
     }
+
+
 }

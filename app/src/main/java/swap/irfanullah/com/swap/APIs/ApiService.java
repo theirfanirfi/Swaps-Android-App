@@ -1,12 +1,17 @@
 package swap.irfanullah.com.swap.APIs;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
+import swap.irfanullah.com.swap.Models.ProfileModel;
 import swap.irfanullah.com.swap.Models.SingleStatusModel;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.Swap;
@@ -39,4 +44,10 @@ public interface ApiService {
     Call<Swap> unswap(@Query("token") String token,@Query("swap_id") int swap_id);
     @GET(AFTER_BASE_URL+"rating/getStatusRatings")
     Call<SingleStatusModel> getRaters(@Query("token") String token,@Query("status_id") int status_id);
+    @GET(AFTER_BASE_URL+"status/deleteStatus")
+    Call<Status> deleteStatus(@Query("token") String token,@Query("status_id") int status_id);
+
+    @Multipart
+    @POST(AFTER_BASE_URL+"profile/updateImage")
+    Call<ProfileModel> updateProfilePicture(@Part("token") RequestBody token, @Part MultipartBody.Part image);
 }

@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
 import swap.irfanullah.com.swap.Models.Status;
+import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.R;
+import swap.irfanullah.com.swap.StatusActivity;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 import swap.irfanullah.com.swap.SwapWithActivity;
 
@@ -91,6 +93,24 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
                     context.startActivity(swapWith);
                 }
             });
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Status status = st.get(position);
+                    int status_id = status.getSTATUS_ID();
+                    Intent singleStatusAct = new Intent(context,StatusActivity.class);
+                    singleStatusAct.putExtra("status_id",status_id);
+                    singleStatusAct.putExtra("position",position);
+                    context.startActivity(singleStatusAct);
+                }
+            });
         }
+    }
+
+    public void notifyAdapter(ArrayList<Status> statuses){
+        this.statuses = statuses;
+        notifyDataSetChanged();
     }
 }
