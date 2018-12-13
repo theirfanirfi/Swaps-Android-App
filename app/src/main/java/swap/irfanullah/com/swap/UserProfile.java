@@ -11,8 +11,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,9 +33,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.ProfilePagerAdapter;
+import swap.irfanullah.com.swap.CustomComponents.PDialog;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.ProfileModel;
+import swap.irfanullah.com.swap.Models.RMsg;
+import swap.irfanullah.com.swap.Models.Statistics;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.User;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
@@ -43,14 +49,68 @@ public class UserProfile extends AppCompatActivity {
     private ImageView profile_image;
     private TabLayout tabLayout;
     private Context context;
+    private TextView profileDescription, statuses,swaps,followers;
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
         initializeObjects();
+        loadStats();
         changeProfilePic();
+        changeProfileDescription();
+    }
 
+    private void loadStats() {
+        RetroLib.geApiService().getStats(user.getTOKEN()).enqueue(new Callback<Statistics>() {
+            @Override
+            public void onResponse(Call<Statistics> call, Response<Statistics> response) {
+                if(response.isSuccessful()){
+                    Statistics stat = response.body();
+                    if(stat.getIS_AUTHENTICATED()){
+                        if(stat.getIS_EMPTY()){
+                            //Toast.makeText(context,stat.getMESSAGE(),Toast.LENGTH_LONG).show();
+                        }else if(stat.getIS_FOUND()){
+                            statuses.setText(Integer.toString(stat.getSTATUSES_COUNT()));
+                            swaps.setText(Integer.toString(stat.getSWAPS_COUNT()));
+                            followers.setText(Integer.toString(stat.getFOLLOWERS_COUNT()));
+                        }else {
+
+                        }
+                    }else {
+                        Toast.makeText(context,RMsg.AUTH_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(context,RMsg.REQ_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Statistics> call, Throwable t) {
+                Toast.makeText(context,t.toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+
+    private void changeProfileDescription() {
+        if(user.getPROFILE_DESCRIPTION() != null){
+            profileDescription.setText(user.getPROFILE_DESCRIPTION());
+        } else {
+            profileDescription.setText("Add Bio by clicking me.");
+        }
+
+
+        profileDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PDialog pDialog = new PDialog();
+                pDialog.setCancelable(false);
+                pDialog.show(getSupportFragmentManager(),"update_profile_description");
+            }
+        });
+        updateDesc();
 
     }
 
@@ -87,12 +147,20 @@ public class UserProfile extends AppCompatActivity {
         tabLayout = findViewById(R.id.profileTabLayout);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        statuses = findViewById(R.id.statusesProfileTextView);
+        swaps = findViewById(R.id.swapsNoProfileTextView);
+        followers = findViewById(R.id.followerNoProfileTextView);
 
         profile_image = findViewById(R.id.profile_image);
+        user = PrefStorage.getUser(context);
+        if(user.getPROFILE_IMAGE() != null) {
+            GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(profile_image);
+        } else {
+            profile_image.setImageResource(R.drawable.ic_person);
+        }
 
-        GLib.downloadImage(context,PrefStorage.getUser(context).getPROFILE_IMAGE()).into(profile_image);
+        profileDescription = findViewById(R.id.userProfileDescription);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,6 +216,35 @@ public class UserProfile extends AppCompatActivity {
 
         } else {
             Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void updateDesc() {
+        User user1 = PrefStorage.getUser(context);
+        if(user1.getPROFILE_DESCRIPTION() != null){
+            profileDescription.setText(user1.getPROFILE_DESCRIPTION());
+        } else {
+            profileDescription.setText("Add Bio by clicking me.");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.profile_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        if(visible){
+            Toast.makeText(context,"visible",Toast.LENGTH_LONG).show();
         }
     }
 }

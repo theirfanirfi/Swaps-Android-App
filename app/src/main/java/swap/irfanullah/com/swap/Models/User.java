@@ -25,6 +25,72 @@ public class User {
     private String TOKEN;
     @SerializedName("ratting")
     private float RATING;
+    @SerializedName("profile_description")
+    private String PROFILE_DESCRIPTION;
+    @SerializedName("isError")
+    private Boolean IS_ERROR;
+    @SerializedName("isAuthenticated")
+    private Boolean IS_AUTHENTICATED;
+    @SerializedName("isUpdated")
+    private Boolean IS_UPDATED;
+    @SerializedName("isNotMatched")
+    private Boolean IS_NOT_MATCHED;
+    @SerializedName("isOldPasswordInCorrect")
+    private Boolean IS_OLD_PASSWORD_INCORRECT;
+    @SerializedName("isLengthError")
+    private Boolean IS_LENGTH_ERROR;
+    @SerializedName("isChanged")
+    private Boolean IS_CHANGED;
+    @SerializedName("isEmpty")
+    private Boolean IS_EMPTY;
+    @SerializedName("user")
+    private User USER;
+    @SerializedName("message")
+    private String MESSAGE;
+
+    public Boolean getIS_EMPTY() {
+        return IS_EMPTY;
+    }
+
+    public Boolean getIS_NOT_MATCHED() {
+        return IS_NOT_MATCHED;
+    }
+
+    public Boolean getIS_OLD_PASSWORD_INCORRECT() {
+        return IS_OLD_PASSWORD_INCORRECT;
+    }
+
+    public Boolean getIS_LENGTH_ERROR() {
+        return IS_LENGTH_ERROR;
+    }
+
+    public Boolean getIS_CHANGED() {
+        return IS_CHANGED;
+    }
+
+    public String getMESSAGE() {
+        return MESSAGE;
+    }
+
+    public Boolean getIS_ERROR() {
+        return IS_ERROR;
+    }
+
+    public Boolean getIS_AUTHENTICATED() {
+        return IS_AUTHENTICATED;
+    }
+
+    public Boolean getIS_UPDATED() {
+        return IS_UPDATED;
+    }
+
+    public User getUSER() {
+        return USER;
+    }
+
+    public String getPROFILE_DESCRIPTION() {
+        return PROFILE_DESCRIPTION;
+    }
 
     public float getRATING() {
         return RATING;

@@ -13,9 +13,11 @@ import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.ProfileModel;
 import swap.irfanullah.com.swap.Models.SingleStatusModel;
+import swap.irfanullah.com.swap.Models.Statistics;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.Swap;
 import swap.irfanullah.com.swap.Models.SwapsTab;
+import swap.irfanullah.com.swap.Models.User;
 
 public interface ApiService {
     String AFTER_BASE_URL = "swap/public/api/";
@@ -50,4 +52,14 @@ public interface ApiService {
     @Multipart
     @POST(AFTER_BASE_URL+"profile/updateImage")
     Call<ProfileModel> updateProfilePicture(@Part("token") RequestBody token, @Part MultipartBody.Part image);
+
+    @GET(AFTER_BASE_URL+"profile/updateDescription")
+    Call<User> updateProfileDescription(@Query("token") String token,@Query("description") String profile_description);
+
+    @GET(AFTER_BASE_URL+"profile/getProfileStats")
+    Call<Statistics> getStats(@Query("token") String token);
+    @GET(AFTER_BASE_URL+"profile/updateProfileDetails")
+    Call<User> updateProfileDetails(@Query("token") String token,@Query("name") String name,@Query("username") String username,@Query("email") String email);
+    @GET(AFTER_BASE_URL+"profile/changePassword")
+    Call<User> changePassword(@Query("token") String token,@Query("newpass") String newpass,@Query("confirmpass") String confirmpass,@Query("oldpass") String oldpass);
 }

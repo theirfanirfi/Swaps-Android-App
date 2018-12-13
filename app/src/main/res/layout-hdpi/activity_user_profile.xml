@@ -34,18 +34,14 @@
                     android:id="@+id/followerNoProfileTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="739"
+                    android:layout_marginEnd="44dp"
+                    android:layout_marginRight="44dp"
+                    android:text="0"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.632"
-                    app:layout_constraintStart_toEndOf="@+id/swapsNoProfileTextView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -71,7 +67,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="8dp"
-                    android:text="739"
+                    android:text="0"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -95,14 +91,14 @@
                     android:id="@+id/swapsNoProfileTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginLeft="44dp"
                     android:layout_marginTop="8dp"
-                    android:text="396"
+                    android:layout_marginEnd="64dp"
+                    android:layout_marginRight="64dp"
+                    android:text="0"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/statusesProfileTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/followerNoProfileTextView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -149,7 +145,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/userProfileDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"

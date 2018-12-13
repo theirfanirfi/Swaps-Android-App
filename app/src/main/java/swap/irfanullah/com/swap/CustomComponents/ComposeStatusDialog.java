@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import swap.irfanullah.com.swap.Adapters.StatusAdapter;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.R;
@@ -34,8 +32,8 @@ public class ComposeStatusDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.compose_status,null);
-        composeTextArea = view.findViewById(R.id.composeStatusTextArea);
-        post = view.findViewById(R.id.postBtn);
+        composeTextArea = view.findViewById(R.id.composeProfileDescTextArea);
+        post = view.findViewById(R.id.updateDescription);
         cancel = view.findViewById(R.id.btnCancel);
         progressBar = view.findViewById(R.id.postProgressBar);
         post.setOnClickListener(new View.OnClickListener() {
