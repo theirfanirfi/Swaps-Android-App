@@ -21,6 +21,12 @@ public class Statistics {
     private String MESSAGE;
     @SerializedName("user")
     private User USER;
+    @SerializedName("isfollow")
+    private int isFollow;
+
+    public int getIsFollow() {
+        return isFollow;
+    }
 
     public User getUSER() {
         return USER;

@@ -34,6 +34,37 @@ public class Followers {
     private Boolean isFollowersFound;
     @SerializedName("isSwapsFound")
     private Boolean isSwapsFound;
+    @SerializedName("isFollowed")
+    private Boolean isFollowed;
+    @SerializedName("isAlreadyFollowed")
+    private Boolean isAlreadyFollowed;
+
+    @SerializedName("isUnFollowed")
+    private Boolean isUnFollowed;
+    @SerializedName("isAlreadyUnFollowed")
+    private Boolean isAlreadyUnFollowed;
+    @SerializedName("isError")
+    private Boolean isError;
+
+    public Boolean getUnFollowed() {
+        return isUnFollowed;
+    }
+
+    public Boolean getAlreadyUnFollowed() {
+        return isAlreadyUnFollowed;
+    }
+
+    public Boolean getFollowed() {
+        return isFollowed;
+    }
+
+    public Boolean getAlreadyFollowed() {
+        return isAlreadyFollowed;
+    }
+
+    public Boolean getError() {
+        return isError;
+    }
 
     public Boolean getFollowersFound() {
         return isFollowersFound;

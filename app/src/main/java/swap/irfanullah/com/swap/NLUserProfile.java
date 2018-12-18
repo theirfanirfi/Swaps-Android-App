@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import swap.irfanullah.com.swap.Adapters.ProfilePagerAdapter;
 import swap.irfanullah.com.swap.CustomComponents.PDialog;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.ProfileModel;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Statistics;
@@ -47,8 +49,10 @@ public class NLUserProfile extends AppCompatActivity {
     private Context context;
     private TextView profileDescription, statuses,swaps,followers;
     private String PROFILE_IMAGE = null, DESCRIPTION;
-    private int USER_ID = 0;
+    private int USER_ID = 0, IS_FOLLOW = 0;
+    private Boolean isFollowed = false;
     private User user;
+    private Button followBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +62,7 @@ public class NLUserProfile extends AppCompatActivity {
     }
 
     private void loadStats() {
-        RetroLib.geApiService().getUserStats(USER_ID).enqueue(new Callback<Statistics>() {
+        RetroLib.geApiService().getUserStats(USER_ID, PrefStorage.getUser(context).getTOKEN()).enqueue(new Callback<Statistics>() {
             @Override
             public void onResponse(Call<Statistics> call, Response<Statistics> response) {
                 if(response.isSuccessful()){
@@ -70,8 +74,12 @@ public class NLUserProfile extends AppCompatActivity {
                             statuses.setText(Integer.toString(stat.getSTATUSES_COUNT()));
                             swaps.setText(Integer.toString(stat.getSWAPS_COUNT()));
                             followers.setText(Integer.toString(stat.getFOLLOWERS_COUNT()));
+                            checkFollow(stat.getIsFollow());
+                            Log.i(RMsg.LOG_MESSAGE,Integer.toString(stat.getIsFollow()));
                             user = stat.getUSER();
                             PROFILE_IMAGE = user.getPROFILE_IMAGE();
+                            DESCRIPTION = user.getPROFILE_DESCRIPTION();
+                            profileDescription.setText(DESCRIPTION);
                             loadProfilePicture();
                         }else {
 finish();
@@ -108,6 +116,9 @@ finish();
         statuses = findViewById(R.id.statusesProfileTextView);
         swaps = findViewById(R.id.swapsNoProfileTextView);
         followers = findViewById(R.id.followerNoProfileTextView);
+        followBtn = findViewById(R.id.followBtn);
+        followBtn.setText("Following");
+followUser();
 
         profile_image = findViewById(R.id.profile_image);
 
@@ -124,4 +135,100 @@ finish();
        }
     }
 
+    private void checkFollow(int isfollow){
+        this.IS_FOLLOW = isfollow;
+        if(this.IS_FOLLOW > 0){
+            isFollowed = true;
+            followBtn.setText("Following");
+        }else {
+            isFollowed = false;
+            followBtn.setText("Follow");
+        }
+
+    }
+
+    private void followUser(){
+        followBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFollowed) {
+                    RetroLib.geApiService().follow(PrefStorage.getUser(context).getTOKEN(), USER_ID).enqueue(new Callback<Followers>() {
+                        @Override
+                        public void onResponse(Call<Followers> call, Response<Followers> response) {
+                            if (response.isSuccessful()) {
+                                Followers followers = response.body();
+                                if (followers.getAuthenticated()) {
+                                    if (followers.getError()) {
+                                        RMsg.toastHere(context, followers.getMESSAGE());
+                                    } else if (followers.getAlreadyFollowed()) {
+                                        RMsg.toastHere(context, followers.getMESSAGE());
+                                        followBtn.setText("Following");
+                                    } else if (followers.getFollowed()) {
+                                        loadStats();
+                                        followBtn.setText("Following");
+                                        RMsg.toastHere(context, followers.getMESSAGE());
+                                    } else {
+                                        RMsg.toastHere(context, followers.getMESSAGE());
+                                    }
+                                } else {
+                                    RMsg.toastHere(context, RMsg.AUTH_ERROR_MESSAGE);
+                                }
+                            } else {
+                                Toast.makeText(context, RMsg.REQ_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Followers> call, Throwable t) {
+                            RMsg.toastHere(context, t.toString());
+
+                        }
+                    });
+                }else {
+                    RetroLib.geApiService().unfollow(PrefStorage.getUser(context).getTOKEN(),USER_ID).enqueue(new Callback<Followers>() {
+                        @Override
+                        public void onResponse(Call<Followers> call, Response<Followers> response) {
+                            if(response.isSuccessful()){
+                                Followers fo = response.body();
+                                if(fo.getAuthenticated()){
+                                    if(fo.getError()){
+                                        RMsg.toastHere(context,fo.getMESSAGE());
+                                    }else {
+                                        if(fo.getUnFollowed()){
+
+                                            isFollowed = false;
+                                            //change the button text back to unfollow
+                                            checkFollow(0);
+                                            loadStats();
+                                            RMsg.toastHere(context,fo.getMESSAGE());
+                                        }else if(fo.getAlreadyUnFollowed()){
+                                            isFollowed = false;
+                                            //change the button text back to unfollow
+                                            checkFollow(0);
+                                            loadStats();
+                                            RMsg.toastHere(context,fo.getMESSAGE());
+                                        }else {
+                                            isFollowed = false;
+                                            //change the button text back to unfollow
+                                            checkFollow(0);
+                                            RMsg.toastHere(context,fo.getMESSAGE());
+                                        }
+                                    }
+                                }else {
+                                    RMsg.toastHere(context,RMsg.AUTH_ERROR_MESSAGE);
+                                }
+                            }else{
+                                RMsg.toastHere(context,RMsg.REQ_ERROR_MESSAGE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Followers> call, Throwable t) {
+                            RMsg.toastHere(context,t.toString());
+                        }
+                    });
+                }
+                }
+        });
+    }
 }

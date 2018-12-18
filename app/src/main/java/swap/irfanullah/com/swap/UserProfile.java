@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class UserProfile extends AppCompatActivity {
     private Context context;
     private TextView profileDescription, statuses,swaps,followers;
     private User user;
+    private Button followBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +155,8 @@ public class UserProfile extends AppCompatActivity {
         statuses = findViewById(R.id.statusesProfileTextView);
         swaps = findViewById(R.id.swapsNoProfileTextView);
         followers = findViewById(R.id.followerNoProfileTextView);
+        followBtn = findViewById(R.id.followBtn);
+        followBtn.setVisibility(View.GONE);
 
         profile_image = findViewById(R.id.profile_image);
         if(user.getPROFILE_IMAGE() != null) {

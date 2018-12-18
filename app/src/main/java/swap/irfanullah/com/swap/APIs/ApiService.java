@@ -67,7 +67,7 @@ public interface ApiService {
     Call<Statistics> getStats(@Query("token") String token);
 
     @GET(AFTER_BASE_URL+"profile/getProfileUserStats")
-    Call<Statistics> getUserStats(@Query("id") int id);
+    Call<Statistics> getUserStats(@Query("id") int id,@Query("token") String token );
 
     @GET(AFTER_BASE_URL+"profile/updateProfileDetails")
     Call<User> updateProfileDetails(@Query("token") String token,@Query("name") String name,@Query("username") String username,@Query("email") String email);
@@ -87,4 +87,10 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"notifications/clear")
     Call<Notification> clearNotifications(@Query("token") String token,@Query("id") int notification_id);
+
+    @GET(AFTER_BASE_URL+"followers/follow")
+    Call<Followers> follow(@Query("token") String token,@Query("id") int user_id);
+
+    @GET(AFTER_BASE_URL+"followers/unfollow")
+    Call<Followers> unfollow(@Query("token") String token,@Query("id") int user_id);
 }
