@@ -24,6 +24,18 @@ public class SingleStatusModel {
     private int SWAPS_COUNT;
     @SerializedName("average_rating")
     private float AVERAGE_RATING;
+    @SerializedName("is_accepted")
+    private int IS_ACCEPTED;
+    @SerializedName("is_rejected")
+    private int IS_REJECTED;
+
+    public int getIS_ACCEPTED() {
+        return IS_ACCEPTED;
+    }
+
+    public int getIS_REJECTED() {
+        return IS_REJECTED;
+    }
 
     public Boolean getIS_FOUND() {
         return IS_FOUND;

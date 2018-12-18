@@ -19,6 +19,12 @@ public class Statistics {
     private int FOLLOWERS_COUNT;
     @SerializedName("message")
     private String MESSAGE;
+    @SerializedName("user")
+    private User USER;
+
+    public User getUSER() {
+        return USER;
+    }
 
     public String getMESSAGE() {
         return MESSAGE;

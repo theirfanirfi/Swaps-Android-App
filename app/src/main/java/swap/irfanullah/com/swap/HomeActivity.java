@@ -16,19 +16,28 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import swap.irfanullah.com.swap.CustomComponents.ComposeStatusDialog;
 import swap.irfanullah.com.swap.Fragments.ChatFragment;
 import swap.irfanullah.com.swap.Fragments.StatusesFragment;
 import swap.irfanullah.com.swap.Fragments.SwapsFragment;
+import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.Notification;
+import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 public class HomeActivity extends AppCompatActivity {
@@ -82,6 +91,40 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        View menu_hotlist = menu.findItem(R.id.notification_icon).getActionView();
+        final TextView tx = (TextView) menu_hotlist.findViewById(R.id.hotlist_hot);
+        RetroLib.geApiService().getNotificationsCount(PrefStorage.getUser(this).getTOKEN()).enqueue(new Callback<Notification>() {
+            @Override
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
+                if(response.isSuccessful()){
+                    Notification notification = response.body();
+                    if(notification.getIS_AUTHENTICATED()){
+                        tx.setText(Integer.toString(notification.getNOTIFICATIONS_COUNT()));
+                    }else {
+                        Toast.makeText(HomeActivity.this,RMsg.AUTH_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+
+                    }
+                }else {
+                    Toast.makeText(HomeActivity.this,RMsg.REQ_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Notification> call, Throwable t) {
+                Toast.makeText(HomeActivity.this,t.toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+        tx.setText("");
+
+        menu_hotlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(RMsg.LOG_MESSAGE,"working 1");
+                Intent notificationAct = new Intent(HomeActivity.this,NotificationActivity.class);
+                startActivity(notificationAct);
+            }
+        });
         return true;
     }
 
@@ -99,6 +142,16 @@ public class HomeActivity extends AppCompatActivity {
             Intent loginAct = new Intent(this,LoginActivity.class);
             startActivity(loginAct);
             finish();
+        }else if(id == R.id.notification_icon){
+            //Log.i(RMsg.LOG_MESSAGE,"working");
+                Intent notificationAct = new Intent(HomeActivity.this,NotificationActivity.class);
+                startActivity(notificationAct);
+        } else if(id == R.id.profile){
+            Intent profileAct = new Intent(HomeActivity.this,UserProfile.class);
+            startActivity(profileAct);
+        } else if(id == R.id.settings){
+            Intent settingsAct = new Intent(HomeActivity.this,Settings.class);
+            startActivity(settingsAct);
         }
 
         return true;

@@ -38,6 +38,18 @@ public class SwapsTab {
     private Boolean IS_ME;
     @SerializedName("swaps")
     private ArrayList<SwapsTab> swapsTabArrayList;
+    @SerializedName("is_accepted")
+    private int IS_ACCEPTED;
+    @SerializedName("is_rejected")
+    private int IS_REJECTED;
+
+    public int getIS_ACCEPTED() {
+        return IS_ACCEPTED;
+    }
+
+    public int getIS_REJECTED() {
+        return IS_REJECTED;
+    }
 
 
     public int getSWAP_ID() {

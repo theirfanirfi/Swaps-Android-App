@@ -183,6 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     userObject = data.getJSONObject("user");
 
+
                     PrefStorage.getEditor(context).putString(PrefStorage.USER_PREF_DETAILS,userObject.toString()).commit();
 
                     Intent homeAct = new Intent(context,HomeActivity.class);

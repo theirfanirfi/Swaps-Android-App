@@ -42,7 +42,18 @@ public class Status{
     private Boolean IS_EMPTY;
     @SerializedName("average_rating")
     private float AVERAGE_RATING;
+    @SerializedName("is_accepted")
+    private int IS_ACCEPTED;
+    @SerializedName("is_rejected")
+    private int IS_REJECTED;
 
+    public int getIS_ACCEPTED() {
+        return IS_ACCEPTED;
+    }
+
+    public int getIS_REJECTED() {
+        return IS_REJECTED;
+    }
 
     public Boolean getIS_DELETED() {
         return IS_DELETED;

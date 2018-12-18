@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
+import swap.irfanullah.com.swap.Models.Notification;
 import swap.irfanullah.com.swap.Models.ProfileModel;
 import swap.irfanullah.com.swap.Models.SingleStatusModel;
 import swap.irfanullah.com.swap.Models.Statistics;
@@ -28,6 +29,9 @@ public interface ApiService {
     @GET(AFTER_BASE_URL+"status/getStatuses")
     Call<Status> getStatuses(@Query("token") String token);
 
+    @GET(AFTER_BASE_URL+"status/getUserStatuses")
+    Call<Status> getUserStatuses(@Query("id") int id);
+
     @GET(AFTER_BASE_URL+"followers/")
     Call<Followers> getFollowers(@Query("token") String token, @Query("status_id") int status_id);
 
@@ -39,6 +43,9 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"swaps/")
     Call<SwapsTab> getSwaps(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"swaps/user")
+    Call<SwapsTab> getUserSwaps(@Query("id") int id);
 
     @GET(AFTER_BASE_URL+"status/rateStatus")
     Call<Status> rateStatus(@Query("token") String token,@Query("status_id") int status_id, @Query("rating") float rating);
@@ -58,8 +65,26 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"profile/getProfileStats")
     Call<Statistics> getStats(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"profile/getProfileUserStats")
+    Call<Statistics> getUserStats(@Query("id") int id);
+
     @GET(AFTER_BASE_URL+"profile/updateProfileDetails")
     Call<User> updateProfileDetails(@Query("token") String token,@Query("name") String name,@Query("username") String username,@Query("email") String email);
     @GET(AFTER_BASE_URL+"profile/changePassword")
     Call<User> changePassword(@Query("token") String token,@Query("newpass") String newpass,@Query("confirmpass") String confirmpass,@Query("oldpass") String oldpass);
+    @GET(AFTER_BASE_URL+"notifications/getNotificationsCount")
+    Call<Notification> getNotificationsCount(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"notifications/getNotifications")
+    Call<Notification> getNotifications(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"swaps/getSwap")
+    Call<Swap> getSwap(@Query("token") String token,@Query("swap_id") int swap_id);
+
+    @GET(AFTER_BASE_URL+"notifications/approveSwap")
+    Call<Swap> approveSwap(@Query("token") String token,@Query("swap_id") int swap_id);
+
+    @GET(AFTER_BASE_URL+"notifications/clear")
+    Call<Notification> clearNotifications(@Query("token") String token,@Query("id") int notification_id);
 }

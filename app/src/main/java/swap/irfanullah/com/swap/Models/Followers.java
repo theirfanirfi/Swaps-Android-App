@@ -8,6 +8,10 @@ public class Followers {
 
     @SerializedName("f_id")
     private int FID;
+    @SerializedName("isAuthenticated")
+    private Boolean isAuthenticated;
+    @SerializedName("isFound")
+    private Boolean isFound;
     @SerializedName("followed_user_id")
     private int FOLLOWED_USER_ID;
     @SerializedName("follower_user_id")
@@ -24,6 +28,32 @@ public class Followers {
     private ArrayList<Followers> followers;
     @SerializedName("status_id")
     private int STATUS_ID;
+    @SerializedName("message")
+    private String MESSAGE;
+    @SerializedName("isFollowersFound")
+    private Boolean isFollowersFound;
+    @SerializedName("isSwapsFound")
+    private Boolean isSwapsFound;
+
+    public Boolean getFollowersFound() {
+        return isFollowersFound;
+    }
+
+    public Boolean getSwapsFound() {
+        return isSwapsFound;
+    }
+
+    public String getMESSAGE() {
+        return MESSAGE;
+    }
+
+    public Boolean getAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public Boolean getFound() {
+        return isFound;
+    }
 
     public int getSTATUS_ID() {
         return STATUS_ID;

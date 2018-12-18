@@ -47,4 +47,8 @@ public class PrefStorage {
         User user = gson.fromJson(PrefStorage.getUserData(context),User.class);
         return user;
     }
+
+    public static Boolean isMe(Context context,int USER_ID){
+        return getUser(context).getUSER_ID() == USER_ID ? true : false;
+    }
 }

@@ -19,12 +19,15 @@ import java.util.ArrayList;
 
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
+import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.SwapsTab;
+import swap.irfanullah.com.swap.NLUserProfile;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.StatusActivity;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 import swap.irfanullah.com.swap.SwapWithActivity;
+import swap.irfanullah.com.swap.UserProfile;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusViewHolder> {
     private Context context;
@@ -103,7 +106,27 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
                     Intent singleStatusAct = new Intent(context,StatusActivity.class);
                     singleStatusAct.putExtra("status_id",status_id);
                     singleStatusAct.putExtra("position",position);
+                    singleStatusAct.putExtra("is_accepted",0);
+                    singleStatusAct.putExtra("swap_id",0);
                     context.startActivity(singleStatusAct);
+                }
+            });
+
+            profile_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Status status = st.get(position);
+                    if(PrefStorage.isMe(context,status.getUSER_ID())){
+                        Intent profileAct = new Intent(context,UserProfile.class);
+                        profileAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(profileAct);
+                    }else {
+                        Intent profileAct = new Intent(context,NLUserProfile.class);
+                        profileAct.putExtra("user_id",status.getUSER_ID());
+                        profileAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(profileAct);
+                    }
                 }
             });
         }

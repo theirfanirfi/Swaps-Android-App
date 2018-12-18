@@ -29,13 +29,14 @@ import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.StatusAdapter;
 import swap.irfanullah.com.swap.Adapters.SwapsAdapter;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.Swap;
 import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 
-public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnFocusChangeListener{
+public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView sRV;
     private SwapsAdapter swapsAdapter;
@@ -88,7 +89,7 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                     Swap sp = response.body();
                                     if (!sp.getAuthenticated()) {
                                         swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                                        Toast.makeText(getContext(), "You are not logged in. Please log in and then try again.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(), RMsg.AUTH_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                                     } else if (sp.getError()) {
                                         swapsAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
                                         Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
@@ -109,7 +110,7 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                         Toast.makeText(getContext(), sp.getMESSAGE(), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Toast.makeText(getContext(), "Request was unsuccessful.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), RMsg.REQ_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -154,10 +155,10 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
 
                             } else {
-                                Toast.makeText(getContext(), "You don't have any swaped status.", Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getContext(), "You don't have any swaped status.", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "You are not logged in. Please log in and then try again.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), RMsg.AUTH_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                         }
 
                     } else {
@@ -166,7 +167,7 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                     }
 
                 } else {
-                    Toast.makeText(getContext(), "Error occurred in loading the swaps.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), RMsg.REQ_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -189,13 +190,6 @@ public class SwapsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         swapsAdapter.notifySwapsAdapter(swapsTabs);
     }
 
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(hasFocus){
-            Toast.makeText(getContext(),"working focus",Toast.LENGTH_LONG).show();
-
-        }
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

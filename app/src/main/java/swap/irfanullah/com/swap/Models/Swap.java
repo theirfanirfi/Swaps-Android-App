@@ -2,6 +2,8 @@ package swap.irfanullah.com.swap.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import retrofit2.http.GET;
+
 public class Swap {
     @SerializedName("swap_id")
     private int SWAP_ID;
@@ -35,6 +37,30 @@ public class Swap {
     private Boolean IS_FOUND;
     @SerializedName("isDeSwap")
     private Boolean IS_DE_SWAP;
+    @SerializedName("is_accepted")
+    private int IS_ACCEPTED;
+    @SerializedName("is_rejected")
+    private int IS_REJECTED;
+    @SerializedName("swap")
+    private Swap GET_SWAP;
+    @SerializedName("isApproved")
+    private Boolean isApproved;
+
+    public Boolean getApproved() {
+        return isApproved;
+    }
+
+    public Swap getGET_SWAP() {
+        return GET_SWAP;
+    }
+
+    public int getIS_ACCEPTED() {
+        return IS_ACCEPTED;
+    }
+
+    public int getIS_REJECTED() {
+        return IS_REJECTED;
+    }
 
     public Boolean getIS_FOUND() {
         return IS_FOUND;

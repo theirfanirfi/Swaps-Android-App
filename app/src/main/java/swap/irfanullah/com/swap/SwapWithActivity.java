@@ -1,5 +1,6 @@
 package swap.irfanullah.com.swap;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.SwapWithAdapter;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.Followers;
+import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.Swap;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
@@ -32,6 +34,7 @@ public class SwapWithActivity extends AppCompatActivity {
     private ArrayList<Followers> followersList, filteredArrayList;
     private EditText searchTextField;
     private int INTENT_STATUS_ID = 0;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +44,53 @@ public class SwapWithActivity extends AppCompatActivity {
        // toolbar.setTitle("");
         setSupportActionBar(toolbar);
         searchTextField = findViewById(R.id.searchSwapedWithField);
-
+context = this;
         INTENT_STATUS_ID = getIntent().getExtras().getInt("status_id");
-
+followersList = new ArrayList<>();
 
         sWRV = findViewById(R.id.swapWithRV);
 
         RetroLib.geApiService().getFollowers(PrefStorage.getUser(this).getTOKEN(),INTENT_STATUS_ID).enqueue(new Callback<Followers>() {
             @Override
             public void onResponse(Call<Followers> call, Response<Followers> response) {
-                Followers followers = response.body();
-                ArrayList<Followers> followersArrayList = followers.getFollowers();
-                followersList = followers.getFollowers();
-                int status_id = followers.getSTATUS_ID();
-                ArrayList<Swap> swaps = followers.getSWAPS();
+                if(response.isSuccessful()){
+                    Followers followers = response.body();
+                    if(followers.getAuthenticated()){
+                        if(followers.getFound()){
+                            if(followers.getFollowersFound()){
+                                ArrayList<Followers> followersArrayList = followers.getFollowers();
+                                followersList = followers.getFollowers();
+                                int status_id = followers.getSTATUS_ID();
+                                ArrayList<Swap> swaps = followers.getSWAPS();
 
-                swapWithAdapter = new SwapWithAdapter(getApplicationContext(),followersArrayList,swaps,status_id);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                sWRV.setLayoutManager(layoutManager);
-                sWRV.setAdapter(swapWithAdapter);
+                                swapWithAdapter = new SwapWithAdapter(getApplicationContext(),followersArrayList,swaps,status_id);
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                sWRV.setLayoutManager(layoutManager);
+                                sWRV.setAdapter(swapWithAdapter);
+                            }else {
+                                Toast.makeText(context,followers.getMESSAGE(),Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            Toast.makeText(context,followers.getMESSAGE(),Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(context,RMsg.AUTH_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
 
-                Log.i("FOLLOWERS: ",response.raw().toString());
+                    }
+                }else {
+                    Toast.makeText(context,RMsg.REQ_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                }
+
+//                Followers followers = response.body();
+//                ArrayList<Followers> followersArrayList = followers.getFollowers();
+//                followersList = followers.getFollowers();
+//                int status_id = followers.getSTATUS_ID();
+//                ArrayList<Swap> swaps = followers.getSWAPS();
+//
+//                swapWithAdapter = new SwapWithAdapter(getApplicationContext(),followersArrayList,swaps,status_id);
+//                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//                sWRV.setLayoutManager(layoutManager);
+//                sWRV.setAdapter(swapWithAdapter);
             }
 
             @Override

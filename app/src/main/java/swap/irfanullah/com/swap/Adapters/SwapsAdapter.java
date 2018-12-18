@@ -19,13 +19,18 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
+import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.SwapsTab;
+import swap.irfanullah.com.swap.Models.User;
+import swap.irfanullah.com.swap.NLUserProfile;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.StatusActivity;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
+import swap.irfanullah.com.swap.UserProfile;
 
 public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHolder> {
     private Context context, ctx;
@@ -52,9 +57,20 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         if (swap.getIS_ME()) {
             statusViewHolder.username.setText(REPRESENTING_LOGGED_USER_IN_TAB);
             statusViewHolder.withTextV.setText(swap.getSWAPED_WITH_FULLNAME());
+            User user = PrefStorage.getUser(context);
+            if(user.getPROFILE_IMAGE() == null){
+                statusViewHolder.profile_image.setImageResource(R.drawable.ic_person);
+            }else {
+                GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
+            }
         } else {
             statusViewHolder.username.setText(swap.getPOSTER_FULLNAME());
             statusViewHolder.withTextV.setText(REPRESENTING_LOGGED_USER_IN_TAB);
+            if(swap.getPOSTER_PROFILE_IMAGE() == null){
+                statusViewHolder.profile_image.setImageResource(R.drawable.ic_person);
+            }else {
+                GLib.downloadImage(context,swap.getPOSTER_PROFILE_IMAGE()).into(statusViewHolder.profile_image);
+            }
         }
 
         statusViewHolder.statusDescription.setText(swap.getSTATUS());
@@ -89,7 +105,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
             layout = itemView.findViewById(R.id.statusLayout);
             //unswap = itemView.findViewById(R.id.cancelViewImgBtn);
 
-
+                gotoProfile(context,swapsTabs);
             //rate the status
 
             ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -118,11 +134,11 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
                                             Toast.makeText(context, status.getMESSAGE(), Toast.LENGTH_LONG).show();
                                         }
                                     } else {
-                                        Toast.makeText(context, "You are not logged in. Please login and try again.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, RMsg.AUTH_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                                     }
 
                                 } else {
-                                    Toast.makeText(context, "Request was unsuccessful.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, RMsg.REQ_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -143,13 +159,45 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
                     int position = getAdapterPosition();
                     SwapsTab swap = swapsTabs.get(position);
                     int status_id = swap.getSTATUS_ID();
+                    int is_accepted = swap.getIS_ACCEPTED();
+                    int swap_id = swap.getSWAP_ID();
                     Intent singleStatusAct = new Intent(context,StatusActivity.class);
                     singleStatusAct.putExtra("status_id",status_id);
                     singleStatusAct.putExtra("position",position);
+                    singleStatusAct.putExtra("is_accepted",is_accepted);
+                    singleStatusAct.putExtra("swap_id",swap_id);
                     context.startActivity(singleStatusAct);
+                    Log.i(RMsg.LOG_MESSAGE,Integer.toString(swap_id)+" : "+Integer.toString(swap.getIS_ACCEPTED()));
                 }
             });
 
+        }
+
+        private void gotoProfile(final Context context, final ArrayList<SwapsTab> swapsTabs) {
+
+            profile_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    final SwapsTab swap = swapsTabs.get(position);
+
+                    Log.i(RMsg.LOG_MESSAGE,Integer.toString(swap.getPOSTER_USER_ID()));
+
+                    if(PrefStorage.isMe(context,swap.getPOSTER_USER_ID())){
+
+                        Intent profileAct = new Intent(context,UserProfile.class);
+                        profileAct.putExtra("user_id",swap.getPOSTER_USER_ID());
+                        profileAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        context.startActivity(profileAct);
+                    }else {
+                        Intent profileAct = new Intent(context,NLUserProfile.class);
+                        profileAct.putExtra("user_id",swap.getPOSTER_USER_ID());
+                        profileAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(profileAct);
+                    }
+                }
+            });
         }
     }
 

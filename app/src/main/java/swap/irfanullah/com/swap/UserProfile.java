@@ -139,9 +139,12 @@ public class UserProfile extends AppCompatActivity {
     }
 
     private void initializeObjects() {
+
         context = this;
+        user = PrefStorage.getUser(context);
+        profileDescription = findViewById(R.id.userProfileDescription);
         viewPager = findViewById(R.id.profileViewPage);
-        profilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager());
+        profilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), user.getUSER_ID());
         viewPager.setAdapter(profilePagerAdapter);
 
         tabLayout = findViewById(R.id.profileTabLayout);
@@ -152,14 +155,12 @@ public class UserProfile extends AppCompatActivity {
         followers = findViewById(R.id.followerNoProfileTextView);
 
         profile_image = findViewById(R.id.profile_image);
-        user = PrefStorage.getUser(context);
         if(user.getPROFILE_IMAGE() != null) {
             GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(profile_image);
         } else {
             profile_image.setImageResource(R.drawable.ic_person);
         }
 
-        profileDescription = findViewById(R.id.userProfileDescription);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
