@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.yalantis.ucrop.UCrop;
-
 import java.util.ArrayList;
 
 
@@ -43,7 +40,7 @@ public class StatusesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_statuses, container, false);
-        sRV = rootView.findViewById(R.id.statusesRV);
+        sRV = rootView.findViewById(R.id.chatRV);
         progressBar = rootView.findViewById(R.id.statusLoadingProgressbar);
         context = getContext();
         makeRequest();

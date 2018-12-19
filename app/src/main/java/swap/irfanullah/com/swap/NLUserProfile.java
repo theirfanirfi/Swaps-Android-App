@@ -53,12 +53,38 @@ public class NLUserProfile extends AppCompatActivity {
     private Boolean isFollowed = false;
     private User user;
     private Button followBtn;
+    private final String LOGGEDIN_USER_INTENT_KEY = "loggedin_user_id";
+    private final String TO_CHAT_WITH_USER_INTENT_KEY = "to_chat_with_user_id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         initializeObjects();
         loadStats();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.nl_user_profile_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.messenger){
+            User loggedUser = PrefStorage.getUser(context);
+            if( loggedUser == null){
+                RMsg.toastHere(context,RMsg.AUTH_ERROR_MESSAGE);
+                finish();
+            }else {
+                Intent chatAct = new Intent(context,ChatActivity.class);
+                chatAct.putExtra(LOGGEDIN_USER_INTENT_KEY,loggedUser.getUSER_ID());
+                chatAct.putExtra(TO_CHAT_WITH_USER_INTENT_KEY,USER_ID);
+                startActivity(chatAct);
+            }
+        }
+        return true;
     }
 
     private void loadStats() {
@@ -101,7 +127,7 @@ finish();
     private void initializeObjects() {
         context = this;
         USER_ID=getIntent().getExtras().getInt("user_id");
-
+        ///user = PrefStorage.getSharedPreference(context).contains(PrefStorage.USER_PREF_DETAILS) ? PrefStorage.getUser(context) : null ;
         if(USER_ID == 0){
             finish();
         }
@@ -118,7 +144,7 @@ finish();
         followers = findViewById(R.id.followerNoProfileTextView);
         followBtn = findViewById(R.id.followBtn);
         followBtn.setText("Following");
-followUser();
+        followUser();
 
         profile_image = findViewById(R.id.profile_image);
 

@@ -10,12 +10,12 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/statusesRV"
-        app:layout_constraintEnd_toEndOf="@+id/statusesRV"
-        app:layout_constraintStart_toStartOf="@+id/statusesRV"
-        app:layout_constraintTop_toTopOf="@+id/statusesRV" />
+        app:layout_constraintBottom_toBottomOf="@+id/chatRV"
+        app:layout_constraintEnd_toEndOf="@+id/chatRV"
+        app:layout_constraintStart_toStartOf="@+id/chatRV"
+        app:layout_constraintTop_toTopOf="@+id/chatRV" />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/statusesRV"
+        android:id="@+id/chatRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"

@@ -12,6 +12,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.Notification;
+import swap.irfanullah.com.swap.Models.Participants;
 import swap.irfanullah.com.swap.Models.ProfileModel;
 import swap.irfanullah.com.swap.Models.SingleStatusModel;
 import swap.irfanullah.com.swap.Models.Statistics;
@@ -93,4 +94,7 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"followers/unfollow")
     Call<Followers> unfollow(@Query("token") String token,@Query("id") int user_id);
+
+    @GET(AFTER_BASE_URL+"participants/")
+    Call<Participants> getParticipants(@Query("token") String token);
 }

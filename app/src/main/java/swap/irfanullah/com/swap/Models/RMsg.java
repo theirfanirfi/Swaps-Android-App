@@ -1,6 +1,7 @@
 package swap.irfanullah.com.swap.Models;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 public class RMsg {
@@ -16,5 +17,12 @@ public class RMsg {
 
     public static void toastHere(Context context, String msg){
         Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
+    }
+    public static void logHere(String msg){
+        Log.i(LOG_MESSAGE,msg);
+    }
+
+    public static void ilogHere(int msg){
+        Log.i(LOG_MESSAGE,Integer.toString(msg));
     }
 }

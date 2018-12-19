@@ -22,7 +22,6 @@ import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.R;
-import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 public class StatusesFragment extends Fragment {
 
@@ -44,7 +43,7 @@ public class StatusesFragment extends Fragment {
         Log.i(RMsg.LOG_MESSAGE+"PROFILE",Integer.toString(USER_ID));
 
         View rootView = inflater.inflate(R.layout.fragment_statuses, container, false);
-        sRV = rootView.findViewById(R.id.statusesRV);
+        sRV = rootView.findViewById(R.id.chatRV);
         progressBar = rootView.findViewById(R.id.statusLoadingProgressbar);
         context = getContext();
         makeRequest();
