@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class Participants {
-    @SerializedName("chat_id")
-    private int PID;
     @SerializedName("isAuthenticated")
     private Boolean isAuthenticated;
     @SerializedName("isFound")
@@ -35,6 +33,12 @@ public class Participants {
     private String MESSAGE;
     @SerializedName("participants")
     private ArrayList<Participants> PARTICIPANTS;
+    @SerializedName("chat_id")
+    private int CHAT_ID;
+
+    public int getCHAT_ID() {
+        return CHAT_ID;
+    }
 
     public Boolean getError() {
         return isError;
@@ -46,10 +50,6 @@ public class Participants {
 
     public String getMESSAGE() {
         return MESSAGE;
-    }
-
-    public int getPID() {
-        return PID;
     }
 
     public Boolean getAuthenticated() {

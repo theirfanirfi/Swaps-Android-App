@@ -55,6 +55,7 @@ public class NLUserProfile extends AppCompatActivity {
     private Button followBtn;
     private final String LOGGEDIN_USER_INTENT_KEY = "loggedin_user_id";
     private final String TO_CHAT_WITH_USER_INTENT_KEY = "to_chat_with_user_id";
+    private final String CHAT_ID_INTENT_KEY = "chat_id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +82,7 @@ public class NLUserProfile extends AppCompatActivity {
                 Intent chatAct = new Intent(context,ChatActivity.class);
                 chatAct.putExtra(LOGGEDIN_USER_INTENT_KEY,loggedUser.getUSER_ID());
                 chatAct.putExtra(TO_CHAT_WITH_USER_INTENT_KEY,USER_ID);
+                chatAct.putExtra(CHAT_ID_INTENT_KEY,0);
                 startActivity(chatAct);
             }
         }

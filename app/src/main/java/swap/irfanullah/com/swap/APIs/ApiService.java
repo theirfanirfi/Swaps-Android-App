@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import swap.irfanullah.com.swap.Models.Followers;
+import swap.irfanullah.com.swap.Models.Messenger;
 import swap.irfanullah.com.swap.Models.Notification;
 import swap.irfanullah.com.swap.Models.Participants;
 import swap.irfanullah.com.swap.Models.ProfileModel;
@@ -97,4 +98,9 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"participants/")
     Call<Participants> getParticipants(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"msg/")
+    Call<Messenger> getMessages(@Query("token") String token,@Query("id") int to_chat_with_id);
+    @GET(AFTER_BASE_URL+"msg/send")
+    Call<Messenger> sendMessage(@Query("token") String token,@Query("id") int to_chat_with_id,@Query("msg") String message);
 }

@@ -1,10 +1,10 @@
 package swap.irfanullah.com.swap.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import swap.irfanullah.com.swap.ChatActivity;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Models.Participants;
-import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.User;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
@@ -67,14 +67,17 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
         private TextView chatWithUsername;
         private ImageView profile_image;
         private ConstraintLayout pLayout;
+        private final String LOGGEDIN_USER_INTENT_KEY = "loggedin_user_id";
+        private final String TO_CHAT_WITH_USER_INTENT_KEY = "to_chat_with_user_id";
+        private final String CHAT_ID_INTENT_KEY = "chat_id";
+
         public ParticipantsViewHolder(@NonNull View itemView,final Context context,final ArrayList<Participants> participantsArrayList) {
             super(itemView);
             this.context = context;
             chatWithUsername = itemView.findViewById(R.id.chatWithUsername);
             profile_image = itemView.findViewById(R.id.profile_image);
             pLayout = itemView.findViewById(R.id.participantLayout);
-
-           gotoChat(participantsArrayList);
+            gotoChat(participantsArrayList);
         }
 
         private void gotoChat(final ArrayList<Participants> participantsArrayList){
@@ -84,10 +87,23 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
                     int position = getAdapterPosition();
                     User user = PrefStorage.getUser(context);
                     Participants participants = participantsArrayList.get(position);
+                    int CHAT_ID = participants.getCHAT_ID();
+                    Intent chatAct = new Intent(context,ChatActivity.class);
+
                     if(user.getUSER_ID() == participants.getUSER_TWO()) {
-                        Log.i(RMsg.LOG_MESSAGE, "You are user two");
+                        int TO_CHAT_WITH_ID = participants.getUSER_ONE();
+                        int LOGGEDIN_USER_ID = participants.getUSER_TWO();
+                        chatAct.putExtra(LOGGEDIN_USER_INTENT_KEY,LOGGEDIN_USER_ID);
+                        chatAct.putExtra(TO_CHAT_WITH_USER_INTENT_KEY,TO_CHAT_WITH_ID);
+                        chatAct.putExtra(CHAT_ID_INTENT_KEY,CHAT_ID);
+                        context.startActivity(chatAct);
                     }else {
-                        Log.i(RMsg.LOG_MESSAGE, "You are user one");
+                        int TO_CHAT_WITH_ID = participants.getUSER_TWO();
+                        int LOGGEDIN_USER_ID = participants.getUSER_ONE();
+                        chatAct.putExtra(LOGGEDIN_USER_INTENT_KEY,LOGGEDIN_USER_ID);
+                        chatAct.putExtra(TO_CHAT_WITH_USER_INTENT_KEY,TO_CHAT_WITH_ID);
+                        chatAct.putExtra(CHAT_ID_INTENT_KEY,CHAT_ID);
+                        context.startActivity(chatAct);
                     }
                 }
             });
