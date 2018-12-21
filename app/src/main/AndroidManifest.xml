@@ -45,12 +45,13 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".Settings"
-            android:parentActivityName=".UserProfile"></activity>
-        <activity android:name=".NLUserProfile"></activity>
+            android:parentActivityName=".UserProfile" />
+        <activity android:name=".NLUserProfile" />
         <activity
             android:name=".NotificationActivity"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".UsersActivity" android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>

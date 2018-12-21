@@ -76,7 +76,7 @@ public class ChatActivity extends AppCompatActivity {
                             }else {
                                 if(messenger.getIS_AUTHENTICATED()){
                                     if(messenger.getIS_SENT()){
-                                        RMsg.toastHere(context,messenger.getRESPONSE_MESSAGE());
+                                       // RMsg.toastHere(context,messenger.getRESPONSE_MESSAGE());
                                         messageField.setText("");
                                         START = 0;
                                         loadMessages();
@@ -155,10 +155,10 @@ public class ChatActivity extends AppCompatActivity {
                                         //messengerArrayList.addAll(messenger.getMESSENGER());
                                     //recyclerViewSetup(messenger.getMESSENGER());
                                     notifyAdapter(messenger.getMESSENGER());
-                                    if(START == 0) {
-                                        START++;
+                                    //if(START == 0) {
+                                        //START++;
                                         rv.smoothScrollToPosition(messenger.getMESSENGER().size() > 0 ? messenger.getMESSENGER().size() - 1 : messenger.getMESSENGER().size());
-                                    }
+                                   // }
                                 }else {
                                     RMsg.logHere(messenger.getRESPONSE_MESSAGE());
 

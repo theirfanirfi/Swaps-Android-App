@@ -103,4 +103,6 @@ public interface ApiService {
     Call<Messenger> getMessages(@Query("token") String token,@Query("id") int to_chat_with_id);
     @GET(AFTER_BASE_URL+"msg/send")
     Call<Messenger> sendMessage(@Query("token") String token,@Query("id") int to_chat_with_id,@Query("msg") String message);
+    @GET(AFTER_BASE_URL+"followers/users")
+    Call<Followers> getUsers(@Query("token") String token);
 }
