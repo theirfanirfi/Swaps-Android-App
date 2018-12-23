@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class RMsg {
     public static final String AUTH_ERROR_MESSAGE = "You are not loggedin. Please login and try again.";
     public static final String REQ_ERROR_MESSAGE = "Request was not successful.";
@@ -24,5 +26,9 @@ public class RMsg {
 
     public static void ilogHere(int msg){
         Log.i(LOG_MESSAGE,Integer.toString(msg));
+    }
+
+    public static int getRandom(){
+        return new Random().nextInt(1000000 - 1000);
     }
 }

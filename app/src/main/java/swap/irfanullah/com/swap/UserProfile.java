@@ -3,6 +3,7 @@ package swap.irfanullah.com.swap;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -24,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
+import java.util.Random;
 
 import javax.microedition.khronos.opengles.GL;
 
@@ -172,7 +174,9 @@ public class UserProfile extends AppCompatActivity {
 
         if(requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK){
             Uri source_uri = data.getData();
-            Uri destination_uri = Uri.fromFile(new File(getCacheDir(),"swaps.png"));
+            Long tsLong = System.currentTimeMillis()/1000;
+            String file_name = Integer.toString(RMsg.getRandom())+ user.getFULL_NAME()+tsLong.toString();
+            Uri destination_uri = Uri.fromFile(new File(getCacheDir(),file_name));
             Crop.of(source_uri,destination_uri).withAspect(50,50).start(this);
             profile_image.setImageURI(Crop.getOutput(data));
 

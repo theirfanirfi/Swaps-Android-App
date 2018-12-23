@@ -2,20 +2,12 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config>
-        <device id="Nexus S" />
-        <device id="Nexus 5" />
-        <device id="Galaxy Nexus" />
-        <device id="Nexus One" />
-        <device id="pixel_xl" />
-        <device id="Nexus 4" />
-      </config>
+      <config />
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="my_" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
-    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -23,7 +15,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe35224a-c945-4af8-a3a2-79aea5b3360a" name="Default" comment="">
+    <list default="true" id="7bd2d94b-717a-4f46-a7f3-4cad29f587be" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
@@ -33,11 +25,78 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_common_1_1_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cardview_v7_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_collections_28_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_solver_1_1_3_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_design_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_28_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_transition_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_volley_volley_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_beardedhen_androidbootstrap_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_annotations_4_8_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_disklrucache_4_8_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_gifdecoder_4_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_glide_4_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_stfalcon_chatkit_0_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_yalantis_ucrop_2_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_flexbox_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_soundcloud_android_android_crop_1_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_15_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_converter_gson_2_1_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_retrofit_2_5_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__de_hdodenhof_circleimageview_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_inject_javax_inject_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ChatActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/RMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/RMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,86 +118,60 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChatAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ChatAdapter.java">
+    <leaf>
+      <file leaf-file-name="ApiService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="46" column="15" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="15" />
+            <state relative-caret-position="102">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RetroLib.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RetroLib.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VolleyLib.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/VolleyLib.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfile.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#initializeObjects#0;class#UserProfile#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FollowersAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/FollowersAdapter.java">
+      <file leaf-file-name="RMsg.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/RMsg.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+            <state relative-caret-position="190">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#595#596#0" expanded="true" />
-                <element signature="e#619#620#0" expanded="true" />
+                <element signature="e#1366#1367#0" expanded="true" />
+                <element signature="e#1400#1401#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NotificationAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/NotificationAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="103" column="21" lean-forward="true" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChatActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ChatActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-              <folding>
-                <element signature="method#refereshMessages#0;class#ChatActivity#0" />
-                <element signature="method#getExtras#0;class#ChatActivity#0" />
-                <element signature="method#initializeObjects#0;class#ChatActivity#0" />
-                <element signature="method#recyclerViewSetup#0;class#ChatActivity#0" />
-                <element signature="method#notifyAdapter#0;class#ChatActivity#0" />
-                <element signature="method#loadMessages#0;class#ChatActivity#0" />
-                <element signature="e#7470#7471#0" expanded="true" />
-                <element signature="e#7528#7529#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrefStorage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Storage/PrefStorage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="layoutResourceFile" />
-        <option value="resourceFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>position</find>
-      <find>user</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2418,148 +2451,28 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/NotificationAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/SingleStatusAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/StatusActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ProfilePagerAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Fragments/Profile/StatusesFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/status_profile_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/Profile/StatusAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Fragments/Profile/SwapsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/Profile/SwapsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/SwapsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-hdpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-ldpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-mdpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xhdpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xxxhdpi/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Statistics.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-ldpi/fragment_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Fragments/ChatFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-ldpi/participants_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/RMsg.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/chat_background.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/chat_background_sender.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/nl_user_profile_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/NLUserProfile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Participants.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Messenger.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ChatAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/chat_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ParticipantsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/users_f_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Followers.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/FollowersAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UsersActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xxxhdpi/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-xhdpi/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-mdpi/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-ldpi/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-hdpi/activity_chat.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ChatActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Storage/PrefStorage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
-    <option name="y" value="50" />
+    <option name="y" value="20" />
     <option name="width" value="1346" />
-    <option name="height" value="698" />
+    <option name="height" value="688" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swap" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swap" type="462c0819:PsiDirectoryNode" />
-              <item name="Storage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swaps" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout-xhdpi" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2583,52 +2496,18 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="swap" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Adapters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="swap" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swaps" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="APIs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="android.sdk.path" value="F:/sdklocation/sdk" />
+    <property name="android.sdk.path" value="F:/sdk" />
     <property name="device.picker.selection" value="Nexus_S_API_19" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AndroidAssigment2" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout-xxxhdpi" />
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout-xxhdpi" />
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout-xhdpi" />
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout-mdpi" />
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout-ldpi" />
-    </key>
-    <key name="android.template.packageName">
-      <recent name="swap.irfanullah.com.swap" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="swap.irfanullah.com.swap.Adapters.Profile" />
-      <recent name="swap.irfanullah.com.swap.Fragments.Profile" />
-      <recent name="swap.irfanullah.com.swap" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Irfan Ullah\AndroidStudioProjects\Swaps\app\src\main\res\layout" />
-    </key>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2747,558 +2626,94 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fe35224a-c945-4af8-a3a2-79aea5b3360a" name="Default" comment="" />
-      <created>1544415835270</created>
+      <changelist id="7bd2d94b-717a-4f46-a7f3-4cad29f587be" name="Default" comment="" />
+      <created>1545490881069</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1544415835270</updated>
+      <updated>1545490881069</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="32" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.329582" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5015129" side_tool="true" weight="0.40996784" />
-      <window_info anchor="right" id="Preview" order="3" sideWeight="0.49863762" weight="0.51891077" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.329582" />
-      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.49848714" weight="0.40996784" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.32843137" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2344932" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.329582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24281392" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.2990196" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="3" sideWeight="0.5013624" side_tool="true" weight="0.4334342" />
+      <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="2" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-mdpi/activity_user_profile.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="153" column="57" selection-start-line="153" selection-start-column="57" selection-end-line="153" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xhdpi/activity_user_profile.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="153" column="57" selection-start-line="153" selection-start-column="57" selection-end-line="153" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/activity_user_profile.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="153" column="57" selection-start-line="153" selection-start-column="57" selection-end-line="153" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxxhdpi/activity_user_profile.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="153" column="57" selection-start-line="153" selection-start-column="57" selection-end-line="153" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_user_profile.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="81" column="16" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="155" column="58" lean-forward="true" selection-start-line="155" selection-start-column="58" selection-end-line="155" selection-end-column="58" />
-          <folding>
-            <element signature="method#loadStats#0;class#UserProfile#0" />
-            <element signature="e#3820#4119#0" expanded="true" />
-            <element signature="e#4118#4119#0" expanded="true" />
-            <element signature="method#changeProfilePic#0;class#UserProfile#0" />
-            <element signature="method#onActivityResult#0;class#UserProfile#0" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Statistics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Fragments/Profile/SwapsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/Profile/SwapsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="79" column="66" selection-start-line="79" selection-start-column="66" selection-end-line="79" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/status_profile_row.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_statuses.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1227">
-          <caret line="179" column="13" selection-start-line="179" selection-start-column="13" selection-end-line="179" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/Nexus_S_API_19 [emulator-5554]/data/data/swap.irfanullah.com.swap/shared_prefs/users.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-ldpi/participants_row.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/chat_background.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RetroLib.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/chat_background_sender.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_send.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/VolleyLib.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="2635">
-          <caret line="155" column="54" selection-start-line="155" selection-start-column="54" selection-end-line="155" selection-end-column="54" />
+        <state relative-caret-position="357">
+          <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/nl_user_profile_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/RMsg.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        <state relative-caret-position="190">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
           <folding>
-            <element signature="e#1250#1251#0" expanded="true" />
-            <element signature="e#1306#1307#0" expanded="true" />
+            <element signature="e#1366#1367#0" expanded="true" />
+            <element signature="e#1400#1401#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/emulator-5556/data/data/swap.irfanullah.com.swap/shared_prefs/users.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-ldpi/fragment_chat.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/NLUserProfile.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+        <state relative-caret-position="293">
+          <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
           <folding>
-            <element signature="method#loadProfilePicture#0;class#NLUserProfile#0" />
-            <element signature="method#checkFollow#0;class#NLUserProfile#0" />
-            <element signature="method#followUser#0;class#NLUserProfile#0" />
+            <element signature="method#initializeObjects#0;class#UserProfile#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Fragments/ChatFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="58" column="85" selection-start-line="58" selection-start-column="85" selection-end-line="58" selection-end-column="85" />
-          <folding>
-            <element signature="method#updateAdapter#0;class#ChatFragment#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Participants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Notification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="37" selection-start-line="37" selection-end-line="46" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1733#1734#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-            <element signature="e#2802#2803#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Messenger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-          <folding>
-            <element signature="e#3906#3907#0" expanded="true" />
-            <element signature="e#3933#3934#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/StatusAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="54" column="73" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ParticipantsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="63" selection-start-line="63" selection-end-line="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onCreateViewHolder#0;class#ParticipantsAdapter#0" />
-            <element signature="method#onBindViewHolder#0;class#ParticipantsAdapter#0" />
-            <element signature="method#gotoChat#0;class#ParticipantsViewHolder#0;class#ParticipantsAdapter#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/user_f_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/chat_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/users_f_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml">
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Followers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UsersActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
-          <folding>
-            <element signature="method#initializeObjects#0;class#UsersActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="38" column="19" lean-forward="true" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
-          <folding>
-            <element signature="e#585#603#0" expanded="true" />
-            <element signature="e#951#980#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxxhdpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-mdpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-ldpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xhdpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-hdpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-xxhdpi/activity_chat.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ChatActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-          <folding>
-            <element signature="method#refereshMessages#0;class#ChatActivity#0" />
-            <element signature="method#getExtras#0;class#ChatActivity#0" />
-            <element signature="method#initializeObjects#0;class#ChatActivity#0" />
-            <element signature="method#recyclerViewSetup#0;class#ChatActivity#0" />
-            <element signature="method#notifyAdapter#0;class#ChatActivity#0" />
-            <element signature="method#loadMessages#0;class#ChatActivity#0" />
-            <element signature="e#7470#7471#0" expanded="true" />
-            <element signature="e#7528#7529#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Storage/PrefStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/ChatAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="46" column="15" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/FollowersAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#595#596#0" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/NotificationAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="103" column="21" lean-forward="true" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
