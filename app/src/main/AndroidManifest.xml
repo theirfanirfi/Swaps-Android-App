@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
         android:name=".AppClasses.App"
@@ -31,11 +32,7 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -51,7 +48,17 @@
             android:name=".NotificationActivity"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".UsersActivity" android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".UsersActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".ComposeStatusActivity" android:parentActivityName=".HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -52,9 +52,10 @@ public class UserProfile extends AppCompatActivity {
     private ImageView profile_image;
     private TabLayout tabLayout;
     private Context context;
-    private TextView profileDescription, statuses,swaps,followers;
+    private TextView profileDescription, statuses, swaps, followers;
     private User user;
     private Button followBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,29 +70,29 @@ public class UserProfile extends AppCompatActivity {
         RetroLib.geApiService().getStats(user.getTOKEN()).enqueue(new Callback<Statistics>() {
             @Override
             public void onResponse(Call<Statistics> call, Response<Statistics> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Statistics stat = response.body();
-                    if(stat.getIS_AUTHENTICATED()){
-                        if(stat.getIS_EMPTY()){
+                    if (stat.getIS_AUTHENTICATED()) {
+                        if (stat.getIS_EMPTY()) {
                             //Toast.makeText(context,stat.getMESSAGE(),Toast.LENGTH_LONG).show();
-                        }else if(stat.getIS_FOUND()){
+                        } else if (stat.getIS_FOUND()) {
                             statuses.setText(Integer.toString(stat.getSTATUSES_COUNT()));
                             swaps.setText(Integer.toString(stat.getSWAPS_COUNT()));
                             followers.setText(Integer.toString(stat.getFOLLOWERS_COUNT()));
-                        }else {
+                        } else {
 
                         }
-                    }else {
-                        Toast.makeText(context,RMsg.AUTH_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, RMsg.AUTH_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                     }
-                }else {
-                    Toast.makeText(context,RMsg.REQ_ERROR_MESSAGE,Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, RMsg.REQ_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Statistics> call, Throwable t) {
-                Toast.makeText(context,t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -99,7 +100,7 @@ public class UserProfile extends AppCompatActivity {
 
 
     private void changeProfileDescription() {
-        if(user.getPROFILE_DESCRIPTION() != null){
+        if (user.getPROFILE_DESCRIPTION() != null) {
             profileDescription.setText(user.getPROFILE_DESCRIPTION());
         } else {
             profileDescription.setText("Add Bio by clicking me.");
@@ -111,7 +112,7 @@ public class UserProfile extends AppCompatActivity {
             public void onClick(View v) {
                 PDialog pDialog = new PDialog();
                 pDialog.setCancelable(false);
-                pDialog.show(getSupportFragmentManager(),"update_profile_description");
+                pDialog.show(getSupportFragmentManager(), "update_profile_description");
             }
         });
         updateDesc();
@@ -161,76 +162,77 @@ public class UserProfile extends AppCompatActivity {
         followBtn.setVisibility(View.GONE);
 
         profile_image = findViewById(R.id.profile_image);
-        if(user.getPROFILE_IMAGE() != null) {
-            GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(profile_image);
+        if (user.getPROFILE_IMAGE() != null) {
+            GLib.downloadImage(context, user.getPROFILE_IMAGE()).into(profile_image);
         } else {
             profile_image.setImageResource(R.drawable.ic_person);
         }
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK){
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             Uri source_uri = data.getData();
-            Long tsLong = System.currentTimeMillis()/1000;
-            String file_name = Integer.toString(RMsg.getRandom())+ user.getFULL_NAME()+tsLong.toString();
-            Uri destination_uri = Uri.fromFile(new File(getCacheDir(),file_name));
-            Crop.of(source_uri,destination_uri).withAspect(50,50).start(this);
+            Long tsLong = System.currentTimeMillis() / 1000;
+            String file_name = Integer.toString(RMsg.getRandom()) + user.getFULL_NAME() + tsLong.toString();
+            Uri destination_uri = Uri.fromFile(new File(getCacheDir(), file_name));
+            Crop.of(source_uri, destination_uri).withAspect(50, 50).start(this);
             profile_image.setImageURI(Crop.getOutput(data));
 
-        }else if(requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK){
+        } else if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
             profile_image.setImageURI(Crop.getOutput(data));
-            Toast.makeText(context,"Profile picture is being updated.",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Profile picture is being updated.", Toast.LENGTH_LONG).show();
             Uri loc = Crop.getOutput(data);
             File file = new File(loc.getPath());
-            RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),PrefStorage.getUser(context).getTOKEN());
-            RequestBody image = RequestBody.create(MediaType.parse("multipart/form-date"),file);
-            MultipartBody.Part img = MultipartBody.Part.createFormData("image",file.getName(),image);
+            RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"), PrefStorage.getUser(context).getTOKEN());
+            RequestBody image = RequestBody.create(MediaType.parse("multipart/form-date"), file);
+            MultipartBody.Part img = MultipartBody.Part.createFormData("image", file.getName(), image);
 
-            RetroLib.geApiService().updateProfilePicture(tokenBody,img).enqueue(new Callback<ProfileModel>() {
+            RetroLib.geApiService().updateProfilePicture(tokenBody, img).enqueue(new Callback<ProfileModel>() {
                 @Override
                 public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
-                    if(response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         ProfileModel profile = response.body();
-                        if(profile.getIS_AUTHENTICATED()){
-                            if(profile.getIS_EMPTY()){
-                                Toast.makeText(context,profile.getMESSAGE(),Toast.LENGTH_LONG).show();
-                            }else if(profile.getIS_ERROR()){
-                                Toast.makeText(context,profile.getMESSAGE(),Toast.LENGTH_LONG).show();
-                            }else if(profile.getIS_SAVED()){
+                        if (profile.getIS_AUTHENTICATED()) {
+                            if (profile.getIS_EMPTY()) {
+                                Toast.makeText(context, profile.getMESSAGE(), Toast.LENGTH_LONG).show();
+                            } else if (profile.getIS_ERROR()) {
+                                Toast.makeText(context, profile.getMESSAGE(), Toast.LENGTH_LONG).show();
+                            } else if (profile.getIS_SAVED()) {
                                 User user = profile.getUSER();
                                 Gson gson = new Gson();
                                 String object = gson.toJson(user);
-                                PrefStorage.getEditor(context).putString(PrefStorage.USER_PREF_DETAILS,object).commit();
-                                Toast.makeText(context,profile.getMESSAGE(),Toast.LENGTH_LONG).show();
-                                Log.i("PROFILEUPDATED:",object);
+                                PrefStorage.getEditor(context).putString(PrefStorage.USER_PREF_DETAILS, object).commit();
+                                Toast.makeText(context, profile.getMESSAGE(), Toast.LENGTH_LONG).show();
+                                Log.i("PROFILEUPDATED:", object);
                             }
-                        }else {
-                            Toast.makeText(context,"You are not loggedin. Login and try again.",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(context, "You are not loggedin. Login and try again.", Toast.LENGTH_LONG).show();
                         }
-                    }else {
-                        Toast.makeText(context,"Request was not successful",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, "Request was not successful", Toast.LENGTH_LONG).show();
                     }
-                    Log.i("NOTPROFILE: ",response.raw().toString() + " : "+response.body().getMESSAGE());
+                    Log.i("NOTPROFILE: ", response.raw().toString() + " : " + response.body().getMESSAGE());
                 }
 
                 @Override
                 public void onFailure(Call<ProfileModel> call, Throwable t) {
-                    Log.i("NOTPROFILE: Exception ",t.toString());
+                    Log.i("NOTPROFILE: Exception ", t.toString());
 
                 }
             });
 
         } else {
-            Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
         }
     }
 
     public void updateDesc() {
         User user1 = PrefStorage.getUser(context);
-        if(user1.getPROFILE_DESCRIPTION() != null){
+        if (user1.getPROFILE_DESCRIPTION() != null) {
             profileDescription.setText(user1.getPROFILE_DESCRIPTION());
         } else {
             profileDescription.setText("Add Bio by clicking me.");
@@ -239,7 +241,7 @@ public class UserProfile extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profile_menu,menu);
+        getMenuInflater().inflate(R.menu.profile_menu, menu);
         return true;
     }
 
@@ -252,8 +254,8 @@ public class UserProfile extends AppCompatActivity {
     public void setVisible(boolean visible) {
         super.setVisible(visible);
 
-        if(visible){
-            Toast.makeText(context,"visible",Toast.LENGTH_LONG).show();
+        if (visible) {
+            Toast.makeText(context, "visible", Toast.LENGTH_LONG).show();
         }
     }
 }

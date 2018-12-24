@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,7 +24,8 @@ import swap.irfanullah.com.swap.Storage.PrefStorage;
 public class ComposeStatusDialog extends AppCompatDialogFragment {
     EditText composeTextArea;
     private Context context;
-    Button post,cancel;
+    Button post;
+    ImageView cancel;
     ProgressBar progressBar;
 
 
