@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -19,16 +20,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +43,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.GridImageAdapter;
 import swap.irfanullah.com.swap.Libraries.Compressor;
+import swap.irfanullah.com.swap.Libraries.RealPathUtils;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.Media;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.User;
@@ -52,7 +58,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
     private User user;
     private GridView gv;
     private GridImageAdapter gridImageAdapter;
-    private List<Uri> uris;
+    private ArrayList<Media> uris;
     private ProgressBar progressBar;
     private final int IMAGE_ACTION = 1;
     private final int VIDEO_ACTION = 2;
@@ -63,6 +69,12 @@ public class ComposeStatusActivity extends AppCompatActivity {
     private final int REQUEST_IMAGE_CAPTURE = 111;
     String mCurrentPhotoPath;
     static final int REQUEST_VIDEO_CAPTURE = 1;
+    private static final int REQUEST_TAKE_GALLERY_VIDEO = 333;
+    private static final int NUM_GRIDS = 2;
+    private static int GRID_WIDTH;
+    private EditText status;
+    private Boolean IS_VIDEO_ADDED = false;
+    private int PICTURES_LIMIT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +88,10 @@ public class ComposeStatusActivity extends AppCompatActivity {
         context = this;
         user = PrefStorage.getUser(context);
         gv = findViewById(R.id.composeStatusGridView);
+        status = findViewById(R.id.composeProfileDescTextArea);
+        GRID_WIDTH = getResources().getDisplayMetrics().widthPixels;
+        int imgWidht = GRID_WIDTH/NUM_GRIDS;
+        gv.setColumnWidth(imgWidht);
         uris = new ArrayList<>();
         progressBar = findViewById(R.id.progressBarStatus);
         gridImageAdapter = new GridImageAdapter(context, uris);
@@ -98,8 +114,39 @@ public class ComposeStatusActivity extends AppCompatActivity {
             case R.id.video:
                 ChooseAction(VIDEO_ACTION);
                 break;
+            case R.id.postStatus:
+                String nStatus = status.getText().toString();
+                if(nStatus.equals("")
+                        && uris.size() <= 0
+                        ){
+                    RMsg.toastHere(context,"Status cannot be empty.");
+                }else {
+                    postStatus(nStatus);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void postStatus(String nStatus) {
+        //the status has no media
+        if(uris.size() <= 0){
+            statusComposeRequest(nStatus);
+        }else {
+            //the status has media
+            if(IS_VIDEO_ADDED){
+                uploadVideoStatus(nStatus);
+            }else {
+                uploadImageStatus(nStatus);
+            }
+        }
+    }
+
+    private void uploadVideoStatus(String nStatus){
+
+    }
+
+    private void uploadImageStatus(String nStatus) {
     }
 
     private void statusComposeRequest(String status)  {
@@ -167,13 +214,44 @@ public class ComposeStatusActivity extends AppCompatActivity {
             // @adapter will be updated.
           new ImageCompressor(uri,context).execute(uri);
         }
-        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+        else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
+            uris.add(new Media(videoUri,2));
+            gridImageAdapter.notifyAdapter(uris);
+            IS_VIDEO_ADDED = true;
            // mVideoView.setVideoURI(videoUri);
         }
 
+        else if (requestCode == REQUEST_TAKE_GALLERY_VIDEO && resultCode == RESULT_OK) {
+            Uri videoUri = data.getData();
+
+            String path = null;
+            if (Build.VERSION.SDK_INT < 11)
+                path = RealPathUtils.getRealPathFromURI_BelowAPI11(context, videoUri);
+
+                // SDK >= 11 && SDK < 19
+            else if (Build.VERSION.SDK_INT < 19)
+                path = RealPathUtils.getRealPathFromURI_API11to18(context, videoUri);
+
+                // SDK > 19 (Android 4.4)
+            else
+                path = RealPathUtils.getRealPathFromURI_API19(context, videoUri);
+            Log.d(RMsg.LOG_MESSAGE, "File Path: " + path);
+            // Get the file instance
+
+            File file = new File(path);
+
+            try {
+                new VideoCompressor().execute(path);
+            }catch (Exception e){
+                RMsg.toastHere(context,e.toString());
+            }
+
+            // mVideoView.setVideoURI(videoUri);
+        }
+
         else {
-            finish();
+           finish();
         }
     }
 
@@ -184,39 +262,68 @@ public class ComposeStatusActivity extends AppCompatActivity {
         //if image action was initiated
         if(ACTION == IMAGE_ACTION) {
             final String[] action = {"Take Photo", "Choose from files"};
-            builder.setItems(action, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(which == OPEN_CAMERA_FOR_IMAGE) {
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            if(IS_VIDEO_ADDED){
+                RMsg.toastHere(context,"Only one video can be posted with a status");
+            }
+            else if(PICTURES_LIMIT  == 0){
+                RMsg.toastHere(context,"You have Reached the limit of 5 pictures with a single status");
+            }else {
+                builder.setItems(action, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == OPEN_CAMERA_FOR_IMAGE) {
+                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                            }
+                        } else {
+                            Crop.pickImage(ComposeStatusActivity.this);
                         }
-                    }else {
-                        Crop.pickImage(ComposeStatusActivity.this);
-                    }
 
-                }
-            });
+                    }
+                });
+            }
+
+            builder.create().show();
         }
         //else, if the action was of video
         else {
-            final String[] action = {"Record Video", "Choose from files"};
-            builder.setItems(action, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(which == OPEN_CAMERA_FOR_VIDEO) {
-                        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-                        }
-                    }else {
-                        RMsg.logHere(action[which]);
-                    }
-                }
-            });
+
+            Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                //takeVideoIntent.putExtra("android.intent.extra.durationLimit", 30000);
+                takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,120);
+                takeVideoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,0);
+               // takeVideoIntent.putExtra("EXTRA_VIDEO_QUALITY", 50);
+                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+            }
+
+//            final String[] action = {"Record Video", "Choose from files"};
+//            builder.setItems(action, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    if(which == OPEN_CAMERA_FOR_VIDEO) {
+//                        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+//                        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+//                            //takeVideoIntent.putExtra("android.intent.extra.durationLimit", 30000);
+//                            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT,5);
+//                            //takeVideoIntent.putExtra("EXTRA_VIDEO_QUALITY", 0);
+//                            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+//                        }
+//                    }else {
+//                        Intent intent = new Intent();
+//                        intent.setType("video/*");
+//                        intent.setAction(Intent.ACTION_GET_CONTENT);
+//                        startActivityForResult(Intent.createChooser(intent,"Select Video"),REQUEST_TAKE_GALLERY_VIDEO);
+//
+//                    }
+//                }
+//            });
+
+            builder.create().show();
         }
-        builder.create().show();
+
+
     }
 
 
@@ -277,9 +384,12 @@ public class ComposeStatusActivity extends AppCompatActivity {
             if(bytes != null){
                 Bitmap compressedBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
                 Uri uri = getImageUri(context,compressedBitmap);
-                uris.add(uri);
+                uris.add(new Media(uri,1));
                 gridImageAdapter.notifyAdapter(uris);
                 progressBar.setVisibility(View.GONE);
+                if(PICTURES_LIMIT > 0){
+                    PICTURES_LIMIT--;
+                }
             }
         }
 
@@ -297,5 +407,39 @@ public class ComposeStatusActivity extends AppCompatActivity {
         return stream.toByteArray();
     }
 
+    public class VideoCompressor extends AsyncTask<String,Integer,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String path) {
+            super.onPostExecute(path);
+            Uri uri = Uri.fromFile(new File(path));
+            uris.add(new Media(uri,2));
+            gridImageAdapter.notifyAdapter(uris);
+            RMsg.logHere(path);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(String... uris) {
+            String file_path = null;
+            try {
+                file_path = SiliCompressor.with(context).compressVideo(uris[0],Compressor.getVideoCacheDir(context).getAbsolutePath());
+                RMsg.logHere("compressed: "+file_path);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+                RMsg.logHere(e.toString());
+            }
+
+            return file_path;
+        }
+    }
 
 }

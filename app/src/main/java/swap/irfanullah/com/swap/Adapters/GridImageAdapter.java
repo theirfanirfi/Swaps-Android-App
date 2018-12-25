@@ -7,23 +7,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import swap.irfanullah.com.swap.Models.Media;
 import swap.irfanullah.com.swap.Models.RMsg;
 
 public class GridImageAdapter extends BaseAdapter {
     private Context context;
-    private List<Uri> images;
+    private ArrayList<Media> media;
+    ImageView imageView;
+    VideoView videoView;
 
-    public GridImageAdapter(Context context, List<Uri> images) {
+    public GridImageAdapter(Context context, ArrayList<Media> media) {
         this.context = context;
-        this.images = images;
+        this.media = media;
     }
 
     @Override
     public int getCount() {
-        return images.size();
+        return this.media.size();
     }
 
     @Override
@@ -38,28 +43,31 @@ public class GridImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
 
-        if (convertView == null) {
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(4, 4, 4, 4);
-        } else {
-            imageView = (ImageView) convertView;
+        Media media = this.media.get(position);
+        if(media.getType() == 1) {
+
+                imageView = new ImageView(context);
+                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(4, 4, 4, 4);
+
+            imageView.setImageURI(this.media.get(position).getUri());
+            return imageView;
+        }else {
+            videoView = new VideoView(context);
+            videoView.setLayoutParams(new GridView.LayoutParams(500, 400));
+            videoView.setPadding(4, 4, 4, 4);
+            videoView.setVideoURI(media.getUri());
+            videoView.setFocusable(true);
+            videoView.start();
+            return videoView;
         }
 
-        // if(images.size() > 0) {
-        imageView.setImageURI(images.get(position));
-        // }
-
-
-        return imageView;
     }
 
-    public void notifyAdapter(List<Uri> uriList) {
-        this.images = uriList;
-        RMsg.ilogHere(this.images.size());
+    public void notifyAdapter(ArrayList<Media> media) {
+        this.media = media;
         notifyDataSetChanged();
     }
 }

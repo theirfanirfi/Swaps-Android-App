@@ -5,6 +5,10 @@ import android.net.Uri;
 public class Media {
     private Uri uri;
     private int type;
+    /* Types of Medias
+    1. @Images = 1
+    2. @Videos = 2
+     */
 
     public Media(Uri uri, int type) {
         this.uri = uri;
