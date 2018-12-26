@@ -49,6 +49,7 @@ import swap.irfanullah.com.swap.Models.Media;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.User;
+import swap.irfanullah.com.swap.Services.StatusMediaService;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 
 public class ComposeStatusActivity extends AppCompatActivity {
@@ -75,6 +76,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
     private EditText status;
     private Boolean IS_VIDEO_ADDED = false;
     private int PICTURES_LIMIT = 5;
+    private int NUMBER_OF_REQUESTS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,20 +136,33 @@ public class ComposeStatusActivity extends AppCompatActivity {
             statusComposeRequest(nStatus);
         }else {
             //the status has media
-            if(IS_VIDEO_ADDED){
-                uploadVideoStatus(nStatus);
-            }else {
-                uploadImageStatus(nStatus);
-            }
+//            if(IS_VIDEO_ADDED){
+//                uploadVideoStatus(nStatus);
+//            }else {
+//                uploadImageStatus(nStatus);
+//            }
+
+            NUMBER_OF_REQUESTS = uris.size();
+            RMsg.ilogHere(NUMBER_OF_REQUESTS);
+            NUMBER_OF_REQUESTS = 5;
+           // uploadImageStatus(nStatus, NUMBER_OF_REQUESTS);
+
+            Intent i = new Intent(context,StatusMediaService.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("uris",uris);
+            i.putExtras(bundle);
+            startService(i);
         }
     }
 
-    private void uploadVideoStatus(String nStatus){
+    private void uploadMediaStatus(String nStatus){
 
     }
 
-    private void uploadImageStatus(String nStatus) {
+    private void uploadImageStatus(String nStatus, int requests) {
+        //new RequestQueue(nStatus).execute();
     }
+
 
     private void statusComposeRequest(String status)  {
         RetroLib.geApiService().composeStatus(PrefStorage.getUser(context).getTOKEN(),status).enqueue(new Callback<Status>() {
