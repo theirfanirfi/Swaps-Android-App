@@ -46,6 +46,12 @@ public class Status{
     private int IS_ACCEPTED;
     @SerializedName("is_rejected")
     private int IS_REJECTED;
+    @SerializedName("obj_status")
+    private Status OBJ_STATUS;
+
+    public Status getOBJ_STATUS() {
+        return OBJ_STATUS;
+    }
 
     public int getIS_ACCEPTED() {
         return IS_ACCEPTED;

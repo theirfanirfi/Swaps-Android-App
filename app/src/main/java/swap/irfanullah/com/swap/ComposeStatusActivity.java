@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.util.Consumer;
 import android.support.v7.app.AlertDialog;
@@ -52,6 +54,8 @@ import swap.irfanullah.com.swap.Models.User;
 import swap.irfanullah.com.swap.Services.StatusMediaService;
 import swap.irfanullah.com.swap.Storage.PrefStorage;
 
+import static swap.irfanullah.com.swap.AppClasses.App.CHANNEL_ID;
+
 public class ComposeStatusActivity extends AppCompatActivity {
 
     private Context context;
@@ -74,9 +78,20 @@ public class ComposeStatusActivity extends AppCompatActivity {
     private static final int NUM_GRIDS = 2;
     private static int GRID_WIDTH;
     private EditText status;
+    //proposed attachment policy, but currently not followed
+    //if video is added, no images should be selected
+    // because videos size might be larger. So,there should be only 1 video and 0 images
+    //but duration of the video is currently set to @2 minutes
     private Boolean IS_VIDEO_ADDED = false;
+    //proposed image limit but currently removed.
     private int PICTURES_LIMIT = 5;
+    //Number of requests to be made, it will determine the number
+    //of attachments as well.
     private int NUMBER_OF_REQUESTS = 0;
+    private int STATUS_ID = 0;
+    //ATTACHMENTS ARE: images and Videos
+    private Boolean IS_ATTACHMENT_REQUEST = false;
+    private final String _SERVICE_INTENT_STATUS_ID = "post_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,38 +147,23 @@ public class ComposeStatusActivity extends AppCompatActivity {
 
     private void postStatus(String nStatus) {
         //the status has no media
-        if(uris.size() <= 0){
+       if(uris.size() <= 0){
             statusComposeRequest(nStatus);
         }else {
-            //the status has media
-//            if(IS_VIDEO_ADDED){
-//                uploadVideoStatus(nStatus);
-//            }else {
-//                uploadImageStatus(nStatus);
-//            }
-
+            //if the status had media attachments,
+            // the @IS_ATTACHMENT_REQUEST variable will have true
+            // and the service will be initiated to upload medias
+            IS_ATTACHMENT_REQUEST = true;
             NUMBER_OF_REQUESTS = uris.size();
-            RMsg.ilogHere(NUMBER_OF_REQUESTS);
-            NUMBER_OF_REQUESTS = 5;
-           // uploadImageStatus(nStatus, NUMBER_OF_REQUESTS);
+            statusComposeRequest(nStatus);
+            //initiateMediaUploadServiceRequests();
 
-            Intent i = new Intent(context,StatusMediaService.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("uris",uris);
-            i.putExtras(bundle);
-            startService(i);
         }
     }
 
-    private void uploadMediaStatus(String nStatus){
-
-    }
-
-    private void uploadImageStatus(String nStatus, int requests) {
-        //new RequestQueue(nStatus).execute();
-    }
-
-
+    //request will be made to the server, after successful posting
+    // the status_id will be obtained, which will be used to
+    // upload status images/videos
     private void statusComposeRequest(String status)  {
         RetroLib.geApiService().composeStatus(PrefStorage.getUser(context).getTOKEN(),status).enqueue(new Callback<Status>() {
             @Override
@@ -173,6 +173,14 @@ public class ComposeStatusActivity extends AppCompatActivity {
                     if(response.body().getAuthenticated()) {
                         if (response.body().getPosted()) {
                            // progressBar.setVisibility(View.GONE);
+
+                            STATUS_ID = response.body().getOBJ_STATUS().getSTATUS_ID();
+
+                            if(IS_ATTACHMENT_REQUEST) {
+                                //BACKGROUND SERVICE WILL BE STARTED FOR UPLOADING IMAGES
+                                // OF THE STATUS
+                                initiateMediaUploadServiceRequests();
+                            }
 
                             Toast.makeText(context, response.body().getMESSAGE(), Toast.LENGTH_LONG).show();
                         } else {
@@ -270,6 +278,9 @@ public class ComposeStatusActivity extends AppCompatActivity {
         }
     }
 
+    //to choose, whether Image or Video button is clicked
+    //then to choose whether the image should be captured or taken from
+    // gallery photos.
     private void ChooseAction(int ACTION){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
@@ -277,12 +288,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
         //if image action was initiated
         if(ACTION == IMAGE_ACTION) {
             final String[] action = {"Take Photo", "Choose from files"};
-            if(IS_VIDEO_ADDED){
-                RMsg.toastHere(context,"Only one video can be posted with a status");
-            }
-            else if(PICTURES_LIMIT  == 0){
-                RMsg.toastHere(context,"You have Reached the limit of 5 pictures with a single status");
-            }else {
+
                 builder.setItems(action, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -297,7 +303,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
 
                     }
                 });
-            }
+
 
             builder.create().show();
         }
@@ -358,6 +364,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
         return image;
     }
 
+    //to get bitmap URI
     public Uri getImageUri(Context context, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -455,6 +462,17 @@ public class ComposeStatusActivity extends AppCompatActivity {
 
             return file_path;
         }
+    }
+
+    //FOR SENDING URIS and to the @StatusMediaService for
+    //background uploading.
+    public void initiateMediaUploadServiceRequests(){
+        Intent i = new Intent(context,StatusMediaService.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(_SERVICE_INTENT_STATUS_ID,STATUS_ID);
+        bundle.putParcelableArrayList("uris",uris);
+        i.putExtras(bundle);
+        startService(i);
     }
 
 }
