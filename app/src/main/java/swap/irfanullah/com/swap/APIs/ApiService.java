@@ -10,6 +10,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import swap.irfanullah.com.swap.Models.Attachments;
 import swap.irfanullah.com.swap.Models.Followers;
 import swap.irfanullah.com.swap.Models.Messenger;
 import swap.irfanullah.com.swap.Models.Notification;
@@ -105,4 +106,11 @@ public interface ApiService {
     Call<Messenger> sendMessage(@Query("token") String token,@Query("id") int to_chat_with_id,@Query("msg") String message);
     @GET(AFTER_BASE_URL+"followers/users")
     Call<Followers> getUsers(@Query("token") String token);
+
+
+    //upload status attachments
+    @Multipart
+    @POST(AFTER_BASE_URL+"attachments/send")
+    Call<Attachments> sendAttachments(@Part("token") RequestBody token, @Part MultipartBody.Part attachment, @Part("attachment_type") RequestBody attachment_type, @Part("status_id") RequestBody status_id);
+
 }

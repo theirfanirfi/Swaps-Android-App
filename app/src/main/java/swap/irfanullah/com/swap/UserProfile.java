@@ -187,8 +187,10 @@ public class UserProfile extends AppCompatActivity {
             Toast.makeText(context, "Profile picture is being updated.", Toast.LENGTH_LONG).show();
             Uri loc = Crop.getOutput(data);
             File file = new File(loc.getPath());
+
+
             RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"), PrefStorage.getUser(context).getTOKEN());
-            RequestBody image = RequestBody.create(MediaType.parse("multipart/form-date"), file);
+            RequestBody image = RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part img = MultipartBody.Part.createFormData("image", file.getName(), image);
 
             RetroLib.geApiService().updateProfilePicture(tokenBody, img).enqueue(new Callback<ProfileModel>() {

@@ -1,8 +1,10 @@
 package swap.irfanullah.com.swap;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -155,6 +157,9 @@ public class ComposeStatusActivity extends AppCompatActivity {
             // and the service will be initiated to upload medias
             IS_ATTACHMENT_REQUEST = true;
             NUMBER_OF_REQUESTS = uris.size();
+            //RMsg.logHere(getRealPathFromURIPath(uris.get(0).getUri(),ComposeStatusActivity.this));
+
+          // File file = new File(path);
             statusComposeRequest(nStatus);
             //initiateMediaUploadServiceRequests();
 
@@ -165,7 +170,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
     // the status_id will be obtained, which will be used to
     // upload status images/videos
     private void statusComposeRequest(String status)  {
-        RetroLib.geApiService().composeStatus(PrefStorage.getUser(context).getTOKEN(),status).enqueue(new Callback<Status>() {
+        RetroLib.geApiService().composeStatus("$2y$10$G0RWLNAiFq/fwZe0sUA7.uqLYoHwhV0hmkcdmk87VmpIzB5QF7IWK",status).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 if(response.isSuccessful())
@@ -222,7 +227,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
                 new ImageCompressor(source_uri,context).execute(source_uri);
             //Uri destination_uri = Uri.fromFile(Compressor.getImagesCacheDir(context));
             Long tsLong = System.currentTimeMillis()/1000;
-            String file_name = Integer.toString(RMsg.getRandom())+ user.getFULL_NAME()+tsLong.toString()+"pick";
+//            String file_name = Integer.toString(RMsg.getRandom())+ user.getFULL_NAME()+tsLong.toString()+"pick";
             //Uri destination_uri = Uri.fromFile(new File(getCacheDir(),file_name));
 
             RMsg.logHere(source_uri.toString());
@@ -240,6 +245,9 @@ public class ComposeStatusActivity extends AppCompatActivity {
         else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
             uris.add(new Media(videoUri,2));
+
+
+
             gridImageAdapter.notifyAdapter(uris);
             IS_VIDEO_ADDED = true;
            // mVideoView.setVideoURI(videoUri);
