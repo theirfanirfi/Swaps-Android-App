@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -115,6 +116,25 @@ public class ComposeStatusActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarStatus);
         gridImageAdapter = new GridImageAdapter(context, uris);
         gv.setAdapter(gridImageAdapter);
+
+        //when item in the grid view is long clicked
+        // so the item will be removed.
+        removeItemsFormTheGridView();
+    }
+
+    private void removeItemsFormTheGridView() {
+
+        gv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //when item in the grid view is long clicked
+                // so the item will be removed.
+                uris.remove(position);
+               //gv.removeView(view);
+                gridImageAdapter.notifyAdapter(uris);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -187,7 +207,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
                                 initiateMediaUploadServiceRequests();
                             }
 
-                            Toast.makeText(context, response.body().getMESSAGE(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, response.body().getMESSAGE() + ", now uploading attachments.", Toast.LENGTH_LONG).show();
                         } else {
                             //progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, response.body().getMESSAGE(), Toast.LENGTH_LONG).show();
@@ -481,6 +501,9 @@ public class ComposeStatusActivity extends AppCompatActivity {
         bundle.putParcelableArrayList("uris",uris);
         i.putExtras(bundle);
         startService(i);
+        finish();
+        RMsg.toastHere(context,"Status is being uploaded in the background.");
+
     }
 
 }

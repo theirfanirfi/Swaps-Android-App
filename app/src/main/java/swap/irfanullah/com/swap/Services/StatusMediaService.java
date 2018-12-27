@@ -49,10 +49,13 @@ public class StatusMediaService extends Service {
     private final static String NOTIFICATION_TITLE = "Swaps";
     private final static String NOTIFICATION_CONTENT = "Status attachments are being uploaded ..";
     private final static int NOTIFICATION_ID = 1023;
-    private static int NOTIFICATION__ATTACHMENT_PROGRESS = 0;
+    private static String NOTIFICATION__ATTACHMENT_PROGRESS = "";
     NotificationManagerCompat notificationManager;
     NotificationCompat.Builder mBuilder;
     private User user;
+    private RequestQueue mAsynRequests;
+    private int SUCCESSFUL_REQUESTS = 0;
+    private final int REQUEST_DELAY = 10000;
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -67,14 +70,21 @@ public class StatusMediaService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         showNotification();
+        //uris of the selected medias, sent by @ComposeStatusActivity
         ArrayList<Media> media = intent.getParcelableArrayListExtra("uris");
         this.media= media;
+        // @STATUS_ID recently posted
+        // to which the attachments will be associated
         this.POST_ID = intent.getExtras().getInt(_SERVICE_INTENT_STATUS_ID);
+        //get the size of attachments that the logic may generate
+        // that number of requests
         NUMBER_OF_REQUESTS = media.size();
         TOTAL_REQUESTS = media.size();
-        //user = PrefStorage.getUser(this).getUSER();
-        new RequestQueue(this.POST_ID, media).execute();
+        user = PrefStorage.getUser(this).getUSER();
+        mAsynRequests = new RequestQueue(this.POST_ID, media);
+        mAsynRequests.execute();
         return START_STICKY;
     }
 
@@ -103,15 +113,32 @@ public class StatusMediaService extends Service {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //the progress of the attachments will be shown in the notification
+            NOTIFICATION__ATTACHMENT_PROGRESS = Integer.toString(CURRENT_REQUEST+1) + " of "+Integer.toString(TOTAL_REQUESTS)+ " is being uploaded.";
+            RMsg.logHere("progress: pre execute: "+NOTIFICATION__ATTACHMENT_PROGRESS);
             showNotification();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            //number of requests will be decremented to keep track
+            //of the attachments.
+            //initiall the value of @NUMBER_OF_REQUESTS will be equal
+            // to the Number of attachments, but it will keep on
+            //decrementing as the attachments are being uploaded.
+
             NUMBER_OF_REQUESTS--;
+            //when the @NUMBER_OF_REQUESTS variable becomes zero. It will mean
+            // that all the attachments are uploaded.
+            //stop the service
+            // and hide the notification.
             if(NUMBER_OF_REQUESTS > 0){
+                //the @CURRENT_REQUEST variable is used to keep
+                // track of the inprogress attachment.
                 CURRENT_REQUEST++;
+                //to reduce load on the server.
+                //requests are delayed for 10 seconds
                 delayNextRequest();
                 RMsg.logHere(Integer.toString(CURRENT_REQUEST) + " of " + Integer.toString(TOTAL_REQUESTS)+ " is being uploaded.");
                 showNotification();
@@ -119,14 +146,20 @@ public class StatusMediaService extends Service {
                // notificationManager.cancel(NOTIFICATION_ID);
                 RMsg.logHere(Integer.toString(CURRENT_REQUEST+1) + " of " + Integer.toString(TOTAL_REQUESTS)+ " is being uploaded.");
                 showNotification();
-                CURRENT_REQUEST = 0;
                 stopSelf();
+            }
+
+            if(SUCCESSFUL_REQUESTS == CURRENT_REQUEST ){
+                RMsg.toastHere(context,"Status Attachment Uploaded.");
+                NOTIFICATION__ATTACHMENT_PROGRESS = "done";
+                notificationManager.cancel(NOTIFICATION_ID);
             }
         }
 
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
+           // RMsg.logHere(values.toString()+" : "+values[0].toString());
         }
 
         @Override
@@ -143,6 +176,10 @@ public class StatusMediaService extends Service {
         protected Void doInBackground(Void... voids) {
             Media m = this.media.get(CURRENT_REQUEST);
 
+            //here it is checked that whether the
+            // media type is image or video
+            // if it was image, so imageUpload request will be called
+            // else video upload request will be called.
             if(m.getType() == 1){
                 Uri uri = m.getUri();
                 String path = getRealPathFromURIPath(uri,context);
@@ -162,13 +199,16 @@ public class StatusMediaService extends Service {
             return null;
         }
 
+        //to reduce load on the server.
+        //requests are delayed for 10 seconds
         public void delayNextRequest(){
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    new RequestQueue(statusid,media).execute();
+                    mAsynRequests= new RequestQueue(statusid,media);
+                    mAsynRequests.execute();
                 }
-            },10000);
+            },REQUEST_DELAY);
         }
 
     }
@@ -187,7 +227,7 @@ public class StatusMediaService extends Service {
 
     public void VideoUploadRequest(File file){
 
-        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),"$2y$10$G0RWLNAiFq/fwZe0sUA7.uqLYoHwhV0hmkcdmk87VmpIzB5QF7IWK");
+        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),user.getTOKEN());
         RequestBody attachment_type = RequestBody.create(MediaType.parse("multipart/form-data"),"2");
         RequestBody vid = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part video = MultipartBody.Part.createFormData("video",file.getName(),vid);
@@ -205,14 +245,15 @@ public class StatusMediaService extends Service {
                     }else {
                         if(med.getIS_AUTHENTICATED()){
                             if(med.getIS_SAVED()){
-                                RMsg.toastHere(context,med.getMESSAGE());
+                                SUCCESSFUL_REQUESTS++;
+                               // RMsg.toastHere(context,med.getMESSAGE());
                             }else {
                                 statusRollBack();
-                                RMsg.toastHere(context,med.getMESSAGE());
+                               // RMsg.toastHere(context,med.getMESSAGE());
                             }
                         }else {
                             statusRollBack();
-                            RMsg.toastHere(context,med.getMESSAGE());
+                          //  RMsg.toastHere(context,med.getMESSAGE());
                         }
                     }
                 }else {
@@ -234,7 +275,7 @@ public class StatusMediaService extends Service {
 
     public void imageUploadRequest(File file){
 
-        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),"$2y$10$G0RWLNAiFq/fwZe0sUA7.uqLYoHwhV0hmkcdmk87VmpIzB5QF7IWK");
+        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),user.getTOKEN());
         RequestBody attachment_type = RequestBody.create(MediaType.parse("multipart/form-data"),"1");
         RequestBody img = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part image = MultipartBody.Part.createFormData("image",file.getName(),img);
@@ -249,22 +290,28 @@ public class StatusMediaService extends Service {
                     if(med.getIS_ERROR()){
                         //if there was anykind of error. Roll back the status
                         statusRollBack();
+                        mAsynRequests.cancel(true);
                         RMsg.toastHere(context,med.getMESSAGE());
                     }else {
                         if(med.getIS_AUTHENTICATED()){
                             if(med.getIS_SAVED()){
-                                RMsg.toastHere(context,med.getMESSAGE());
+                                //mAsynRequests.cancel(true);
+                                SUCCESSFUL_REQUESTS++;
                             }else {
                                 statusRollBack();
-                                RMsg.toastHere(context,med.getMESSAGE());
+                                mAsynRequests.cancel(true);
+                               // RMsg.toastHere(context,med.getMESSAGE());
                             }
                         }else {
                             statusRollBack();
-                            RMsg.toastHere(context,med.getMESSAGE());
+                            mAsynRequests.cancel(true);
+                            //RMsg.toastHere(context,med.getMESSAGE());
                         }
                     }
                 }else {
                     statusRollBack();
+                    mAsynRequests.cancel(true);
+
                     RMsg.toastHere(context,RMsg.REQ_ERROR_MESSAGE);
                 }
 
@@ -276,12 +323,15 @@ public class StatusMediaService extends Service {
             @Override
             public void onFailure(Call<Attachments> call, Throwable t) {
                 statusRollBack();
+                mAsynRequests.cancel(true);
                 RMsg.logHere(t.toString());
             }
         });
     }
 
     private void statusRollBack() {
+        //this function is declared to rollback the status
+        //in case of failure, but any how not used yet.
     }
 
     public void showNotification(){
@@ -292,7 +342,7 @@ public class StatusMediaService extends Service {
                     .setContentTitle(NOTIFICATION_TITLE)
                     .setContentText(NOTIFICATION_CONTENT)
                     .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Progress: "+Integer.toString(NOTIFICATION__ATTACHMENT_PROGRESS)))
+                            .bigText(NOTIFICATION__ATTACHMENT_PROGRESS))
                     .setAutoCancel(false)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             notificationManager = NotificationManagerCompat.from(this);

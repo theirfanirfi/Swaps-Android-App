@@ -12,7 +12,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="my_" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -23,6 +22,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd2d94b-717a-4f46-a7f3-4cad29f587be" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -32,9 +32,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/AppClasses/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/AppClasses/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Services/StatusMediaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Services/StatusMediaService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,110 +72,97 @@
       <file leaf-file-name="ComposeStatusActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="305" selection-start-line="305" selection-end-line="305" />
+            <state relative-caret-position="169">
+              <caret line="101" column="51" selection-start-line="101" selection-start-column="51" selection-end-line="101" selection-end-column="51" />
               <folding>
-                <element signature="method#onCreate#0;class#ComposeStatusActivity#0" />
-                <element signature="method#initializeObjects#0;class#ComposeStatusActivity#0" />
+                <element signature="e#4739#5151#0" expanded="true" />
+                <element signature="e#5150#5151#0" expanded="true" />
                 <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
                 <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
                 <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
                 <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
-                <element signature="e#11588#12294#0" expanded="true" />
-                <element signature="e#12293#12294#0" expanded="true" />
+                <element signature="method#ChooseAction#0;class#ComposeStatusActivity#0" />
+                <element signature="e#12267#12973#0" expanded="true" />
+                <element signature="e#12972#12973#0" expanded="true" />
                 <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
                 <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
                 <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
                 <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
                 <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
+                <element signature="method#initiateMediaUploadServiceRequests#0;class#ComposeStatusActivity#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Status.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java">
+      <file leaf-file-name="activity_compose_status.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_compose_status.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="531">
+              <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+            <state relative-caret-position="697">
+              <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2295">
+              <caret line="204" column="52" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
               <folding>
-                <element signature="e#1567#1568#0" expanded="true" />
+                <element signature="method#initializeObjects#0;class#UserProfile#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatusMediaService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatusMediaService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Services/StatusMediaService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="907">
-              <caret line="149" column="62" lean-forward="true" selection-start-line="149" selection-start-column="62" selection-end-line="149" selection-end-column="62" />
+            <state relative-caret-position="255">
+              <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#270#271#0" expanded="true" />
-                <element signature="e#297#298#0" expanded="true" />
-                <element signature="e#1469#1470#0" expanded="true" />
-                <element signature="e#1523#1524#0" expanded="true" />
-                <element signature="e#1591#1592#0" expanded="true" />
-                <element signature="e#1639#1640#0" expanded="true" />
-                <element signature="e#1697#1698#0" expanded="true" />
-                <element signature="e#1740#1741#0" expanded="true" />
-                <element signature="method#delayNextRequest#0;class#RequestQueue#0;class#StatusMediaService#0" />
-                <element signature="e#3795#3975#0" expanded="true" />
-                <element signature="e#3974#3975#0" expanded="true" />
+                <element signature="class#RequestQueue#0;class#StatusMediaService#0" />
+                <element signature="method#RequestQueue#0;class#RequestQueue#0;class#StatusMediaService#0" />
+                <element signature="class#6678:8209" />
+                <element signature="method#statusRollBack#0;class#StatusMediaService#0" />
+                <element signature="method#showNotification#0;class#StatusMediaService#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MediaStore.java" pinned="false" current-in-tab="false">
-        <entry file="file://F:/sdk/sources/android-28/android/provider/MediaStore.java">
+      <file leaf-file-name="ApiService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5321">
-              <caret line="361" column="31" selection-start-line="361" selection-start-column="31" selection-end-line="361" selection-end-column="31" />
+            <state relative-caret-position="1564">
+              <caret line="113" column="203" selection-start-line="113" selection-start-column="203" selection-end-line="113" selection-end-column="203" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RealPathUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RealPathUtils.java">
+      <file leaf-file-name="Attachments.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Attachments.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="61" column="67" selection-start-line="61" selection-start-column="67" selection-end-line="61" selection-end-column="67" />
+            <state relative-caret-position="476">
+              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Media.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Media.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#643#644#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
-                <element signature="e#796#797#0" expanded="true" />
-                <element signature="e#439#440#0" expanded="true" />
-                <element signature="e#466#467#0" expanded="true" />
-                <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#688#689#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridImageAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/GridImageAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#907#908#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -192,6 +178,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>showN</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2485,7 +2476,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/compose_status_select_options.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/file_paths.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/Compressor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RetroLib.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_compose_status.xml" />
@@ -2494,11 +2484,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/GridImageAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Media.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ToBeDeletedActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/AppClasses/App.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Attachments.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Services/StatusMediaService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -2516,9 +2509,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2548,6 +2540,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2691,6 +2684,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -2699,14 +2693,15 @@
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.32980332" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3279743" />
-      <window_info anchor="bottom" id="Logcat" order="7" weight="0.41800642" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3279743" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.44855306" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24281392" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24281392" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.27974278" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2715,7 +2710,6 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.32980332" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -2733,44 +2727,26 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Adapters/GridImageAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="56" column="15" lean-forward="true" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/compose_status_media_image.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2261">
           <caret line="133" column="42" lean-forward="true" selection-start-line="133" selection-start-column="42" selection-end-line="133" selection-end-column="42" />
           <folding>
-            <element signature="method#onCreate#0;class#ComposeStatusActivity#0" />
-            <element signature="method#initializeObjects#0;class#ComposeStatusActivity#0" />
+            <element signature="e#4739#5151#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
             <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
             <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
             <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
             <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
-            <element signature="e#11588#12294#0" expanded="true" />
-            <element signature="e#12293#12294#0" expanded="true" />
+            <element signature="method#ChooseAction#0;class#ComposeStatusActivity#0" />
+            <element signature="e#12267#12973#0" expanded="true" />
+            <element signature="e#12972#12973#0" expanded="true" />
             <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
             <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
             <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
             <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
             <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
+            <element signature="method#initiateMediaUploadServiceRequests#0;class#ComposeStatusActivity#0" />
           </folding>
         </state>
       </provider>
@@ -2854,19 +2830,21 @@
         <state relative-caret-position="1836">
           <caret line="203" column="14" lean-forward="true" selection-start-line="203" selection-start-column="14" selection-end-line="203" selection-end-column="14" />
           <folding>
-            <element signature="method#onCreate#0;class#ComposeStatusActivity#0" />
-            <element signature="method#initializeObjects#0;class#ComposeStatusActivity#0" />
+            <element signature="e#4739#5151#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
             <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
             <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
             <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
             <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
-            <element signature="e#11588#12294#0" expanded="true" />
-            <element signature="e#12293#12294#0" expanded="true" />
+            <element signature="method#ChooseAction#0;class#ComposeStatusActivity#0" />
+            <element signature="e#12267#12973#0" expanded="true" />
+            <element signature="e#12972#12973#0" expanded="true" />
             <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
             <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
             <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
             <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
             <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
+            <element signature="method#initiateMediaUploadServiceRequests#0;class#ComposeStatusActivity#0" />
           </folding>
         </state>
       </provider>
@@ -2920,19 +2898,21 @@
         <state relative-caret-position="918">
           <caret line="69" column="22" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
           <folding>
-            <element signature="method#onCreate#0;class#ComposeStatusActivity#0" />
-            <element signature="method#initializeObjects#0;class#ComposeStatusActivity#0" />
+            <element signature="e#4739#5151#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
             <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
             <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
             <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
             <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
-            <element signature="e#11588#12294#0" expanded="true" />
-            <element signature="e#12293#12294#0" expanded="true" />
+            <element signature="method#ChooseAction#0;class#ComposeStatusActivity#0" />
+            <element signature="e#12267#12973#0" expanded="true" />
+            <element signature="e#12972#12973#0" expanded="true" />
             <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
             <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
             <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
             <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
             <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
+            <element signature="method#initiateMediaUploadServiceRequests#0;class#ComposeStatusActivity#0" />
           </folding>
         </state>
       </provider>
@@ -2944,13 +2924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -3030,16 +3003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="193" column="66" selection-start-line="193" selection-start-column="66" selection-end-line="193" selection-end-column="66" />
-          <folding>
-            <element signature="method#initializeObjects#0;class#UserProfile#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/file_paths.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3085,30 +3048,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_compose_status.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="45" column="69" selection-start-line="45" selection-start-column="69" selection-end-line="45" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RealPathUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="61" column="67" selection-start-line="61" selection-start-column="67" selection-end-line="61" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3139,16 +3082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1019">
-          <caret line="65" column="82" selection-start-line="65" selection-start-column="82" selection-end-line="65" selection-end-column="82" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ToBeDeletedActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -3173,39 +3106,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Status.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="816">
           <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-          <folding>
-            <element signature="e#1567#1568#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="305" selection-start-line="305" selection-end-line="305" />
-          <folding>
-            <element signature="method#onCreate#0;class#ComposeStatusActivity#0" />
-            <element signature="method#initializeObjects#0;class#ComposeStatusActivity#0" />
-            <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
-            <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
-            <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
-            <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
-            <element signature="e#11588#12294#0" expanded="true" />
-            <element signature="e#12293#12294#0" expanded="true" />
-            <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
-            <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
-            <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
-            <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
-            <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Media.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
+        <state relative-caret-position="680">
           <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3213,34 +3121,111 @@
             <element signature="e#687#688#0" expanded="true" />
             <element signature="e#750#751#0" expanded="true" />
             <element signature="e#796#797#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#688#689#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Libraries/RealPathUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="61" column="67" selection-start-line="61" selection-start-column="67" selection-end-line="61" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/sdk/sources/android-28/android/net/Uri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="272" column="27" selection-start-line="272" selection-start-column="27" selection-end-line="272" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/UserProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="204" column="52" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
+          <folding>
+            <element signature="method#initializeObjects#0;class#UserProfile#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Models/Attachments.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="e#907#908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/APIs/ApiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="113" column="203" selection-start-line="113" selection-start-column="203" selection-end-line="113" selection-end-column="203" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/ComposeStatusActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="101" column="51" selection-start-line="101" selection-start-column="51" selection-end-line="101" selection-end-column="51" />
+          <folding>
+            <element signature="e#4739#5151#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
+            <element signature="method#onOptionsItemSelected#0;class#ComposeStatusActivity#0" />
+            <element signature="method#postStatus#0;class#ComposeStatusActivity#0" />
+            <element signature="method#statusComposeRequest#0;class#ComposeStatusActivity#0" />
+            <element signature="method#onActivityResult#0;class#ComposeStatusActivity#0" />
+            <element signature="method#ChooseAction#0;class#ComposeStatusActivity#0" />
+            <element signature="e#12267#12973#0" expanded="true" />
+            <element signature="e#12972#12973#0" expanded="true" />
+            <element signature="method#createImageFile#0;class#ComposeStatusActivity#0" />
+            <element signature="method#getImageUri#0;class#ComposeStatusActivity#0" />
+            <element signature="class#ImageCompressor#0;class#ComposeStatusActivity#0" />
+            <element signature="method#getBytesFromBitmap#0;class#ComposeStatusActivity#0" />
+            <element signature="class#VideoCompressor#0;class#ComposeStatusActivity#0" />
+            <element signature="method#initiateMediaUploadServiceRequests#0;class#ComposeStatusActivity#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swap/irfanullah/com/swap/Services/StatusMediaService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="907">
-          <caret line="149" column="62" lean-forward="true" selection-start-line="149" selection-start-column="62" selection-end-line="149" selection-end-column="62" />
+        <state relative-caret-position="255">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#270#271#0" expanded="true" />
-            <element signature="e#297#298#0" expanded="true" />
-            <element signature="e#1469#1470#0" expanded="true" />
-            <element signature="e#1523#1524#0" expanded="true" />
-            <element signature="e#1591#1592#0" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-            <element signature="e#1697#1698#0" expanded="true" />
-            <element signature="e#1740#1741#0" expanded="true" />
-            <element signature="method#delayNextRequest#0;class#RequestQueue#0;class#StatusMediaService#0" />
-            <element signature="e#3795#3975#0" expanded="true" />
-            <element signature="e#3974#3975#0" expanded="true" />
+            <element signature="class#RequestQueue#0;class#StatusMediaService#0" />
+            <element signature="method#RequestQueue#0;class#RequestQueue#0;class#StatusMediaService#0" />
+            <element signature="class#6678:8209" />
+            <element signature="method#statusRollBack#0;class#StatusMediaService#0" />
+            <element signature="method#showNotification#0;class#StatusMediaService#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_compose_status.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
   </component>
-</pro
+</project>
