@@ -52,6 +52,18 @@ public class Status{
     private int ATTACHMENT_ID;
     @SerializedName("attachment_url")
     private String ATTACHMENT_URL;
+    @SerializedName("has_attachment")
+    private int HAS_ATTACHMENTS;
+    @SerializedName("attachments")
+    private String ATTACHMENTS;
+
+    public int getHAS_ATTACHMENTS() {
+        return HAS_ATTACHMENTS;
+    }
+
+    public String getATTACHMENTS() {
+        return ATTACHMENTS;
+    }
 
     public Status getOBJ_STATUS() {
         return OBJ_STATUS;

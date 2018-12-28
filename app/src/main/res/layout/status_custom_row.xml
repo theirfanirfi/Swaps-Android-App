@@ -52,14 +52,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginBottom="8dp"
             android:text="2h"
             app:layout_constraintBottom_toTopOf="@+id/statusTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+        <GridView
+            android:id="@+id/mediaGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusTextView" >
+
+        </GridView>
 
         <ImageView
             android:id="@+id/swapPlusIvBtn"
@@ -77,7 +97,7 @@
             app:layout_constraintStart_toEndOf="@+id/statusTextView"
             app:layout_constraintTop_toBottomOf="@+id/statusTimeTextView"
 
-            app:layout_constraintVertical_bias="0.954"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/swap" />
 
         <RatingBar
@@ -87,9 +107,10 @@
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:isIndicator="true"
             android:numStars="5"
             android:rating="3.5"
@@ -98,22 +119,7 @@
             android:stepSize=".5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/swapPlusIvBtn"
-            app:layout_constraintHorizontal_bias="0.427"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/statusMediaPager"
-            android:layout_width="match_parent"
-            android:layout_height="309dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.539"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statusTextView"
             app:layout_constraintVertical_bias="1.0" />

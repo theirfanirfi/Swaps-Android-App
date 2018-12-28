@@ -29,6 +29,18 @@ public class Attachments {
     private Boolean IS_SAVED;
     @SerializedName("attachments")
     private ArrayList<Attachments> attachmentsArrayList;
+    @SerializedName("isFound")
+    private Boolean isFound;
+    @SerializedName("attachment_url")
+    private String ATTACHMENT_URL;
+
+    public String getATTACHMENT_URL() {
+        return ATTACHMENT_URL;
+    }
+
+    public Boolean getFound() {
+        return isFound;
+    }
 
     public ArrayList<Attachments> getAttachmentsArrayList() {
         return attachmentsArrayList;

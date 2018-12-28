@@ -56,6 +56,7 @@ public class StatusMediaService extends Service {
     private RequestQueue mAsynRequests;
     private int SUCCESSFUL_REQUESTS = 0;
     private final int REQUEST_DELAY = 10000;
+    private String TOKEN = "";
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -65,7 +66,7 @@ public class StatusMediaService extends Service {
     public void onCreate() {
         super.onCreate();
         context = this;
-
+        //user = PrefStorage.getUser(this).getUSER();
     }
 
     @Override
@@ -78,11 +79,11 @@ public class StatusMediaService extends Service {
         // @STATUS_ID recently posted
         // to which the attachments will be associated
         this.POST_ID = intent.getExtras().getInt(_SERVICE_INTENT_STATUS_ID);
+        this.TOKEN = intent.getExtras().getString("token");
         //get the size of attachments that the logic may generate
         // that number of requests
         NUMBER_OF_REQUESTS = media.size();
         TOTAL_REQUESTS = media.size();
-        user = PrefStorage.getUser(this).getUSER();
         mAsynRequests = new RequestQueue(this.POST_ID, media);
         mAsynRequests.execute();
         return START_STICKY;
@@ -227,7 +228,7 @@ public class StatusMediaService extends Service {
 
     public void VideoUploadRequest(File file){
 
-        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),user.getTOKEN());
+        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),TOKEN);
         RequestBody attachment_type = RequestBody.create(MediaType.parse("multipart/form-data"),"2");
         RequestBody vid = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part video = MultipartBody.Part.createFormData("video",file.getName(),vid);
@@ -275,7 +276,7 @@ public class StatusMediaService extends Service {
 
     public void imageUploadRequest(File file){
 
-        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),user.getTOKEN());
+        RequestBody tokenBody = RequestBody.create(MediaType.parse("multipart/form-data"),TOKEN);
         RequestBody attachment_type = RequestBody.create(MediaType.parse("multipart/form-data"),"1");
         RequestBody img = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part image = MultipartBody.Part.createFormData("image",file.getName(),img);
@@ -317,7 +318,7 @@ public class StatusMediaService extends Service {
 
                 //debug logs
                 RMsg.logHere(response.raw().toString());
-                RMsg.logHere(response.body().getMESSAGE());
+               // RMsg.logHere(response.body().getMESSAGE());
             }
 
             @Override

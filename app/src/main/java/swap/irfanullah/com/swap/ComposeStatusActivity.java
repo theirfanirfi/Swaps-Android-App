@@ -190,7 +190,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
     // the status_id will be obtained, which will be used to
     // upload status images/videos
     private void statusComposeRequest(String status)  {
-        RetroLib.geApiService().composeStatus("$2y$10$G0RWLNAiFq/fwZe0sUA7.uqLYoHwhV0hmkcdmk87VmpIzB5QF7IWK",status).enqueue(new Callback<Status>() {
+        RetroLib.geApiService().composeStatus(user.getTOKEN(),status).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 if(response.isSuccessful())
@@ -205,9 +205,12 @@ public class ComposeStatusActivity extends AppCompatActivity {
                                 //BACKGROUND SERVICE WILL BE STARTED FOR UPLOADING IMAGES
                                 // OF THE STATUS
                                 initiateMediaUploadServiceRequests();
+                            }else {
+                                RMsg.toastHere(context,"Status Posted");
+                                finish();
                             }
 
-                            Toast.makeText(context, response.body().getMESSAGE() + ", now uploading attachments.", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(context, response.body().getMESSAGE() + ", now uploading attachments.", Toast.LENGTH_LONG).show();
                         } else {
                             //progressBar.setVisibility(View.GONE);
                             Toast.makeText(context, response.body().getMESSAGE(), Toast.LENGTH_LONG).show();
@@ -499,6 +502,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt(_SERVICE_INTENT_STATUS_ID,STATUS_ID);
         bundle.putParcelableArrayList("uris",uris);
+        bundle.putString("token",user.getTOKEN());
         i.putExtras(bundle);
         startService(i);
         finish();

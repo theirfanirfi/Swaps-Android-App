@@ -14,8 +14,8 @@ public class ToBeDeletedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_to_be_deleted);
 //        ArrayList<Media> media = getIntent().getParcelableArrayListExtra("uris");
 //        RMsg.logHere("NEW ACTIVITY: "+media.get(0).getUri().toString());
-        GridView gv = findViewById(R.id.gridview);
-        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(this);
-        gv.setAdapter(statusFragGridAdapter);
+//        GridView gv = findViewById(R.id.gridview);
+//        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(this);
+//        gv.setAdapter(statusFragGridAdapter);
     }
 }

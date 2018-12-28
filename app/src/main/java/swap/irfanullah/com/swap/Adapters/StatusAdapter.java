@@ -11,18 +11,34 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import swap.irfanullah.com.swap.Libraries.GLib;
+import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
+import swap.irfanullah.com.swap.Models.Attachments;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.SwapsTab;
+import swap.irfanullah.com.swap.Models.User;
 import swap.irfanullah.com.swap.NLUserProfile;
 import swap.irfanullah.com.swap.R;
 import swap.irfanullah.com.swap.StatusActivity;
@@ -33,10 +49,13 @@ import swap.irfanullah.com.swap.UserProfile;
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusViewHolder> {
     private Context context;
     private ArrayList<Status> statuses;
+    private ArrayList<String> attachmentsArrayList;
+    private User user;
 
     public StatusAdapter(Context context, ArrayList<Status> st) {
         this.context = context;
         this.statuses = st;
+        user = PrefStorage.getUser(this.context);
     }
 
     @NonNull
@@ -55,14 +74,18 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     statusViewHolder.ratingBar.setRating(e.getRATTING());
     statusViewHolder.statusTime.setText(TimeDiff.getTimeDifference(e.getTIME()));
 
-    if(PrefStorage.getUser(context).getPROFILE_IMAGE() == null) {
+    if(user.getPROFILE_IMAGE() == null) {
         statusViewHolder.profile_image.setImageResource(R.drawable.ic_person);
     }
     else {
         //statusViewHolder.profile_image.setImageURI(Uri.parse(PrefStorage.getUser(context).getPROFILE_IMAGE()));
-        GLib.downloadImage(context,PrefStorage.getUser(context).getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
+        GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
     }
+    RMsg.logHere(Integer.toString(e.getHAS_ATTACHMENTS()));
 
+    if(e.getHAS_ATTACHMENTS() == 1) {
+        loadStatusMedia(statusViewHolder, e.getSTATUS_ID(),e.getATTACHMENTS());
+    }
 
 
     }
@@ -81,7 +104,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         ConstraintLayout layout;
         RatingBar ratingBar;
         TextView statusTime;
-        ViewPager mediaPager;
+        GridView mediaView;
+        ProgressBar mediaProgressBar;
         public StatusViewHolder(@NonNull final View itemView, final Context context, final ArrayList<Status> st) {
             super(itemView);
 
@@ -92,7 +116,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapWithBtn = itemView.findViewById(R.id.swapPlusIvBtn);
             statusTime = itemView.findViewById(R.id.statusTimeTextView);
-            mediaPager = itemView.findViewById(R.id.statusMediaPager);
+            mediaView = itemView.findViewById(R.id.mediaGridView);
+         //   mediaProgressBar = itemView.findViewById(R.id.mediaProgressBar);
 
             swapWithBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,5 +167,32 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     public void notifyAdapter(ArrayList<Status> statuses){
         this.statuses = statuses;
         notifyDataSetChanged();
+    }
+
+    private void loadStatusMedia(final StatusViewHolder viewHolder, int status_id, String attachments){
+        attachmentsArrayList = new ArrayList<>();
+        final StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,attachmentsArrayList);
+        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
+        //viewHolder.mediaView.setVisibility(View.VISIBLE);
+       // viewHolder.mediaProgressBar.setVisibility(View.VISIBLE);
+
+//        viewHolder.mediaProgressBar.setVisibility(View.GONE);
+        Gson gson = new Gson();
+        JsonElement jsonArray = gson.fromJson(attachments,JsonElement.class);
+        if(jsonArray.isJsonArray()) {
+            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
+            for(int i = 0; i <jsonArray1.size();i++) {
+                JsonObject object = jsonArray1.get(i).getAsJsonObject();
+                attachmentsArrayList.add(object.get("attachment_url").toString());
+                RMsg.logHere("IF OBJECT: "+object.get("attachment_url"));
+                statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
+            }
+        }else if(jsonArray.isJsonObject()){
+            JsonObject object = jsonArray.getAsJsonObject();
+            attachmentsArrayList.add(object.get("attachment_url").toString());
+            RMsg.logHere("object: "+object.get("attachment_url"));
+            statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
+        }
+
     }
 }
