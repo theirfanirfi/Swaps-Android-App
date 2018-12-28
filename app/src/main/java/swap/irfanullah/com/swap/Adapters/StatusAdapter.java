@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     statusViewHolder.statusDescription.setText(e.getSTATUS());
     statusViewHolder.ratingBar.setRating(e.getRATTING());
     statusViewHolder.statusTime.setText(TimeDiff.getTimeDifference(e.getTIME()));
+
     if(PrefStorage.getUser(context).getPROFILE_IMAGE() == null) {
         statusViewHolder.profile_image.setImageResource(R.drawable.ic_person);
     }
@@ -60,6 +62,9 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         //statusViewHolder.profile_image.setImageURI(Uri.parse(PrefStorage.getUser(context).getPROFILE_IMAGE()));
         GLib.downloadImage(context,PrefStorage.getUser(context).getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
     }
+
+
+
     }
 
 
@@ -76,6 +81,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         ConstraintLayout layout;
         RatingBar ratingBar;
         TextView statusTime;
+        ViewPager mediaPager;
         public StatusViewHolder(@NonNull final View itemView, final Context context, final ArrayList<Status> st) {
             super(itemView);
 
@@ -86,6 +92,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapWithBtn = itemView.findViewById(R.id.swapPlusIvBtn);
             statusTime = itemView.findViewById(R.id.statusTimeTextView);
+            mediaPager = itemView.findViewById(R.id.statusMediaPager);
 
             swapWithBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

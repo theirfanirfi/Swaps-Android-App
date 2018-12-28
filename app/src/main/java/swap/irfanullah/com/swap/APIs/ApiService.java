@@ -113,4 +113,6 @@ public interface ApiService {
     @POST(AFTER_BASE_URL+"attachments/send")
     Call<Attachments> sendAttachments(@Part("token") RequestBody token, @Part MultipartBody.Part attachment, @Part("attachment_type") RequestBody attachment_type, @Part("status_id") RequestBody status_id);
 
+    @GET(AFTER_BASE_URL+"status/attachments")
+    Call<Attachments> getStatusAttachments(@Query("token") String token,@Query("status_id") int status_id);
 }

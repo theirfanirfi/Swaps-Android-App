@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -152,9 +153,31 @@ public class HomeActivity extends AppCompatActivity {
         } else if(id == R.id.settings){
             Intent settingsAct = new Intent(HomeActivity.this,Settings.class);
             startActivity(settingsAct);
+        }else if(id == R.id.invite){
+
+            sendInvitation();
         }
 
         return true;
+    }
+
+
+    private void sendInvitation(){
+
+        try {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_SUBJECT, "Swaps");
+            String strShareMessage = "\nLet me recommend you this application\n\n";
+            strShareMessage = strShareMessage + "https://play.google.com/store/apps/details?id=" + getPackageName();
+            Uri screenshotUri = Uri.parse("android.resource://"+getPackageName()+"/drawable/person");
+            i.setType("image/png");
+            i.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+            i.putExtra(Intent.EXTRA_TEXT, strShareMessage);
+            startActivity(Intent.createChooser(i, "Invite via"));
+        } catch(Exception e) {
+            //e.toString();
+        }
     }
 
     /**

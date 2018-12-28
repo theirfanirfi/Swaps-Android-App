@@ -48,9 +48,21 @@ public class Status{
     private int IS_REJECTED;
     @SerializedName("obj_status")
     private Status OBJ_STATUS;
+    @SerializedName("attachment_id")
+    private int ATTACHMENT_ID;
+    @SerializedName("attachment_url")
+    private String ATTACHMENT_URL;
 
     public Status getOBJ_STATUS() {
         return OBJ_STATUS;
+    }
+
+    public int getATTACHMENT_ID() {
+        return ATTACHMENT_ID;
+    }
+
+    public String getATTACHMENT_URL() {
+        return ATTACHMENT_URL;
     }
 
     public int getIS_ACCEPTED() {

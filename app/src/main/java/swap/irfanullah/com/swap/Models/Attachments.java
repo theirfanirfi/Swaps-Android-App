@@ -2,6 +2,8 @@ package swap.irfanullah.com.swap.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class Attachments {
     @SerializedName("user_id")
     private int USER_ID;
@@ -25,6 +27,12 @@ public class Attachments {
     private String MESSAGE;
     @SerializedName("isSaved")
     private Boolean IS_SAVED;
+    @SerializedName("attachments")
+    private ArrayList<Attachments> attachmentsArrayList;
+
+    public ArrayList<Attachments> getAttachmentsArrayList() {
+        return attachmentsArrayList;
+    }
 
     public Boolean getIS_SAVED() {
         return IS_SAVED;
