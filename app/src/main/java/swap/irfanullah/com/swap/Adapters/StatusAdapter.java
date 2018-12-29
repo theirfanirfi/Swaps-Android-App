@@ -81,7 +81,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         //statusViewHolder.profile_image.setImageURI(Uri.parse(PrefStorage.getUser(context).getPROFILE_IMAGE()));
         GLib.downloadImage(context,user.getPROFILE_IMAGE()).into(statusViewHolder.profile_image);
     }
-    RMsg.logHere(Integer.toString(e.getHAS_ATTACHMENTS()));
+    //RMsg.logHere(Integer.toString(e.getHAS_ATTACHMENTS()));
 
     if(e.getHAS_ATTACHMENTS() == 1) {
         loadStatusMedia(statusViewHolder, e.getSTATUS_ID(),e.getATTACHMENTS());
@@ -170,29 +170,29 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     }
 
     private void loadStatusMedia(final StatusViewHolder viewHolder, int status_id, String attachments){
-        attachmentsArrayList = new ArrayList<>();
-        final StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,attachmentsArrayList);
-        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
-        //viewHolder.mediaView.setVisibility(View.VISIBLE);
-       // viewHolder.mediaProgressBar.setVisibility(View.VISIBLE);
-
-//        viewHolder.mediaProgressBar.setVisibility(View.GONE);
-        Gson gson = new Gson();
-        JsonElement jsonArray = gson.fromJson(attachments,JsonElement.class);
-        if(jsonArray.isJsonArray()) {
-            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
-            for(int i = 0; i <jsonArray1.size();i++) {
-                JsonObject object = jsonArray1.get(i).getAsJsonObject();
-                attachmentsArrayList.add(object.get("attachment_url").toString());
-                RMsg.logHere("IF OBJECT: "+object.get("attachment_url"));
-                statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
-            }
-        }else if(jsonArray.isJsonObject()){
-            JsonObject object = jsonArray.getAsJsonObject();
-            attachmentsArrayList.add(object.get("attachment_url").toString());
-            RMsg.logHere("object: "+object.get("attachment_url"));
-            statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
-        }
+//        attachmentsArrayList = new ArrayList<>();
+//        final StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,attachmentsArrayList);
+//        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
+//        viewHolder.mediaView.setVisibility(View.VISIBLE);
+//       // viewHolder.mediaProgressBar.setVisibility(View.VISIBLE);
+//
+////        viewHolder.mediaProgressBar.setVisibility(View.GONE);
+//        Gson gson = new Gson();
+//        JsonElement jsonArray = gson.fromJson(attachments,JsonElement.class);
+//        if(jsonArray.isJsonArray()) {
+//            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
+//            for(int i = 0; i <jsonArray1.size();i++) {
+//                JsonObject object = jsonArray1.get(i).getAsJsonObject();
+//                attachmentsArrayList.add(object.get("attachment_url").toString());
+//                //RMsg.logHere("IF OBJECT: "+object.get("attachment_url").toString());
+//                statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
+//            }
+//        }else if(jsonArray.isJsonObject()){
+//            JsonObject object = jsonArray.getAsJsonObject();
+//            attachmentsArrayList.add(object.get("attachment_url").toString());
+//            //RMsg.logHere("object: "+object.get("attachment_url"));
+//            statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
+//        }
 
     }
 }

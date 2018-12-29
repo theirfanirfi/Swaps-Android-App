@@ -6,25 +6,38 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import swap.irfanullah.com.swap.Adapters.SingleStatusAdapter;
+import swap.irfanullah.com.swap.Adapters.StatusAdapter;
+import swap.irfanullah.com.swap.Adapters.StatusFragGridAdapter;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
+import swap.irfanullah.com.swap.Models.Attachments;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.SingleStatusModel;
 import swap.irfanullah.com.swap.Models.Status;
@@ -47,6 +60,10 @@ public class StatusActivity extends AppCompatActivity {
     private static final String ACTION_BAR_TITLE = "Status";
     private int IS_ACCEPTED = 0;
     private Boolean isMe= false;
+    private RecyclerView statusMedia;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Attachments> mediaAttachments;
+    private StatusFragGridAdapter statusFragGridAdapter;
     Menu menu;
 
     @Override
@@ -207,15 +224,24 @@ public class StatusActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         trash = findViewById(R.id.deleteStatusIcon);
         ratingBar = findViewById(R.id.ratingBar);
+        statusMedia = findViewById(R.id.gridViewStatus);
         context = this;
         status = new Status();
 
         raters = new ArrayList<>();
         singleStatusAdapter = new SingleStatusAdapter(context,raters, status);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager layoutManagerr = new LinearLayoutManager(context);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManagerr);
         recyclerView.setAdapter(singleStatusAdapter);
+
+        mediaAttachments = new ArrayList<>();
+        statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        layoutManager = new GridLayoutManager(context,3);
+        //statusMedia.setHasFixedSize(true);
+        statusMedia.setAdapter(statusFragGridAdapter);
+        statusMedia.setLayoutManager(layoutManager);
+
     }
 
     private void makeRequest(final Context context) {
@@ -225,6 +251,11 @@ public class StatusActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     singleStatusModel = response.body();
                     status = singleStatusModel.getSTATUS();
+
+                    if(status.getHAS_ATTACHMENTS() == 1){
+                        loadStatusMedia(status.getATTACHMENTS());
+                    }
+
 
                     fullname.setText(status.getName());
                     statusTextView.setText(status.getSTATUS());
@@ -377,5 +408,60 @@ public class StatusActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void loadStatusMedia(String attachments){
+
+        // viewHolder.mediaProgressBar.setVisibility(View.VISIBLE);
+
+//        viewHolder.mediaProgressBar.setVisibility(View.GONE);
+        Gson gson = new Gson();
+        JsonElement json = gson.fromJson(attachments,JsonElement.class);
+        if(json.isJsonObject()) {
+            JsonObject object = json.getAsJsonObject();
+            Attachments att = gson.fromJson(object, Attachments.class);
+            mediaAttachments.add(att);
+            statusFragGridAdapter.notifyAdapter(mediaAttachments);
+           // GLib.downloadImage(context, att.getATTACHMENT_URL()).into(statusMedia);
+
+            RMsg.logHere("Single: "+att.getATTACHMENT_URL());
+        }else if(json.isJsonArray()){
+            JsonArray jsonArray = json.getAsJsonArray();
+            //Attachments att = gson.fromJson(object, Attachments.class);
+            Type type = new TypeToken<ArrayList<Attachments>>(){}.getType();
+            ArrayList<Attachments> arrayList = gson.fromJson(jsonArray,type);
+            statusFragGridAdapter.notifyAdapter(arrayList);
+
+            RMsg.logHere("working");
+        }
+
+//
+//        Attachments jsonArray = gson.fromJson(attachments,JsonElement.class);
+//        if(jsonArray.isJsonArray()) {
+//            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
+//            for(int i = 0; i <jsonArray1.size();i++) {
+//                JsonObject object = jsonArray1.get(i).getAsJsonObject();
+//                mediaAttachments.add(object.get("attachment_url").toString());
+//                //RMsg.logHere("IF OBJECT: "+object.get("attachment_url").toString().trim());
+//              //  statusFragGridAdapter.notifyAdapter(mediaAttachments);
+//
+//                try {
+//                    GLib.downloadImage(context, object.get("attachment_url").toString()).into(statusMedia);
+//                }catch (Exception e){
+//                    RMsg.logHere(e.toString());
+//                }
+//            }
+//        }else if(jsonArray.isJsonObject()){
+//            JsonObject object = jsonArray.getAsJsonObject();
+//            mediaAttachments.add(object.get("attachment_url").toString());
+//            try {
+//                GLib.downloadImage(context, object.get("attachment_url").toString()).into(statusMedia);
+//            }catch (Exception e){
+//                RMsg.logHere(e.toString());
+//            }
+//            //RMsg.logHere("object: "+object.get("attachment_url"));
+//           // statusFragGridAdapter.notifyAdapter(mediaAttachments);
+//        }
+
     }
 }
