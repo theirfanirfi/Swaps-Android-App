@@ -256,7 +256,7 @@ public class ComposeStatusActivity extends AppCompatActivity {
             RMsg.logHere(source_uri.toString());
 
         }else if(requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK){
-
+        //currently there is no cropping functionality in the status media attachment
         }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             //@bitmap uri will be obtained here.

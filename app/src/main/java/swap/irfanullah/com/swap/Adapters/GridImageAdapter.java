@@ -12,6 +12,8 @@ import android.widget.VideoView;
 import java.util.ArrayList;
 import java.util.List;
 
+import swap.irfanullah.com.swap.CustomComponents.SwapsSquareImageView;
+import swap.irfanullah.com.swap.CustomComponents.SwapsSquareImageViewForComposing;
 import swap.irfanullah.com.swap.Models.Media;
 import swap.irfanullah.com.swap.Models.RMsg;
 
@@ -47,10 +49,10 @@ public class GridImageAdapter extends BaseAdapter {
         Media media = this.media.get(position);
         if(media.getType() == 1) {
 
-                imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(4, 4, 4, 4);
+                imageView = new SwapsSquareImageView(context);
+               imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+ imageView.setPadding(2, 2, 2, 2);
 
             imageView.setImageURI(this.media.get(position).getUri());
             return imageView;

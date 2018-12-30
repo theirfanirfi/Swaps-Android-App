@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +23,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -84,7 +87,9 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     //RMsg.logHere(Integer.toString(e.getHAS_ATTACHMENTS()));
 
     if(e.getHAS_ATTACHMENTS() == 1) {
-        loadStatusMedia(statusViewHolder, e.getSTATUS_ID(),e.getATTACHMENTS());
+        loadStatusMedia(statusViewHolder,e.getATTACHMENTS());
+    }else {
+        statusViewHolder.mediaView.setVisibility(View.GONE);
     }
 
 
@@ -104,7 +109,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         ConstraintLayout layout;
         RatingBar ratingBar;
         TextView statusTime;
-        GridView mediaView;
+        RecyclerView mediaView;
         ProgressBar mediaProgressBar;
         public StatusViewHolder(@NonNull final View itemView, final Context context, final ArrayList<Status> st) {
             super(itemView);
@@ -116,7 +121,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapWithBtn = itemView.findViewById(R.id.swapPlusIvBtn);
             statusTime = itemView.findViewById(R.id.statusTimeTextView);
-            mediaView = itemView.findViewById(R.id.mediaGridView);
+            mediaView = itemView.findViewById(R.id.gridViewStatus);
          //   mediaProgressBar = itemView.findViewById(R.id.mediaProgressBar);
 
             swapWithBtn.setOnClickListener(new View.OnClickListener() {
@@ -169,30 +174,32 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         notifyDataSetChanged();
     }
 
-    private void loadStatusMedia(final StatusViewHolder viewHolder, int status_id, String attachments){
-//        attachmentsArrayList = new ArrayList<>();
-//        final StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,attachmentsArrayList);
-//        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
-//        viewHolder.mediaView.setVisibility(View.VISIBLE);
-//       // viewHolder.mediaProgressBar.setVisibility(View.VISIBLE);
-//
-////        viewHolder.mediaProgressBar.setVisibility(View.GONE);
-//        Gson gson = new Gson();
-//        JsonElement jsonArray = gson.fromJson(attachments,JsonElement.class);
-//        if(jsonArray.isJsonArray()) {
-//            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
-//            for(int i = 0; i <jsonArray1.size();i++) {
-//                JsonObject object = jsonArray1.get(i).getAsJsonObject();
-//                attachmentsArrayList.add(object.get("attachment_url").toString());
-//                //RMsg.logHere("IF OBJECT: "+object.get("attachment_url").toString());
-//                statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
-//            }
-//        }else if(jsonArray.isJsonObject()){
-//            JsonObject object = jsonArray.getAsJsonObject();
-//            attachmentsArrayList.add(object.get("attachment_url").toString());
-//            //RMsg.logHere("object: "+object.get("attachment_url"));
-//            statusFragGridAdapter.notifyAdapter(attachmentsArrayList);
-//        }
+    private void loadStatusMedia(final StatusViewHolder viewHolder,  String attachments){
+        ArrayList<Attachments> mediaAttachments = new ArrayList<>();
+        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,4);
+        viewHolder.mediaView.setHasFixedSize(true);
+        viewHolder.mediaView.setLayoutManager(layoutManager);
+        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
+        viewHolder.mediaView.setVisibility(View.VISIBLE);
 
+        Gson gson = new Gson();
+        JsonElement json = gson.fromJson(attachments,JsonElement.class);
+        if(json.isJsonObject()) {
+            JsonObject object = json.getAsJsonObject();
+            Attachments att = gson.fromJson(object, Attachments.class);
+            mediaAttachments.add(att);
+            statusFragGridAdapter.notifyAdapter(mediaAttachments);
+            // GLib.downloadImage(context, att.getATTACHMENT_URL()).into(statusMedia);
+
+            RMsg.logHere("Single: "+att.getATTACHMENT_URL());
+        }else if(json.isJsonArray()){
+            JsonArray jsonArray = json.getAsJsonArray();
+            //Attachments att = gson.fromJson(object, Attachments.class);
+            Type type = new TypeToken<ArrayList<Attachments>>(){}.getType();
+            ArrayList<Attachments> arrayList = gson.fromJson(jsonArray,type);
+            statusFragGridAdapter.notifyAdapter(arrayList);
+            RMsg.logHere("working");
+        }
     }
 }

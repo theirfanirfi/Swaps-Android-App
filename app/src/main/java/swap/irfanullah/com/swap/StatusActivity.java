@@ -434,34 +434,5 @@ public class StatusActivity extends AppCompatActivity {
 
             RMsg.logHere("working");
         }
-
-//
-//        Attachments jsonArray = gson.fromJson(attachments,JsonElement.class);
-//        if(jsonArray.isJsonArray()) {
-//            JsonArray jsonArray1 = jsonArray.getAsJsonArray();
-//            for(int i = 0; i <jsonArray1.size();i++) {
-//                JsonObject object = jsonArray1.get(i).getAsJsonObject();
-//                mediaAttachments.add(object.get("attachment_url").toString());
-//                //RMsg.logHere("IF OBJECT: "+object.get("attachment_url").toString().trim());
-//              //  statusFragGridAdapter.notifyAdapter(mediaAttachments);
-//
-//                try {
-//                    GLib.downloadImage(context, object.get("attachment_url").toString()).into(statusMedia);
-//                }catch (Exception e){
-//                    RMsg.logHere(e.toString());
-//                }
-//            }
-//        }else if(jsonArray.isJsonObject()){
-//            JsonObject object = jsonArray.getAsJsonObject();
-//            mediaAttachments.add(object.get("attachment_url").toString());
-//            try {
-//                GLib.downloadImage(context, object.get("attachment_url").toString()).into(statusMedia);
-//            }catch (Exception e){
-//                RMsg.logHere(e.toString());
-//            }
-//            //RMsg.logHere("object: "+object.get("attachment_url"));
-//           // statusFragGridAdapter.notifyAdapter(mediaAttachments);
-//        }
-
     }
 }
