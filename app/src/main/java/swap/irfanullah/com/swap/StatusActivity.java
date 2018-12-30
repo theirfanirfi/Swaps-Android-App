@@ -237,7 +237,7 @@ public class StatusActivity extends AppCompatActivity {
 
         mediaAttachments = new ArrayList<>();
         statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
-        layoutManager = new GridLayoutManager(context,3);
+        layoutManager = new GridLayoutManager(context,4);
         //statusMedia.setHasFixedSize(true);
         statusMedia.setAdapter(statusFragGridAdapter);
         statusMedia.setLayoutManager(layoutManager);
