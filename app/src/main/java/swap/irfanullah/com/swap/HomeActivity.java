@@ -173,9 +173,9 @@ public class HomeActivity extends AppCompatActivity {
             i.putExtra(Intent.EXTRA_SUBJECT, "Swaps");
             String strShareMessage = "\nLet me recommend you this application\n\n";
             strShareMessage = strShareMessage + "https://play.google.com/store/apps/details?id=" + getPackageName();
-            Uri screenshotUri = Uri.parse("android.resource://"+getPackageName()+"/drawable/person");
-            i.setType("image/png");
-            i.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+//            Uri screenshotUri = Uri.parse("android.resource://"+getPackageName()+"/drawable/person");
+//            i.setType("image/png");
+//            i.putExtra(Intent.EXTRA_STREAM, screenshotUri);
             i.putExtra(Intent.EXTRA_TEXT, strShareMessage);
             startActivity(Intent.createChooser(i, "Invite via"));
         } catch(Exception e) {

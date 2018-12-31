@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginRequest(String emailF, String passwordF) throws JSONException, UnsupportedEncodingException {
-
+        progressBar.setVisibility(View.VISIBLE);
         JSONArray dataArray = new JSONArray();
         dataArray.put(0,emailF);
         dataArray.put(1,passwordF);
@@ -159,6 +159,9 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        progressBar.setVisibility(View.GONE);
+
     }
 
     private void initializeObjects()
@@ -166,5 +169,6 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.emailTextField);
         password = findViewById(R.id.passwordTextField);
         context = this;
+        progressBar = findViewById(R.id.progressBarLogin);
     }
 }

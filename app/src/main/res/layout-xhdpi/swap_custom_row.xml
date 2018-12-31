@@ -25,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.156" />
+            app:layout_constraintVertical_bias="0.033" />
 
         <TextView
             android:id="@+id/usernameTextView"
@@ -61,6 +61,26 @@
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/usernameTextView"
             app:layout_constraintVertical_bias="0.0" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gridViewStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusTextView"
+            app:layout_constraintVertical_bias="1.0" />
+
 
         <TextView
             android:id="@+id/statusTimeTextView"
@@ -112,31 +132,30 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <!--<ImageView-->
-            <!--android:id="@+id/cancelViewImgBtn"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="1.0"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/statusTextView"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/statusTimeTextView"-->
-            <!--app:layout_constraintVertical_bias="1.0"-->
-            <!--app:srcCompat="@drawable/cancelswap" />-->
+        <!--android:id="@+id/cancelViewImgBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="1.0"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/statusTextView"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/statusTimeTextView"-->
+        <!--app:layout_constraintVertical_bias="0.857"-->
+        <!--app:srcCompat="@drawable/cancelswap" />-->
 
         <RatingBar
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyleIndicator"
-            android:layout_width="wrap_content"
+            android:layout_width="187dp"
             android:layout_height="33dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginLeft="88dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
@@ -145,12 +164,9 @@
             android:rating="3.5"
             android:scaleX=".8"
             android:scaleY=".6"
-            android:stepSize=".5"
+            android:stepSize="0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cancelViewImgBtn"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statusTextView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

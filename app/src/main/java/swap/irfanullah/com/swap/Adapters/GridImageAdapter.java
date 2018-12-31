@@ -14,6 +14,7 @@ import java.util.List;
 
 import swap.irfanullah.com.swap.CustomComponents.SwapsSquareImageView;
 import swap.irfanullah.com.swap.CustomComponents.SwapsSquareImageViewForComposing;
+import swap.irfanullah.com.swap.CustomComponents.SwapsSquareVideoViewForComposing;
 import swap.irfanullah.com.swap.Models.Media;
 import swap.irfanullah.com.swap.Models.RMsg;
 
@@ -58,7 +59,7 @@ public class GridImageAdapter extends BaseAdapter {
             return imageView;
         }else {
             videoView = new VideoView(context);
-            videoView.setLayoutParams(new GridView.LayoutParams(500, 400));
+            videoView.setLayoutParams(new GridView.LayoutParams(240, 200));
             videoView.setPadding(4, 4, 4, 4);
             videoView.setVideoURI(media.getUri());
             videoView.setFocusable(true);

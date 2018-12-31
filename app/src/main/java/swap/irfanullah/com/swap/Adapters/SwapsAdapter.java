@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -22,6 +30,7 @@ import retrofit2.Response;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
+import swap.irfanullah.com.swap.Models.Attachments;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.Models.Status;
 import swap.irfanullah.com.swap.Models.SwapsTab;
@@ -76,6 +85,13 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         statusViewHolder.statusDescription.setText(swap.getSTATUS());
         statusViewHolder.ratingBar.setRating(swap.getAVG_RATTING());
         statusViewHolder.swapTime.setText(TimeDiff.getTimeDifference(swap.getSWAP_DATE()));
+
+
+        if(swap.getHAS_ATTACHMENTS() == 1) {
+            loadStatusMedia(statusViewHolder,swap.getATTACHMENTS());
+        }else {
+            statusViewHolder.mediaView.setVisibility(View.GONE);
+        }
     }
 
 
@@ -90,7 +106,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         TextView username, statusDescription, withTextV, swapTime;
         ConstraintLayout layout;
         RatingBar ratingBar;
-
+        RecyclerView mediaView;
 
         public StatusViewHolder(@NonNull View itemView, final Context context, final ArrayList<SwapsTab> swapsTabs) {
             super(itemView);
@@ -103,6 +119,8 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapTime = itemView.findViewById(R.id.statusTimeTextView);
             layout = itemView.findViewById(R.id.statusLayout);
+            mediaView = itemView.findViewById(R.id.gridViewStatus);
+
             //unswap = itemView.findViewById(R.id.cancelViewImgBtn);
 
                 gotoProfile(context,swapsTabs);
@@ -210,5 +228,35 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         notifyDataSetChanged();
     }
 
+    private void loadStatusMedia(final SwapsAdapter.StatusViewHolder viewHolder, String attachments){
+        RMsg.logHere("SWAPS: "+attachments);
+
+        ArrayList<Attachments> mediaAttachments = new ArrayList<>();
+        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,4);
+        viewHolder.mediaView.setHasFixedSize(true);
+        viewHolder.mediaView.setLayoutManager(layoutManager);
+        viewHolder.mediaView.setAdapter(statusFragGridAdapter);
+        viewHolder.mediaView.setVisibility(View.VISIBLE);
+
+        Gson gson = new Gson();
+        JsonElement json = gson.fromJson(attachments,JsonElement.class);
+        if(json.isJsonObject()) {
+            JsonObject object = json.getAsJsonObject();
+            Attachments att = gson.fromJson(object, Attachments.class);
+            mediaAttachments.add(att);
+            statusFragGridAdapter.notifyAdapter(mediaAttachments);
+            // GLib.downloadImage(context, att.getATTACHMENT_URL()).into(statusMedia);
+
+            RMsg.logHere("Single: "+att.getATTACHMENT_URL());
+        }else if(json.isJsonArray()){
+            JsonArray jsonArray = json.getAsJsonArray();
+            //Attachments att = gson.fromJson(object, Attachments.class);
+            Type type = new TypeToken<ArrayList<Attachments>>(){}.getType();
+            ArrayList<Attachments> arrayList = gson.fromJson(jsonArray,type);
+            statusFragGridAdapter.notifyAdapter(arrayList);
+            RMsg.logHere("working");
+        }
+    }
 
 }
