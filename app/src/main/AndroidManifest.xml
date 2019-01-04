@@ -60,14 +60,14 @@
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ComposeStatusActivity"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".ToBeDeletedActivity"></activity>
 
-        </activity>
-        <activity android:name=".ToBeDeletedActivity">
+        <service
+            android:name=".Services.StatusMediaService"
+            android:enabled="true" />
 
-        </activity>
-
-        <service android:enabled="true" android:name=".Services.StatusMediaService" />
+        <activity android:name=".ImageViewer"></activity>
     </application>
 
 </manifest>

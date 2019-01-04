@@ -186,14 +186,14 @@ public class StatusMediaService extends Service {
                 String path = getRealPathFromURIPath(uri,context);
                 File file = new File(path);
                 imageUploadRequest(file);
-                RMsg.logHere("upload Image");
+                //RMsg.logHere("upload Image");
             }else {
                 Uri uri = m.getUri();
                 String path = getRealPathFromURIPath(uri,context);
 
                 File file = new File(path);
                 VideoUploadRequest(file);
-                RMsg.logHere("upload Video");
+                //RMsg.logHere("upload Video");
             }
 
             //Log.i(RMsg.LOG_MESSAGE,"IN running: "+Integer.toString(NUMBER_OF_REQUESTS));
@@ -341,7 +341,7 @@ public class StatusMediaService extends Service {
                     // app small icon will be set when it is provided.
                     .setSmallIcon(R.drawable.ic_person)
                     .setContentTitle(NOTIFICATION_TITLE)
-                    .setContentText(NOTIFICATION_CONTENT)
+                    .setContentText(NOTIFICATION__ATTACHMENT_PROGRESS)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(NOTIFICATION__ATTACHMENT_PROGRESS))
                     .setAutoCancel(false)

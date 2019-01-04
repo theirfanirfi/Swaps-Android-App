@@ -27,6 +27,7 @@ public class PDialog extends AppCompatDialogFragment {
     BootstrapEditText profile_description;
     BootstrapButton updateBtn,cancelBtn;
     ProgressBar progressBar;
+    public ResultLister mListner;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
@@ -75,10 +76,12 @@ public class PDialog extends AppCompatDialogFragment {
                         if(user.getIS_ERROR()){
                             Toast.makeText(getContext(),user.getMESSAGE(),Toast.LENGTH_LONG).show();
                         }else if(user.getIS_UPDATED()){
+                            mListner.onUpdate(true);
                             User updatedUser = user.getUSER();
                             Gson gson = new Gson();
                             String newUser = gson.toJson(updatedUser);
                             PrefStorage.getEditor(getContext()).putString(PrefStorage.USER_PREF_DETAILS,newUser).commit();
+                            RMsg.logHere(PrefStorage.getUser(getContext()).getPROFILE_DESCRIPTION());
                             Toast.makeText(getContext(),user.getMESSAGE(),Toast.LENGTH_LONG).show();
                             getDialog().dismiss();
                         } else {
@@ -102,6 +105,11 @@ public class PDialog extends AppCompatDialogFragment {
 
         progressBar.setVisibility(View.GONE);
 
+    }
+
+    public interface ResultLister{
+        public void onUpdate(Boolean isUpdated);
+        public void onFailure(Boolean isUpdate);
     }
 
 }

@@ -42,10 +42,14 @@
         android:padding="8dp"
         app:bootstrapBrand="info"
         app:bootstrapSize="md"
+        android:textAlignment="textStart"
+        android:clickable="true"
+        android:autoLink="web"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:gravity="start" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/updateDescription"

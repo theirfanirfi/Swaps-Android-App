@@ -113,6 +113,19 @@ public class UserProfile extends AppCompatActivity {
                 PDialog pDialog = new PDialog();
                 pDialog.setCancelable(false);
                 pDialog.show(getSupportFragmentManager(), "update_profile_description");
+
+                pDialog.mListner = new PDialog.ResultLister() {
+                    @Override
+                    public void onUpdate(Boolean isUpdated) {
+                        RMsg.logHere("updated: "+Boolean.toString(isUpdated));
+                       updateDesc();
+                    }
+
+                    @Override
+                    public void onFailure(Boolean isUpdate) {
+                       RMsg.logHere(Boolean.toString(isUpdate));
+                    }
+                };
             }
         });
         updateDesc();
@@ -234,6 +247,7 @@ public class UserProfile extends AppCompatActivity {
 
     public void updateDesc() {
         User user1 = PrefStorage.getUser(context);
+        RMsg.logHere(user1.getPROFILE_DESCRIPTION());
         if (user1.getPROFILE_DESCRIPTION() != null) {
             profileDescription.setText(user1.getPROFILE_DESCRIPTION());
         } else {

@@ -118,6 +118,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
             profile_image = itemView.findViewById(R.id.profile_image);
             username = itemView.findViewById(R.id.usernameTextView);
             statusDescription = itemView.findViewById(R.id.statusTextView);
+
             ratingBar = itemView.findViewById(R.id.ratingBar);
             swapWithBtn = itemView.findViewById(R.id.swapPlusIvBtn);
             statusTime = itemView.findViewById(R.id.statusTimeTextView);
@@ -164,6 +165,13 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
                         profileAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(profileAct);
                     }
+                }
+            });
+
+            mediaView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
         }
