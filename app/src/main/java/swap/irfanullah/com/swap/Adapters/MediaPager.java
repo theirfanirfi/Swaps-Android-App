@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class MediaPager extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
-        return (view == (LinearLayout) o);
+        return (view == (RelativeLayout) o);
     }
 
     @NonNull
@@ -42,8 +43,10 @@ public class MediaPager extends PagerAdapter {
         if(media.getATTACHMENT_TYPE() == 1) {
             View view = LayoutInflater.from(context).inflate(R.layout.image_viewer_layout, container, false);
             ImageView iv = view.findViewById(R.id.imageView);
+            ProgressBar progressBar = view.findViewById(R.id.pagerProgressBar);
             GLib.downloadImage(context,media.getATTACHMENT_URL()).into(iv);
             container.addView(view);
+            progressBar.setVisibility(View.GONE);
             return view;
         }else {
             View view = LayoutInflater.from(context).inflate(R.layout.video_viewer_layout, container, false);
@@ -56,5 +59,10 @@ public class MediaPager extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    public void notifyAdapter(ArrayList<Attachments> at){
+        this.attachments = at;
+        notifyDataSetChanged();
     }
 }

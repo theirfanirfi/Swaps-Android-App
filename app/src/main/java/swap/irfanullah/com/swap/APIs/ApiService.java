@@ -115,4 +115,6 @@ public interface ApiService {
 
     @GET(AFTER_BASE_URL+"status/attachments")
     Call<Attachments> getStatusAttachments(@Query("token") String token,@Query("status_id") int status_id);
+    @GET(AFTER_BASE_URL+"status/get")
+    Call<Status> getStatus(@Query("token") String token,@Query("status_id") int status_id);
 }

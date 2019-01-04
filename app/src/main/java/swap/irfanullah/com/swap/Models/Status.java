@@ -40,6 +40,8 @@ public class Status{
     private Boolean IS_ALREADY_RATED;
     @SerializedName("isEmpty")
     private Boolean IS_EMPTY;
+    @SerializedName("isError")
+    private Boolean IS_ERROR;
     @SerializedName("average_rating")
     private float AVERAGE_RATING;
     @SerializedName("is_accepted")
@@ -56,6 +58,10 @@ public class Status{
     private int HAS_ATTACHMENTS;
     @SerializedName("attachments")
     private String ATTACHMENTS;
+
+    public Boolean getIS_ERROR() {
+        return IS_ERROR;
+    }
 
     public int getHAS_ATTACHMENTS() {
         return HAS_ATTACHMENTS;

@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import swap.irfanullah.com.swap.ImageViewer;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
 import swap.irfanullah.com.swap.Libraries.TimeDiff;
@@ -54,7 +55,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     private ArrayList<Status> statuses;
     private ArrayList<String> attachmentsArrayList;
     private User user;
-
+    int STATUS_ID;
     public StatusAdapter(Context context, ArrayList<Status> st) {
         this.context = context;
         this.statuses = st;
@@ -87,7 +88,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     //RMsg.logHere(Integer.toString(e.getHAS_ATTACHMENTS()));
 
     if(e.getHAS_ATTACHMENTS() == 1) {
-        loadStatusMedia(statusViewHolder,e.getATTACHMENTS());
+        loadStatusMedia(statusViewHolder,e.getATTACHMENTS(),e.getSTATUS_ID());
     }else {
         statusViewHolder.mediaView.setVisibility(View.GONE);
     }
@@ -111,6 +112,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         TextView statusTime;
         RecyclerView mediaView;
         ProgressBar mediaProgressBar;
+
+
         public StatusViewHolder(@NonNull final View itemView, final Context context, final ArrayList<Status> st) {
             super(itemView);
 
@@ -168,12 +171,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
                 }
             });
 
-            mediaView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+//            mediaView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
         }
     }
 
@@ -182,9 +185,9 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
         notifyDataSetChanged();
     }
 
-    private void loadStatusMedia(final StatusViewHolder viewHolder,  String attachments){
+    private void loadStatusMedia(final StatusViewHolder viewHolder,  String attachments, int status_id){
         ArrayList<Attachments> mediaAttachments = new ArrayList<>();
-        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments,status_id);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,4);
         viewHolder.mediaView.setHasFixedSize(true);
         viewHolder.mediaView.setLayoutManager(layoutManager);
@@ -209,5 +212,6 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
             statusFragGridAdapter.notifyAdapter(arrayList);
             RMsg.logHere("working");
         }
+
     }
 }

@@ -45,6 +45,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
     private Context context, ctx;
     private ArrayList<SwapsTab> swapsTabArrayList;
     private final static String REPRESENTING_LOGGED_USER_IN_TAB = "You";
+    private int STATUS_ID = 0;
 
     public SwapsAdapter(Context context, ArrayList<SwapsTab> swapsTabArrayList) {
         this.context = context;
@@ -57,7 +58,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         View view = LayoutInflater.from(this.context).inflate(R.layout.swap_custom_row, viewGroup, false);
 
 
-        return new StatusViewHolder(view, this.context, this.swapsTabArrayList);
+        return new StatusViewHolder(view, this.context, this.swapsTabArrayList, STATUS_ID);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
 
 
         if(swap.getHAS_ATTACHMENTS() == 1) {
-            loadStatusMedia(statusViewHolder,swap.getATTACHMENTS());
+            loadStatusMedia(statusViewHolder,swap.getATTACHMENTS(), swap.getSTATUS_ID());
         }else {
             statusViewHolder.mediaView.setVisibility(View.GONE);
         }
@@ -108,7 +109,7 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         RatingBar ratingBar;
         RecyclerView mediaView;
 
-        public StatusViewHolder(@NonNull View itemView, final Context context, final ArrayList<SwapsTab> swapsTabs) {
+        public StatusViewHolder(@NonNull View itemView, final Context context, final ArrayList<SwapsTab> swapsTabs, int status_id) {
             super(itemView);
 
             layout = itemView.findViewById(R.id.statusLayout);
@@ -228,11 +229,11 @@ public class SwapsAdapter extends RecyclerView.Adapter<SwapsAdapter.StatusViewHo
         notifyDataSetChanged();
     }
 
-    private void loadStatusMedia(final SwapsAdapter.StatusViewHolder viewHolder, String attachments){
+    private void loadStatusMedia(final SwapsAdapter.StatusViewHolder viewHolder, String attachments, int status_id){
         RMsg.logHere("SWAPS: "+attachments);
 
         ArrayList<Attachments> mediaAttachments = new ArrayList<>();
-        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        StatusFragGridAdapter statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments, status_id);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,4);
         viewHolder.mediaView.setHasFixedSize(true);
         viewHolder.mediaView.setLayoutManager(layoutManager);

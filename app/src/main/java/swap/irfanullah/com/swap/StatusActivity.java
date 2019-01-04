@@ -236,7 +236,7 @@ public class StatusActivity extends AppCompatActivity {
         recyclerView.setAdapter(singleStatusAdapter);
 
         mediaAttachments = new ArrayList<>();
-        statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments);
+        statusFragGridAdapter = new StatusFragGridAdapter(context,mediaAttachments,this.STATUS_ID);
         layoutManager = new GridLayoutManager(context,4);
         //statusMedia.setHasFixedSize(true);
         statusMedia.setAdapter(statusFragGridAdapter);

@@ -1,6 +1,7 @@
 package swap.irfanullah.com.swap.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,71 +14,22 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import swap.irfanullah.com.swap.ImageViewer;
 import swap.irfanullah.com.swap.Libraries.GLib;
 import swap.irfanullah.com.swap.Models.Attachments;
 import swap.irfanullah.com.swap.Models.RMsg;
 import swap.irfanullah.com.swap.R;
 
-
-//public class StatusFragGridAdapter extends ArrayAdapter {
-//    private Context context;
-//    private ArrayList<Attachments> _attachmentsArrayList;
-//
-//    public StatusFragGridAdapter(Context context,ArrayList<Attachments> _attachmentsArrayList) {
-//        super(context, R.layout.status_frag_grid_custom_row);
-//        this._attachmentsArrayList = _attachmentsArrayList;
-//        this.context = context;
-//    }
-//
-//
-//    @Override
-//    public int getCount() {
-//       // RMsg.logHere("notified: size: "+Integer.toString(_attachmentsArrayList.size()));
-//
-//        return _attachmentsArrayList.size();
-//
-//    }
-//
-//    @Override
-//    public Object getItem(int position) {
-//        return null;
-//    }
-//
-//    @Override
-//    public long getItemId(int position) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.status_frag_grid_custom_row,parent,false);
-//        ImageView iv = view.findViewById(R.id.customSquareImage);
-//        Attachments attachments = _attachmentsArrayList.get(position);
-//        try {
-//            GLib.downloadImage(context, attachments.getATTACHMENT_URL()).into(iv);
-//        }catch (Exception e){
-//            RMsg.logHere("Exception: "+e.getMessage());
-//        }
-//
-//       RMsg.logHere("notified: url: "+attachments.getATTACHMENT_URL());
-//        return view;
-//    }
-//
-//    public void notifyAdapter(ArrayList<Attachments> at){
-//        this._attachmentsArrayList = at;
-//        notifyDataSetChanged();
-//        //RMsg.logHere("notified");
-//    }
-//}
-
 public class StatusFragGridAdapter extends RecyclerView.Adapter<StatusFragGridAdapter.MediaViewHolder>{
 
     private Context context;
     private ArrayList<Attachments> attachmentsArrayList;
+    private int STATUS_ID = 0;
 
-    public StatusFragGridAdapter(Context context, ArrayList<Attachments> attachmentsArrayList) {
+    public StatusFragGridAdapter(Context context, ArrayList<Attachments> attachmentsArrayList, int status_id) {
         this.context = context;
         this.attachmentsArrayList = attachmentsArrayList;
+        this.STATUS_ID = status_id;
     }
 
     @NonNull
@@ -85,7 +37,7 @@ public class StatusFragGridAdapter extends RecyclerView.Adapter<StatusFragGridAd
     public MediaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.status_frag_grid_custom_row,viewGroup,false);
 
-        return new MediaViewHolder(view,context,attachmentsArrayList);
+        return new MediaViewHolder(view,context,attachmentsArrayList, STATUS_ID);
     }
 
     @Override
@@ -103,12 +55,21 @@ public class StatusFragGridAdapter extends RecyclerView.Adapter<StatusFragGridAd
         private Context context;
         private ArrayList<Attachments> attachments;
         ImageView iv;
-        public MediaViewHolder(@NonNull View itemView,Context context,ArrayList<Attachments> attachments) {
+        public MediaViewHolder(@NonNull View itemView, final Context context, final ArrayList<Attachments> attachments, final int status_id) {
             super(itemView);
             this.context = context;
             this.attachments = attachments;
             iv = itemView.findViewById(R.id.customSquareImage);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent pager = new Intent(context,ImageViewer.class);
+                    pager.putExtra("status_id",status_id);
+                    context.startActivity(pager);
+                }
+            });
         }
+
     }
 
         public void notifyAdapter(ArrayList<Attachments> at){
