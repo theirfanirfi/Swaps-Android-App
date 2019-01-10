@@ -1,12 +1,15 @@
 package swap.irfanullah.com.swap.Adapters;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
@@ -20,6 +23,9 @@ import swap.irfanullah.com.swap.R;
 public class MediaPager extends PagerAdapter {
     private Context context;
     private ArrayList<Attachments> attachments;
+    private VideoView iv;
+    private ImageView play;
+    private MediaController mediaController;
 
     public MediaPager(Context context,ArrayList<Attachments> attachments) {
         this.context = context;
@@ -41,6 +47,11 @@ public class MediaPager extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         Attachments media = this.attachments.get(position);
         if(media.getATTACHMENT_TYPE() == 1) {
+            if(mediaController != null)
+                mediaController.invalidate();
+
+
+
             View view = LayoutInflater.from(context).inflate(R.layout.image_viewer_layout, container, false);
             ImageView iv = view.findViewById(R.id.imageView);
             ProgressBar progressBar = view.findViewById(R.id.pagerProgressBar);
@@ -50,7 +61,40 @@ public class MediaPager extends PagerAdapter {
             return view;
         }else {
             View view = LayoutInflater.from(context).inflate(R.layout.video_viewer_layout, container, false);
-            VideoView iv = view.findViewById(R.id.videoView);
+            iv = view.findViewById(R.id.videoView);
+           play = view.findViewById(R.id.playImage);
+            mediaController = new MediaController(context);
+
+            mediaController.setAnchorView(iv);
+            mediaController.setMediaPlayer(iv);
+            iv.setMediaController(mediaController);
+            Uri video = Uri.parse(media.getATTACHMENT_URL());
+            iv.setVideoURI(video);
+
+
+            iv.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    play.setVisibility(View.VISIBLE);
+                }
+            });
+
+            iv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    play.setVisibility(View.VISIBLE);
+                }
+            });
+
+            play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    play.setVisibility(View.GONE);
+                    iv.start();
+                }
+            });
+
+
             container.addView(view);
             return view;
         }

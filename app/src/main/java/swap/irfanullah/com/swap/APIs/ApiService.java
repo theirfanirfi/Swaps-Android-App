@@ -24,13 +24,17 @@ import swap.irfanullah.com.swap.Models.SwapsTab;
 import swap.irfanullah.com.swap.Models.User;
 
 public interface ApiService {
-    String AFTER_BASE_URL = "swap/public/api/";
+    //String AFTER_BASE_URL = "swap/public/api/";
+    String AFTER_BASE_URL = "http://irfitech.com/public/api/";
     @POST(AFTER_BASE_URL+"status/compose")
     @FormUrlEncoded
     Call<Status> composeStatus(@Field("token") String token,@Field("status") String status);
 
     @GET(AFTER_BASE_URL+"status/getStatuses")
     Call<Status> getStatuses(@Query("token") String token);
+
+    @GET(AFTER_BASE_URL+"status/discoverStatuses")
+    Call<Status> discoverStatuses(@Query("token") String token);
 
     @GET(AFTER_BASE_URL+"status/getUserStatuses")
     Call<Status> getUserStatuses(@Query("id") int id);

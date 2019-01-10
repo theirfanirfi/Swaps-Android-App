@@ -34,6 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import swap.irfanullah.com.swap.CustomComponents.ComposeStatusDialog;
 import swap.irfanullah.com.swap.Fragments.ChatFragment;
+import swap.irfanullah.com.swap.Fragments.DiscoverStatusesFragment;
 import swap.irfanullah.com.swap.Fragments.StatusesFragment;
 import swap.irfanullah.com.swap.Fragments.SwapsFragment;
 import swap.irfanullah.com.swap.Libraries.RetroLib;
@@ -213,6 +214,9 @@ public class HomeActivity extends AppCompatActivity {
                 case 2:
                     ChatFragment chatFragment = new ChatFragment();
                     return chatFragment;
+                case 3:
+                    DiscoverStatusesFragment discoverStatusesFragment = new DiscoverStatusesFragment();
+                    return discoverStatusesFragment;
             }
 
             return null;
@@ -221,7 +225,7 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
     }
 }
