@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class VolleyLib {
 
-   // public static final String BASE_URL = "http://192.168.10.3/swap/public/api/";
-    public static final String BASE_URL = "http://irfitech.com/public/api/";
+    public static final String BASE_URL = "http://192.168.10.3/swap/public/api/";
+   // public static final String BASE_URL = "http://irfitech.com/public/api/";
     public static final Boolean NOT_AUTH_LOG_IN = true;
     public static final String NOT_AUTH_MESSAGE = "You are not logged in. Please log in and try again.";
     public static final String IS_AUTHENTICATED = "isAuthenticated";

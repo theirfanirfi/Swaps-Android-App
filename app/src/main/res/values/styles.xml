@@ -22,4 +22,9 @@
     <style name="TextViewLight">
         <item name="android:textStyle">normal</item>
     </style>
+
+    <style name="inviteButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
 </resources>
